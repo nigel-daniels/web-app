@@ -1,0 +1,8 @@
+{
+	"port": 			443,
+	"devPort": 			3000,
+	"urlEncodeMax": 	"1Mb",
+	"jsonMax": 			"1Mb",
+	"shutdownTimout": 	60,
+	"defaultEnv": 		"development"
+}

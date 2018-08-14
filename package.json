@@ -1,0 +1,45 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "author": "Nigel Daniels",
+  "license": "MIT",
+  "description": "Basic web application framework",
+  "keywords": [
+    "web",
+    "app",
+    "js",
+    "react",
+    "redux"
+  ],
+  "homepage": "https://github.com/nigel-daniels/web-app#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nigel-daniels/web-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nigel-daniels/web-app/issues"
+  },
+  "scripts": {
+    "dev": "./node_modules/.bin/npm-run-all -p build:client build:server server",
+    "build:server": "cd server && ../node_modules/.bin/webpack",
+    "build:client": "cd client && ../node_modules/.bin/webpack",
+    "server": "./node_modules/.bin/nodemon -r source-map-support/register ./dist/server.js",
+    "test:client": "./node_modules/.bin/mocha -r babel-core/register -r ./client/test/test_helper.js client/test/**/*.spec.js",
+    "test:server": "./node_modules/.bin/mocha -r babel-core/register -r ./server/test/test_helper.js server/test/**/*.spec.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-react-redux": "^2.3.0",
+    "json-loader": "^0.5.7",
+    "mocha": "^5.1.1",
+    "nodemon": "^1.17.5",
+    "npm-run-all": "^4.1.3",
+    "source-map-support": "^0.5.6",
+    "webpack": "^4.8.2",
+    "webpack-cli": "^2.1.3"
+  }
+}

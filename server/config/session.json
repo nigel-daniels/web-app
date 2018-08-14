@@ -1,0 +1,10 @@
+{
+	"secret": 				"d9jk£4jas$lddh",
+	"name": 				"web-app.sid",
+	"domain": 				"localhost",
+	"path": 				"/",
+    "sameSite": 			true,
+	"httpOnly": 			true,
+	"resave": 				true,
+	"saveUninitialized": 	false
+}

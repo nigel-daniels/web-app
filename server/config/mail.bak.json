@@ -1,0 +1,14 @@
+{
+	"host": 		"example.com",
+	"port": 		465,
+	"secure": 		true,
+	"auth": 		{
+	  				"user": "no.reply@example.com",
+					"pass": "xxxxxxxx"
+					},
+	"ignoreTLS": 	true,
+	"tls": 			{
+					"rejectUnauthorized": false
+					},
+	"debug": 		false
+}

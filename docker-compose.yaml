@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+    mongo:
+        image: mongo:latest
+        ports:
+            - 27017:27017
+        volumes:
+            - ~/git/web-app/docker/mongo/data:/data/db
+
+    web-app:
+        build: .
+        environment:
+            - MONGO_URL=mongodb://mongo:27017/db
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/usr/local/web-app
+            - /usr/local/web-app/node_modules
+            - /usr/local/web-app/client/node_modules
+            - /usr/local/web-app/server/node_modules
+        ulimits:
+            nofile: 5000
+        command:
+            npm run dev
+        depends_on:
+            - mongo
