@@ -11,7 +11,7 @@ import { middleware as pack } from 'redux-pack';
 import { App } from './components/App';
 import reducer from './reducer';
 import 'popper.js';
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'bootstrap';
 import 'bootstrap-validator';
 import 'bootstrap-notify';

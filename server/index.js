@@ -156,14 +156,14 @@ app.use(function (req, res, next) {
 
 // Now set up for https
 debug('Setting up https keys');
-var privateKey	= fs.readFileSync(__dirname + '/keys/it-test-key.pem');
-var certificate = fs.readFileSync(__dirname +'/keys/it-test-crt.crt');
+var privateKey	= fs.readFileSync(__dirname + '/keys/test-key.pem');
+var certificate = fs.readFileSync(__dirname +'/keys/test-crt.crt');
 
 // Finally start the server
 debug('Setting up the server');
 let server = https.createServer({key: privateKey, cert: certificate}, app).listen(port, function(){
 	startup = false;
-	console.log('Web-App Server, listening on port ' + port + ', environment is ' + env);
+	console.log('Web-App Server, listening https on port ' + port + ', environment is ' + env);
 });
 
 

@@ -28,6 +28,6 @@ docker/mongo/data
 
 # Private files
 mail.json
-it-test-crt.crt
-it-test-csr.pem
-it-test-key.pem
+test-crt.crt
+test-csr.pem
+test-key.pem
