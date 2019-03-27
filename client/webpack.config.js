@@ -34,7 +34,7 @@ module.exports = {
 		rules:	[
 			{ enforce: 'pre', test: /\.jsx$/, loader: 'source-map-loader'},
 			{test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/},
-			{ test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, options: {presets: ['env']}},
+			{ test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, options: {presets: ['@babel/env']}},
 			{ test: /\.css$/, loader: 'style-loader!css-loader'},
 			{ test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, loader: 'file-loader' },
 			{ test: /\.(png|jpg|gif)$/, loader: 'file-loader' }

@@ -113,7 +113,6 @@ export function signup(req, res) {
 
 export function login(req, res) {
 	debug('login, called.');
-	debug('login, res: ' + JSON.stringify(res));
 	res.sendStatus(200);
 }
 
@@ -215,6 +214,7 @@ export function logout(req, res) {
 	req.logout();
 	debug('logout, done.');
 	res.sendStatus(200);
+	return;
 }
 
 export function isAuthenticated(req, res, next) {

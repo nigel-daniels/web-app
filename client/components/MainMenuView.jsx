@@ -5,7 +5,7 @@
  */
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Debug from 'debug';
 
 let debug = Debug('MainMenuView');
@@ -33,7 +33,7 @@ class MainMenuView extends Component {
 			return (<ul className="dropdown-menu">
 				<li><Link to="/profile">Profile</Link></li>
 				<li role="separator" className="divider"></li>
-				<li><a href="" onClick={this.props.logout}>Logout</a></li>
+				<li><a href="#" onClick={this.props.logout}>Logout</a></li>
 			</ul>);
 		} else {
 			debug('userMenu, role is admin or super.');
@@ -42,7 +42,7 @@ class MainMenuView extends Component {
 				<li role="separator" className="divider"></li>
 				<li><Link to="/admin">Administer</Link></li>
 				<li role="separator" className="divider"></li>
-				<li><a href="" onClick={this.props.logout}>Logout</a></li>
+				<li><a href="#" onClick={this.props.logout}>Logout</a></li>
 			</ul>);
 		}
 	}

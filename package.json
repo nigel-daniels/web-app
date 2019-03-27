@@ -20,15 +20,16 @@
     "url": "https://github.com/nigel-daniels/web-app/issues"
   },
   "scripts": {
-    "dev": "./node_modules/.bin/npm-run-all -p build:client build:server server",
+    "dev": "./node_modules/.bin/npm-run-all -p build:client build:server start",
     "build:server": "cd server && ../node_modules/.bin/webpack",
     "build:client": "cd client && ../node_modules/.bin/webpack",
-    "server": "./node_modules/.bin/nodemon -r source-map-support/register ./dist/server.js",
+    "start": "./node_modules/.bin/nodemon -r source-map-support/register ./dist/server.js",
     "test:client": "./node_modules/.bin/mocha -r babel-core/register -r ./client/test/test_helper.js client/test/**/*.spec.js",
     "test:server": "./node_modules/.bin/mocha -r babel-core/register -r ./server/test/test_helper.js server/test/**/*.spec.js"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "eslint": "^5.15.3",
@@ -42,5 +43,7 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^6.9.0"
+  }
 }

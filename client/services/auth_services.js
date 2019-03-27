@@ -71,5 +71,5 @@ export const logout = () => {
 
 	return fetchOk('/logout', init)
 		.then((response) => {debug('logout, fetch ok.');return response;})
-		.catch((error) => {debug('logout, fetch, caught err.'); throw error;});
+		.catch((error) => {debug('logout, fetch, caught err: ' + JSON.stringify(error)); throw error;});
 };
