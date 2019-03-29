@@ -189,7 +189,7 @@ class LoginView extends Component {
   						<div className="login-brand">
   							<div className="row">
   								<div className="col-xs-2 login-logo">
-  									<img alt="Logo" src="images/happy.png" height="40" width="40"/>
+  									<img alt="Logo" src="images/saic.png" height="40" width="40"/>
   								</div>
   								<div className="col-xs-10 login-main-title">
   									<h1>Web App Demo</h1>

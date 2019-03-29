@@ -49,7 +49,7 @@ class MainMenuView extends Component {
 
 	render () {
 		debug('render, called.');
-		
+
 		const logout = () => {
 			this.props.logout();
 		};
@@ -66,7 +66,7 @@ class MainMenuView extends Component {
 							<span className="icon-bar"></span>
 						</button>
 						<a className="navbar-brand" href="https://www.initiatethinking.com/">
-							<img alt="Initiate Thinking Logo" src="images/happy.png" height="30"/>
+							<img alt="SAIC" src="images/saic.png" height="30" width="30"/>
 						</a>
 					</div>
 					<div id="navbar" className="navbar-collapse collapse">
