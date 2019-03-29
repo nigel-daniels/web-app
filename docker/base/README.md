@@ -1,4 +1,4 @@
-# Initiate Thinking Web Base
+# Web Base
 This image is a base image for a node based application.  It has some basic tools installed.
 
 ## Build
