@@ -53,11 +53,12 @@
 .login-brand .row {
 	margin-left: auto;
 	margin-right: auto;
+	width: 80%
 }
 
 .login-main-title h1 {
     margin: 0;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 .login-title {

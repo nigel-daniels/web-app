@@ -188,12 +188,12 @@ class LoginView extends Component {
   					<div className="col-md-4">
   						<div className="login-brand">
   							<div className="row">
-  								<div className="col-xs-2 login-logo">
+  								<span className="col-xs-2 login-logo">
   									<img alt="Logo" src="images/saic.png" height="40" width="40"/>
-  								</div>
-  								<div className="col-xs-10 login-main-title">
+  								</span>
+  								<span className="col-xs-10 login-main-title">
   									<h1>Web App Demo</h1>
-  								</div>
+  								</span>
   							</div>
   						</div>
   						<div className="panel panel-default login-panel">
@@ -353,7 +353,7 @@ class LoginView extends Component {
   				</div>
   				<div className="footer">
   					<p>
-  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2017 Initiate Thinking <a id="cookies">Cookie Policy</a>
+  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a id="cookies">Cookie Policy</a>
   					</p>
   				</div>
   			</div>;
