@@ -49,8 +49,7 @@ class MainMenuView extends Component {
 
 	render () {
 		debug('render, called.');
-		//debug('props: ' + this.props);
-
+		
 		const logout = () => {
 			this.props.logout();
 		};
@@ -88,12 +87,7 @@ class MainMenuView extends Component {
 					</div>
 				</div>
 			</nav>;
-		} else {
-			debug('render, loggedin false, redirecting to \'/login\'.');
-			return <Redirect to={{ pathname: '/login' }} />;
 		}
-
-
 	}
 };
 

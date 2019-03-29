@@ -163,7 +163,7 @@ var certificate = fs.readFileSync(__dirname +'/keys/test-crt.crt');
 debug('Setting up the server');
 let server = https.createServer({key: privateKey, cert: certificate}, app).listen(port, function(){
 	startup = false;
-	console.log('Web-App Server, listening https on port ' + port + ', environment is ' + env);
+	console.log('Web-App Server, listening on port ' + port + ', environment is ' + env);
 });
 
 
