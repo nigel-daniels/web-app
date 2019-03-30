@@ -158,6 +158,7 @@ class LoginView extends Component {
 
 	render() {
 		debug('render, called.');
+
 		const passwordPattern = '(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$';
 
 		const rfc5322 = '(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\\x01-\\x08\\x0b\\' +
@@ -171,190 +172,193 @@ class LoginView extends Component {
 
 		//const { from } = this.props.location.state || { from: { pathname: '/' }};
 		debug('render loggedin = ' + this.props.loggedin);
-		if (this.props.loggedin) {
-			debug('render, loggedin true, redirecting to \'/home\'.');
-			return <Redirect to={{ pathname: '/home' }} />;
-		}
-		else {
-			debug('render, loggedin false, rendering login view.');
-			debug('render, props: ' + JSON.stringify(this.props));
-			return 	<div className="container-fluid">
-				<div className="row">
-					<div className="col-md-4"></div>
-					<div className="col-md-4">
-						<div className="login-brand">
-							<div className="row">
-								<div className="col-xs-2 login-logo">
-									<img alt="Logo" src="images/happy.png" height="40" width="40"/>
-								</div>
-								<div className="col-xs-10 login-main-title">
-									<h1>Web App Demo</h1>
-								</div>
-							</div>
-						</div>
-						<div className="panel panel-default login-panel">
-							<div className="panel-heading">
-								<h2 className="panel-title login-title">Login</h2>
-							</div>
-							<div className="panel-body">
-								<div className="login-view">
-									<form className="form-horizontal login-form" id="login-form">
-										<div className="form-group input-block-ico">
-											<div className="input-group login-email-group">
-												<div className="input-group-prepend login-email-addon">
-													<span className="input-group-text">
-														<span className="fa fa-envelope-o" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="email"  pattern={rfc5322} className="form-control login-email-input" id="login-email" tabIndex={1} placeholder="Login e-mail" data-error="The login e-mail is required." required autoFocus/>
-											</div>
-											<div className="input-group login-password-group">
-												<div className="input-group-prepend login-password-addon">
-													<span className="input-group-text">
-														<span className="fa fa-lock" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="password" className="form-control login-password-input" id="login-password" tabIndex={5} data-error="The password is required." placeholder="Password" required/>
-											</div>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group">
-											<button type="submit" className="btn btn-primary btn-block" id="login" tabIndex={10}>Sign in</button>
-										</div>
-									</form>
-									<div className="row login-footer">
-										<div className="col-md-6 login-footer-left">
-											<a id="login-forgot" onClick={this.handleAction.bind(this)} tabIndex={15}>Forgot password?</a>
-										</div>
-										<div className="col-md-6 login-footer-right">
-											<a id="login-signup" onClick={this.handleAction.bind(this)} tabIndex={20}>Create account?</a>
-										</div>
-									</div>
-								</div>
+    if (this.props.isworking) {
+      return null;
+    } else {
+  		if (this.props.loggedin) {
+  			debug('render, loggedin true, redirecting to \'/home\'.');
+  			return <Redirect to={{ pathname: '/home' }} />;
+  		}
+  		else {
+  			debug('render, loggedin false, rendering login view.');
+  			debug('render, props: ' + JSON.stringify(this.props));
+  			return 	<div className="container-fluid">
+  				<div className="row">
+  					<div className="col-md-4"></div>
+  					<div className="col-md-4">
+  						<div className="login-brand">
+  							<div className="row">
+  								<span className="col-xs-2 login-logo">
+  									<img alt="Logo" src="images/saic.png" height="40" width="40"/>
+  								</span>
+  								<span className="col-xs-10 login-main-title">
+  									<h1>Web App Demo</h1>
+  								</span>
+  							</div>
+  						</div>
+  						<div className="panel panel-default login-panel">
+  							<div className="panel-heading">
+  								<h2 className="panel-title login-title">Login</h2>
+  							</div>
+  							<div className="panel-body">
+  								<div className="login-view">
+  									<form className="form-horizontal login-form" id="login-form">
+  										<div className="form-group input-block-ico">
+  											<div className="input-group login-email-group">
+  												<div className="input-group-prepend login-email-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-envelope-o" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="email"  pattern={rfc5322} className="form-control login-email-input" id="login-email" tabIndex={1} placeholder="Login e-mail" data-error="The login e-mail is required." required autoFocus/>
+  											</div>
+  											<div className="input-group login-password-group">
+  												<div className="input-group-prepend login-password-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-lock" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="password" className="form-control login-password-input" id="login-password" tabIndex={5} data-error="The password is required." placeholder="Password" required/>
+  											</div>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group">
+  											<button type="submit" className="btn btn-primary btn-block" id="login" tabIndex={10}>Sign in</button>
+  										</div>
+  									</form>
+  									<div className="row login-footer">
+  										<div className="col-md-6 login-footer-left">
+  											<a id="login-forgot" onClick={this.handleAction.bind(this)} tabIndex={15}>Forgot password?</a>
+  										</div>
+  										<div className="col-md-6 login-footer-right">
+  											<a id="login-signup" onClick={this.handleAction.bind(this)} tabIndex={20}>Create account?</a>
+  										</div>
+  									</div>
+  								</div>
 
-								<div className="signup-view"  style={hidden}>
-									<form className="form-horizontal signup-form" id="signup-form">
-										<div className="form-group input-block-ico">
-											<label htmlFor="first" className="sr-only">Your Name</label>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-user" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="text" id="firstName" className="form-control" tabIndex={25} placeholder="First/Given name"  data-error="A first/given name is required." required/>
-											</div>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-user" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="text" id="lastName" className="form-control" tabIndex={30} placeholder="Last/Family name" data-error="A last/family name is required." required/>
-											</div>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group">
-											<label htmlFor="organisation" className="sr-only">Organisation Name</label>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-building" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="text" id="organisation" className="form-control" tabIndex={40} placeholder="Organisation name (optional)"/>
-											</div>
-										</div>
-										<div className="form-group input-block-ico">
-											<label htmlFor="email" className="sr-only">Email address</label>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-envelope-o" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="email" id="email" pattern={rfc5322} className="form-control" tabIndex={45} placeholder="E-mail" data-error="A valid e-mail is required." required/>
-											</div>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-envelope-o" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="email" id="email2" pattern={rfc5322} className="form-control" tabIndex={50} placeholder="Validate e-mail" data-error="A confirmation e-mail is required." data-match="#email" data-match-error="The e-mails do not match." required/>
-											</div>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group input-block-ico">
-											<label htmlFor="password" className="sr-only">Password</label>
-											<div className="input-group" data-toggle="tooltip" title="Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-key" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="password" id="password" pattern={passwordPattern} className="form-control" tabIndex={55} placeholder="Password" data-error="A valid password is required." required/>
-											</div>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-key" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="password" id="password2" pattern={passwordPattern} className="form-control" tabIndex={60} placeholder="Validate password" data-error="A confirmation password is required." data-match="#password" data-match-error="The passwords do not match." required/>
-											</div>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group">
-											<input type="checkbox" id="terms" tabIndex={70} data-error="You need to read and agree to the terms and conditions." required/> I agree to the <a id="termsLink">terms and conditions.</a>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group">
-											<input type="checkbox" id="privacy" tabIndex={75} data-error="You need to read agree to the privacy policy." required/> I agree to the <a id="privacyLink">privacy policy.</a>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group">
-											<button className="btn btn-primary btn-block" type="submit" id="signup" tabIndex={80}>Sign up</button>
-											<button className="btn btn-block" type="button" id="signup-login" onClick={this.handleAction.bind(this)} tabIndex={85}>Back to Login</button>
-										</div>
-									</form>
-								</div>
+  								<div className="signup-view"  style={hidden}>
+  									<form className="form-horizontal signup-form" id="signup-form">
+  										<div className="form-group input-block-ico">
+  											<label htmlFor="first" className="sr-only">Your Name</label>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-user" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="text" id="firstName" className="form-control" tabIndex={25} placeholder="First/Given name"  data-error="A first/given name is required." required/>
+  											</div>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-user" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="text" id="lastName" className="form-control" tabIndex={30} placeholder="Last/Family name" data-error="A last/family name is required." required/>
+  											</div>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group">
+  											<label htmlFor="organisation" className="sr-only">Organisation Name</label>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-building" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="text" id="organisation" className="form-control" tabIndex={40} placeholder="Organisation name (optional)"/>
+  											</div>
+  										</div>
+  										<div className="form-group input-block-ico">
+  											<label htmlFor="email" className="sr-only">Email address</label>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-envelope-o" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="email" id="email" pattern={rfc5322} className="form-control" tabIndex={45} placeholder="E-mail" data-error="A valid e-mail is required." required/>
+  											</div>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-envelope-o" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="email" id="email2" pattern={rfc5322} className="form-control" tabIndex={50} placeholder="Validate e-mail" data-error="A confirmation e-mail is required." data-match="#email" data-match-error="The e-mails do not match." required/>
+  											</div>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group input-block-ico">
+  											<label htmlFor="password" className="sr-only">Password</label>
+  											<div className="input-group" data-toggle="tooltip" title="Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-key" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="password" id="password" pattern={passwordPattern} className="form-control" tabIndex={55} placeholder="Password" data-error="A valid password is required." required/>
+  											</div>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-key" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="password" id="password2" pattern={passwordPattern} className="form-control" tabIndex={60} placeholder="Validate password" data-error="A confirmation password is required." data-match="#password" data-match-error="The passwords do not match." required/>
+  											</div>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group">
+  											<input type="checkbox" id="terms" tabIndex={70} data-error="You need to read and agree to the terms and conditions." required/> I agree to the <a id="termsLink">terms and conditions.</a>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group">
+  											<input type="checkbox" id="privacy" tabIndex={75} data-error="You need to read agree to the privacy policy." required/> I agree to the <a id="privacyLink">privacy policy.</a>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group">
+  											<button className="btn btn-primary btn-block" type="submit" id="signup" tabIndex={80}>Sign up</button>
+  											<button className="btn btn-block" type="button" id="signup-login" onClick={this.handleAction.bind(this)} tabIndex={85}>Back to Login</button>
+  										</div>
+  									</form>
+  								</div>
 
-								<div className="forgot-view"  style={hidden}>
-									<p className="forgot-copy">This will send a message to your registered account e-mail address, allowing you to reset your password.</p>
-									<form className="form-horizontal forgot-form" id="forgot-form">
-										<div className="form-group">
-											<label htmlFor="forgot-name" className="sr-only">User name</label>
-											<div className="input-group">
-												<div className="input-group-prepend login-name-addon">
-													<span className="input-group-text">
-														<span className="fa fa-envelope-o" aria-hidden="true"/>
-													</span>
-												</div>
-												<input type="email" id="forgot-email" pattern={rfc5322} className="form-control" tabIndex={90} placeholder="E-mail"  data-error="An email address is required." required/>
-											</div>
-											<span className="help-block with-errors"></span>
-										</div>
-										<div className="form-group">
-											<button className="btn btn-primary btn-block" type="submit" id="forgot" tabIndex={95}>Send e-mail</button>
-											<button className="btn btn-block" type="button" id="forgot-login" onClick={this.handleAction.bind(this)} tabIndex={100}>Back to Login</button>
-										</div>
-									</form>
-								</div>
+  								<div className="forgot-view"  style={hidden}>
+  									<p className="forgot-copy">This will send a message to your registered account e-mail address, allowing you to reset your password.</p>
+  									<form className="form-horizontal forgot-form" id="forgot-form">
+  										<div className="form-group">
+  											<label htmlFor="forgot-name" className="sr-only">User name</label>
+  											<div className="input-group">
+  												<div className="input-group-prepend login-name-addon">
+  													<span className="input-group-text">
+  														<span className="fa fa-envelope-o" aria-hidden="true"/>
+  													</span>
+  												</div>
+  												<input type="email" id="forgot-email" pattern={rfc5322} className="form-control" tabIndex={90} placeholder="E-mail"  data-error="An email address is required." required/>
+  											</div>
+  											<span className="help-block with-errors"></span>
+  										</div>
+  										<div className="form-group">
+  											<button className="btn btn-primary btn-block" type="submit" id="forgot" tabIndex={95}>Send e-mail</button>
+  											<button className="btn btn-block" type="button" id="forgot-login" onClick={this.handleAction.bind(this)} tabIndex={100}>Back to Login</button>
+  										</div>
+  									</form>
+  								</div>
 
-							</div>
-						</div>
-					</div>
-					<div className="col-md-4"></div>
-				</div>
-				<div className="footer">
-					<p>
-						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2017 Initiate Thinking <a id="cookies">Cookie Policy</a>
-					</p>
-				</div>
-			</div>;
-		}
-
+  							</div>
+  						</div>
+  					</div>
+  					<div className="col-md-4"></div>
+  				</div>
+  				<div className="footer">
+  					<p>
+  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a id="cookies">Cookie Policy</a>
+  					</p>
+  				</div>
+  			</div>;
+  		}
+    }
 	}
 };
 

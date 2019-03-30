@@ -14,8 +14,12 @@ debug.enabled = window.debug;
 export class About extends React.Component {
 	render () {
 		debug('render, called.');
-		return 	<Main>
-			<h4>About page content!</h4>
-		</Main>;
+    if (this.props.isworking) {
+      return null;
+    } else {
+  		return 	<Main>
+  			<h4>About page content!</h4>
+  		</Main>;
+    }
 	}
 }

@@ -30,26 +30,24 @@ class MainMenuView extends Component {
 
 		if (role === 'STAFF') {
 			debug('userMenu, role is user.');
-			return (<ul className="dropdown-menu">
-				<li><Link to="/profile">Profile</Link></li>
-				<li role="separator" className="divider"></li>
-				<li><a href="#" onClick={this.props.logout}>Logout</a></li>
+			return (<ul className="navbar-nav ml-auto">
+				<li className="nav-item"><Link to="/profile">Profile</Link></li>
+				<li className="dropdown-divider"></li>
+				<li className="nav-item"><a className="nav-link" href="#" onClick={this.props.logout}>Logout</a></li>
 			</ul>);
 		} else {
 			debug('userMenu, role is admin or super.');
-			return (<ul className="dropdown-menu">
-				<li><Link to="/profile">Profile</Link></li>
-				<li role="separator" className="divider"></li>
-				<li><Link to="/admin">Administer</Link></li>
-				<li role="separator" className="divider"></li>
-				<li><a href="#" onClick={this.props.logout}>Logout</a></li>
+			return (<ul className="navbar-nav ml-auto">
+				<li className="nav-item"><Link to="/profile">Profile</Link></li>
+				<li className="nav-item"><Link to="/admin">Administer</Link></li>
+				<li className="dropdown-divider"></li>
+				<li className="nav-item"><a className="nav-link" href="#" onClick={this.props.logout}>Logout</a></li>
 			</ul>);
 		}
 	}
 
 	render () {
 		debug('render, called.');
-		//debug('props: ' + this.props);
 
 		const logout = () => {
 			this.props.logout();
@@ -57,43 +55,31 @@ class MainMenuView extends Component {
 
 		if (this.props.loggedin) {
 			debug('render, loggedin true.');
-			return 	<nav className="navbar navbar-fixed-top">
-				<div className="container-fluid">
-					<div className="navbar-header">
-						<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-							<span className="sr-only">Toggle navigation</span>
-							<span className="icon-bar"></span>
-							<span className="icon-bar"></span>
-							<span className="icon-bar"></span>
-						</button>
-						<a className="navbar-brand" href="https://www.initiatethinking.com/">
-							<img alt="Initiate Thinking Logo" src="images/happy.png" height="30"/>
-						</a>
-					</div>
-					<div id="navbar" className="navbar-collapse collapse">
-						<ul className="nav navbar-nav">
-							<li><Link to='/'>Home</Link></li>
-							<li><Link to="/action">Action 1</Link></li>
-							<li><Link to='/about'>About</Link></li>
+			return 	<nav className="navbar navbar-expand-sm navbar-fixed-top navbar-light bg-light">
+        <a className="navbar-brand" href="#">
+          <img alt="SAIC" src="images/saic.png" height="30" width="30"/>
+        </a>
+				<button type="button" className="navbar-toggler mr-auto" data-toggle="collapse" data-target="#links" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
+					<span className="fas fa-bars"></span>
+				</button>
+        <button type="button" className="navbar-toggler ml-auto" data-toggle="collapse" data-target="#account" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
+					<span className="fas fa-user"></span>
+				</button>
+
+					<div id="links" className="navbar-collapse collapse">
+						<ul className="navbar-nav mr-auto">
+							<li className="nav-item"><Link to='/'>Home</Link></li>
+							<li className="nav-item"><Link to="/action">Action 1</Link></li>
+							<li className="nav-item"><Link to='/about'>About</Link></li>
 						</ul>
-						<ul className="nav navbar-nav navbar-right">
-							<li className="dropdown">
-								<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<span className="glyphicon glyphicon-user" aria-hidden="true"></span>
-									<span className="caret"></span>
-								</a>
-								{this.userMenu('STAFF')}
-							</li>
-						</ul>
+          </div>
+
+          <div id="account" className="navbar-collapse collapse">
+						{this.userMenu('STAFF')}
 					</div>
-				</div>
+
 			</nav>;
-		} else {
-			debug('render, loggedin false, redirecting to \'/login\'.');
-			return <Redirect to={{ pathname: '/login' }} />;
 		}
-
-
 	}
 };
 

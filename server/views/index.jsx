@@ -19,7 +19,7 @@ export default class Index extends React.Component {
 					<meta charSet="utf-8"/>
 					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-					<title>Initiate Thinking Base App</title>
+					<title>Base Web App</title>
 				</head>
 
 				<body>

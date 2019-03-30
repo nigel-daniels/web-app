@@ -20,7 +20,13 @@ import Debug from 'debug';
 
 // Now set up the local debug
 let debug = Debug('index');
-debug.enabled = $('#app-script').attr('data-env') === 'development';
+
+if ($('#app-script').attr('data-env') === 'development') {
+  Debug.enable('*');
+  debug('debug enabled');
+} else {
+  Debug.disable();
+}
 
 debug('setting notify style');
 $.notifyDefaults({
