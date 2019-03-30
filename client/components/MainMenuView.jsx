@@ -31,15 +31,15 @@ class MainMenuView extends Component {
 		if (role === 'STAFF') {
 			debug('userMenu, role is user.');
 			return (<ul className="navbar-nav ml-auto">
-				<li className="nav-item"><Link to="/profile">Profile</Link></li>
+				<li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
 				<li className="dropdown-divider"></li>
 				<li className="nav-item"><a className="nav-link" href="#" onClick={this.props.logout}>Logout</a></li>
 			</ul>);
 		} else {
 			debug('userMenu, role is admin or super.');
 			return (<ul className="navbar-nav ml-auto">
-				<li className="nav-item"><Link to="/profile">Profile</Link></li>
-				<li className="nav-item"><Link to="/admin">Administer</Link></li>
+				<li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
+				<li className="nav-item"><Link className="nav-link" to="/admin">Administer</Link></li>
 				<li className="dropdown-divider"></li>
 				<li className="nav-item"><a className="nav-link" href="#" onClick={this.props.logout}>Logout</a></li>
 			</ul>);
@@ -56,27 +56,27 @@ class MainMenuView extends Component {
 		if (this.props.loggedin) {
 			debug('render, loggedin true.');
 			return 	<nav className="navbar navbar-expand-sm navbar-fixed-top navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          <img alt="SAIC" src="images/saic.png" height="30" width="30"/>
-        </a>
+		        <a className="navbar-brand" href="#">
+		          <img alt="SAIC" src="images/saic.png" height="30" width="30"/>
+		        </a>
 				<button type="button" className="navbar-toggler mr-auto" data-toggle="collapse" data-target="#links" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
 					<span className="fas fa-bars"></span>
 				</button>
-        <button type="button" className="navbar-toggler ml-auto" data-toggle="collapse" data-target="#account" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
+        		<button type="button" className="navbar-toggler ml-auto" data-toggle="collapse" data-target="#account" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
 					<span className="fas fa-user"></span>
 				</button>
 
-					<div id="links" className="navbar-collapse collapse">
-						<ul className="navbar-nav mr-auto">
-							<li className="nav-item"><Link to='/'>Home</Link></li>
-							<li className="nav-item"><Link to="/action">Action 1</Link></li>
-							<li className="nav-item"><Link to='/about'>About</Link></li>
-						</ul>
-          </div>
+				<div id="links" className="navbar-collapse collapse">
+					<ul className="navbar-nav mr-auto">
+						<li className="nav-item"><Link className="nav-link" to='/'>Home</Link></li>
+						<li className="nav-item"><Link className="nav-link" to="/action">Action 1</Link></li>
+						<li className="nav-item"><Link className="nav-link" to='/about'>About</Link></li>
+					</ul>
+          		</div>
 
-          <div id="account" className="navbar-collapse collapse">
-						{this.userMenu('STAFF')}
-					</div>
+          		<div id="account" className="navbar-collapse collapse">
+					{this.userMenu('STAFF')}
+				</div>
 
 			</nav>;
 		}
