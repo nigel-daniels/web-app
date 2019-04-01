@@ -44,7 +44,6 @@ passport.use('local', new passportLocal(localOptions,
 			if (user) {
 				debug('local, user found');
 				if (user.active) {
-					debug('local, try password ' + password);
 					if (user.validatePassword(password)) {
 						debug('password ok, logged in.');
 						//debug('user is: ' + JSON.stringify(user));

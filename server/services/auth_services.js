@@ -4,6 +4,7 @@
  * MIT Licensed
  */
 import * as nodemailer from 'nodemailer';
+import stringify from 'json-stringify-safe';
 import mailConfig from '../config/mail';
 import Organisation from '../models/Organisation';
 import User, {ADMIN, SUPER} from '../models/User';
@@ -113,7 +114,10 @@ export function signup(req, res) {
 
 export function login(req, res) {
 	debug('login, called.');
-	res.sendStatus(200);
+	//res.locals.user = req.user;
+	res.status(200).send({result: req.user});
+	debug('sent res: ' + stringify(res, null, 4));
+	return;
 }
 
 export function authenticate(req, res) {
@@ -176,6 +180,7 @@ export function getResetPage(req, res) {
 	debug('getResetPage, called');
 	debug('getResetPage, id: ' + req.query.id);
 	res.redirect('/reset/' + req.query.id);
+	return;
 }
 
 export function resetPassword(req, res) {
@@ -226,4 +231,5 @@ export function isAuthenticated(req, res, next) {
 
 	debug('isAuthenticated, not ok.');
 	res.redirect('/');
+	return;
 }
