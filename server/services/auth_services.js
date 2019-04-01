@@ -101,7 +101,7 @@ export function signup(req, res) {
 								}
 
 								debug('signup, success.');
-								res.status(201).send({result: user});
+								res.sendStatus(200);
 								return;
 							});
 						});
@@ -114,9 +114,7 @@ export function signup(req, res) {
 
 export function login(req, res) {
 	debug('login, called.');
-	//res.locals.user = req.user;
-	res.status(200).send({result: req.user});
-	debug('sent res: ' + stringify(res, null, 4));
+	res.status(200).send({user: req.user});
 	return;
 }
 

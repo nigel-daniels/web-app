@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 	return {
 		isworking:	state.auth.isworking,
 		loggedin: 	state.auth.loggedin,
-		err:		state.auth.err
+		err:		    state.auth.err
 	};
 };
 

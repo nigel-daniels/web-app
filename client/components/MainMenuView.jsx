@@ -75,7 +75,7 @@ class MainMenuView extends Component {
           		</div>
 
           		<div id="account" className="navbar-collapse collapse">
-					{this.userMenu('STAFF')}
+					{this.userMenu(this.props.user.role)}
 				</div>
 
 			</nav>;
@@ -86,6 +86,7 @@ class MainMenuView extends Component {
 MainMenuView.propTypes = {
 	isworking:	PropTypes.bool,
 	loggedin:	PropTypes.bool,
+	user:	PropTypes.object,
 	err:		PropTypes.string,
 
 	logout:		PropTypes.func

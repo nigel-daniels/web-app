@@ -10,6 +10,6 @@ export const coreInit = {
 
 export const fetchOk = (api, init) => fetch(api, init)
  	.then(res => {
-		debug('fetchOk response ok is: ' + res.ok);
-		return res.ok ? res : res.json().then(err => Promise.reject(err));
+		debug('fetchOk response: ' + JSON.stringify(res));
+		return res.ok ? res.json() : res.json().then(err => Promise.reject(err));
 	});
