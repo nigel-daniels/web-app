@@ -3,7 +3,7 @@
  * Author: Nigel Daniels
  * MIT Licensed
  */
-import {signup, forgotPassword, getResetPage, resetPassword, login, authenticate, logout} from '../services';
+import {signup, forgotPassword, getResetPage, resetPassword, login, loginRedirect, authenticate, logout} from '../services';
 
 export default function (app, passport) {
 	app.post('/signup', signup);
@@ -15,7 +15,8 @@ export default function (app, passport) {
 	app.get('/reset', getResetPage);
 	app.post('/reset', resetPassword);
 
-  app.post('/login', login);
+	app.post('/login', login);
+	app.get('/login', loginRedirect);
 	app.get('/authenticate', authenticate);
 	app.get('/logout', logout);
 

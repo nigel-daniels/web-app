@@ -114,35 +114,34 @@ export function signup(req, res) {
 }
 
 export function login(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) {
-      return res.status(err.status).send({ message : err.message }); // will generate a 500 error
-    }
-    // Generate a JSON response reflecting authentication status
-    if (! user) {
-      return res.status(err.status).send({ message : err.message });
-    }
-    // ***********************************************************************
-    // "Note that when using a custom callback, it becomes the application's
-    // responsibility to establish a session (by calling req.login()) and send
-    // a response."
-    // Source: http://passportjs.org/docs
-    // ***********************************************************************
-    req.login(user, loginErr => {
-      if (loginErr) {
-        return next(loginErr);
-      }
-      return res.status(200).send({user: user });
-    });
-  })(req, res, next);
+	debug('login, called.');
+
+	passport.authenticate('local', function(err, user, info) {
+    	if (err) {
+			debug('login, err: ' + JSON.stringify(err));
+      		return res.status(err.status).send({ message : err.message }); // will generate a 500 error
+    	}
+
+    	if (!user) {
+			debug('login, no user: ' + JSON.stringify(err));
+      		return res.status(err.status).send({ message : err.message });
+    	}
+
+		// It's our responsibility to loginto the session
+    	req.login(user, loginErr => {
+      		if (loginErr) {
+        		return next(loginErr);
+      		}
+
+	  	return res.status(200).send({user: user});
+    	});
+	})(req, res, next);
 }
 
-/*export function login(req, res) {
-	debug('login, called.');
-  debug('login, req: ' + stringify(res));
-	res.status(200).send({user: req.user});
-	return;
-}*/
+export function loginRedirect(req, res) {
+	debug('loginRedirect, called.');
+	return res.redirect('/');
+}
 
 export function authenticate(req, res) {
 	debug('authenticate, called.');

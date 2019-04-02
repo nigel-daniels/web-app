@@ -22,10 +22,10 @@ import Debug from 'debug';
 let debug = Debug('index');
 
 if ($('#app-script').attr('data-env') === 'development') {
-  Debug.enable('*');
-  debug('debug enabled');
+	Debug.enable('*');
+	debug('debug enabled');
 } else {
-  Debug.disable();
+	Debug.disable();
 }
 
 debug('setting notify style');
