@@ -15,7 +15,7 @@ export default function (app, passport) {
 	app.get('/reset', getResetPage);
 	app.post('/reset', resetPassword);
 
-	app.post('/login', 	passport.authenticate('local'), login);
+  app.post('/login', login);
 	app.get('/authenticate', authenticate);
 	app.get('/logout', logout);
 

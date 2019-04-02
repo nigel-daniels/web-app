@@ -22,7 +22,7 @@ export const signup = (firstName, lastName, organisation, email, password) => {
 	debug('signup, init is: ' + JSON.stringify(init));
 	return fetchOk('/signup', init)
 		.then((response) => {debug('signup, response ok.');return response;})
-		.catch((error) => {debug('signup, fetch, caught err: ' + error); throw error;});
+		.catch((error) => {debug('signup, fetch, caught err.'); throw error;});
 
 };
 
@@ -71,5 +71,5 @@ export const logout = () => {
 
 	return fetchOk('/logout', init)
 		.then((response) => {debug('logout, fetch ok.');return response;})
-		.catch((error) => {debug('logout, fetch, caught err: ' + JSON.stringify(error)); throw error;});
+		.catch((error) => {debug('logout, fetch, caught err.'); throw error;});
 };

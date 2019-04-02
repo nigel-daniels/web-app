@@ -62,13 +62,13 @@ app.use(function (req, res, next) {
 if (process.env.DEBUG == null) {
 	switch (env) {
 	case 'development':
-		Debug.enable('*,-babel');
+		Debug.enable('*,-babel*');
 		break;
 	case 'production':
 		Debug.disable();
 		break;
 	default:
-		Debug.enable('*,-babel');
+		Debug.enable('*,-babel*');
 		env = 'development';
 		break;
 	}

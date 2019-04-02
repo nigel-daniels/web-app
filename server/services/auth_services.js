@@ -9,6 +9,7 @@ import mailConfig from '../config/mail';
 import Organisation from '../models/Organisation';
 import User, {ADMIN, SUPER} from '../models/User';
 import debugModule from 'debug';
+import passport from 'passport';
 
 const debug = debugModule('auth_service');
 
@@ -112,11 +113,36 @@ export function signup(req, res) {
 	});
 }
 
-export function login(req, res) {
+export function login(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return res.status(err.status).send({ message : err.message }); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (! user) {
+      return res.status(err.status).send({ message : err.message });
+    }
+    // ***********************************************************************
+    // "Note that when using a custom callback, it becomes the application's
+    // responsibility to establish a session (by calling req.login()) and send
+    // a response."
+    // Source: http://passportjs.org/docs
+    // ***********************************************************************
+    req.login(user, loginErr => {
+      if (loginErr) {
+        return next(loginErr);
+      }
+      return res.status(200).send({user: user });
+    });
+  })(req, res, next);
+}
+
+/*export function login(req, res) {
 	debug('login, called.');
+  debug('login, req: ' + stringify(res));
 	res.status(200).send({user: req.user});
 	return;
-}
+}*/
 
 export function authenticate(req, res) {
 	debug('authenticate, called.');
