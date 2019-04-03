@@ -154,3 +154,10 @@
 	position: absolute;
 	width: 100%;
 }
+
+/*
+ * All Content
+ */
+.page-content {
+	padding: 5px;
+}
