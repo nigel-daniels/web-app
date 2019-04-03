@@ -17,18 +17,15 @@ export function getUser(req, res) {
 	User.findById(req.user.id, function(err, user) {
 		if (err) {
 			debug('GET, err: ' + JSON.stringify(err));
-			res.status(500).send('Error finding user: ' + err.message);
-			return;
+			return res.status(500).send({message: 'Error finding user: ' + err.message});
 		}
 
 		if (user) {
 			debug('GET, success');
-			res.status(200).send(user);
-			return;
+			return res.status(200).send({user: user});
 		} else {
 			debug('GET, user not found.');
-			res.status(404).send('The user requested was not found.');
-			return;
+			return res.status(404).send({message: 'The user requested was not found.'});
 		}
 	});
 }
@@ -45,18 +42,15 @@ export function getUsers(req, res) {
 	User.findMany(query, (err, users) => {
 		if (err) {
 			debug('GET:*, err: ' + JSON.stringify(err));
-			res.status(500).send('Error finding users, message: ' + err.message);
-			return;
+			return res.status(500).send({message: 'Error finding users: ' + err.message});
 		}
 
 		if (users) {
 			debug('GET:*, success');
-			res.status(200).send(users);
-			return;
+			return res.status(200).send({users: users});
 		} else {
 			debug('GET:*, no users found');
-			res.status(404).send('No users found.');
-			return;
+			return res.status(404).send({message: 'No users found.'});
 		}
 	});
 }
@@ -72,18 +66,15 @@ export function getUserById(req, res) {
 	User.findOne(query, function(err, user) {
 		if (err) {
 			debug('GET:id, err: ' + JSON.stringify(err));
-			res.status(500).send('Error finding users, message: ' + err.message);
-			return;
+			return res.status(500).send({message: 'Error finding users: ' + err.message});
 		}
 
 		if (user) {
 			debug('GET:id, success');
-			res.status(200).send(user);
-			return;
+			return res.status(200).send({user: user});
 		} else {
 			debug('GET:id, user not found.');
-			res.status(404).send('The user requested was not found.');
-			return;
+			return res.status(404).send({message: 'The user requested was not found.'});
 		}
 	});
 }
@@ -98,8 +89,7 @@ export function putUser(req, res) {
 		User.findById(req.params.user._id, (err, user) => {
 			if (err) {
 				debug('PUT, error finding user: ' + JSON.stringify(err));
-				res.status(500).send('Error finding user, message: ' + err.message);
-				return;
+				return res.status(500).send({message: 'Error finding user: ' + err.message});
 			}
 
 			if (user) {
@@ -107,19 +97,16 @@ export function putUser(req, res) {
 				debug('PUT, checking user values provided.');
 				if (!req.body.email) {
 					debug('PUT, e-mail is required');
-					res.status(400).send('An e-mail address is required.'); // NLS
-					return;
+					return res.status(400).send({message: 'An e-mail address is required.'}); // NLS
 				} else if (!req.body.role) {
 					debug('PUT, role is required');
-					res.status(400).send('A user role is required.'); // NLS
-					return;
+					return res.status(400).send({message: 'A user role is required.'}); // NLS
 				}
 
 				// Check the role is valid
 				if (!User.validateRole(req.body.role)) {
 					debug('PUT, not a valid user role.');
-					res.status(400).send('The user role provided is invalid.'); // NLS
-					return;
+					return res.status(400).send({message: 'The user role provided is invalid.'}); // NLS
 				}
 
 				// Validate the email is not already in use
@@ -128,14 +115,12 @@ export function putUser(req, res) {
 					User.findOne({email: req.body.email}, (err, user) => {
 						if (err) {
 							debug('PUT, error finding user by email: ' + err.message);
-							res.status(500).send('Error checking email, message: ' + err.message);
-							return;
+							return res.status(500).send({message: 'Error checking email, message: ' + err.message}); // NLS
 						}
 
 						if (user) {
 							debug('PUT, email is already in use.');
-							res.status(400).send('The selected e-mail address is in use.'); // NLS
-							return;
+							return res.status(400).send({message: 'The selected e-mail address is in use.'}); // NLS
 						}
 					});
 				}
@@ -153,24 +138,20 @@ export function putUser(req, res) {
 				user.save((err) => {
 					if (err) {
 						debug('PUT, error saving user updates: ' + JSON.stringify(err));
-						res.status(500).send('Error saving the user details, message: ' + err.message);
-						return;
+						return res.status(500).send({message: 'Error saving the user details, message: ' + err.message}); // NLS
 					}
 
 					debug('PUT, success!');
-					res.sendStatus(200);
-					return;
+					return res.status(200).send({message: 'Success!'}); // NLS
 				});
 			} else {
 				debug('PUT, requested user was not found.');
-				res.status(404).send('The user requested was not found.');
-				return;
+				return res.status(404).send({message: 'The user requested was not found.'}); //NLS
 			}
 		});
 	} else {
 		debug('PUT, invalid update from user: ' + req.user.id + ', updating user: ' + req.params.id);
-		res.status(403).send('user: ' + req.user.id + ' does not have permission to update user: ' + req.params.id);
-		return;
+		return res.status(403).send({message: 'User: ' + req.user.id + ' does not have permission to update user: ' + req.params.id}); // NLS
 	}
 }
 
@@ -183,8 +164,7 @@ export function deleteUser(req, res) {
 	User.findById(req.params.id, (err, user) => {
 		if (err) {
 			debug('DELETE, err: ' + JSON.stringify(err));
-			res.status(500).send('Error finding user, message: ' + err.message);
-			return;
+			return res.status(500).send({message: 'Error finding user: ' + err.message});
 		}
 
 		if (user) {
@@ -194,23 +174,19 @@ export function deleteUser(req, res) {
 				user.save((err) => {
 					if (err){
 						debug('DELETE, err: ' + JSON.stringify(err));
-						res.status(500).send('Error deleting user, message: ' + err.message);
-						return;
+						return res.status(500).send({message: 'Error deleting user, message: ' + err.message});
 					}
 
 					debug('DELETE, err: ' + JSON.stringify(err));
-					res.sendStatus(200);
-					return;
+					return res.status(200).send({message: 'Success!'});
 				});
 			} else {
 				debug('DELETE, invalid delete from user: ' + req.user.id + ', deleting user: ' + req.params.id);
-				res.status(403).send('user: ' + req.user.id + ' does not have permission to delete user: ' + req.params.id);
-				return;
+				return res.status(403).send({message: 'user: ' + req.user.id + ' does not have permission to delete user: ' + req.params.id});
 			}
 		} else {
 			debug('DELETE, The user requested was not found.');
-			res.status(404).send('The user requested was not found.');
-			return;
+			return res.status(404).send({message: 'The user requested was not found.'});
 		}
 	});
 }

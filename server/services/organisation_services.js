@@ -20,31 +20,27 @@ export function postOrganisation(req, res) {
 		Organisation.find({name: req.body.name}, (err, organisation) => {
 			if (err) {
 				debug('POST, err: ' + JSON.stringify(err));
-				res.status(500).send('error finding organisation : ' + JSON.stringify(err));
-				return;
+				return res.status(500).send({message: 'error finding organisation : ' + err.message});
 			}
 
 			if (organisation) {
 				debug('POST, organisation exists with the name: ' + req.body.name);
-				res.status(400).SendStream('An organisation with the name ' + req.body.name + ' already exists.');
-				return;
+				return res.status(400).SendStream({message: 'An organisation with the name ' + req.body.name + ' already exists.'});
 			}
 
-			Organisation.create({name: req.body.name, parent: req.body.parent}, (err, doc) => {
+			Organisation.create({name: req.body.name, parent: req.body.parent}, (err, newOrg) => {
 				if (err) {
 					debug('POST, error ' + JSON.stringify(err));
-					res.status(500).send(err);
-					return;
+					return res.status(500).send({message: 'Error creating organisation: ' + err.message});
 				}
 
 				debug('POST, success');
-				res.status(201).send(doc);
-				return;
+				return res.status(201).send({organisation: newOrg});
 			});
 		});
 	} else {
 		debug('POST, name provided invalid name: ' + req.body.name);
-		res.status(400).send('Invalid name for organisation name: ' + req.body.name);
+		return res.status(400).send({message: 'Invalid name for organisation: ' + req.body.name});
 	}
 }
 
@@ -57,16 +53,15 @@ export function getOrganisation(req, res) {
 	Organisation.findById(req.user.organisation, (err, organisation) => {
 		if (err) {
 			debug('GET, err: ' + JSON.stringify(err));
-			res.status(500).send('error finding organisation : ' + JSON.stringify(err));
-			return;
+			return res.status(500).send({message: 'error finding organisation : ' + err.message});
 		}
 
 		if (organisation) {
 			debug('GET, success');
-			res.status(200).send(organisation);
+			return res.status(200).send({organisation: organisation});
 		} else {
 			debug('GET, org: ' + req.user.organisation + ' not found for user: ' + req.user.id);
-			res.status(404).send('no organisation found for account ' + req.user.id);
+			return res.status(404).send({message: 'no organisation found for account ' + req.user.id});
 		}
 
 	});
@@ -82,21 +77,20 @@ export function getOrganisations(req, res) {
 		Organisation.find({}, (err, organisations) => {
 			if (err) {
 				debug('GET:*, err: ' + JSON.stringify(err));
-				res.status(500).send('error finding organisations : ' + JSON.stringify(err));
-				return;
+				return res.status(500).send({message: 'error finding organisations : ' + JSON.stringify(err)});
 			}
 
 			if (organisations) {
 				debug('GET:*, success');
-				res.send(organisations);
+				return res.send(organisations);
 			} else {
 				debug('GET:*, org: no organisations found.');
-				res.status(404).send('no organisations found.');
+				return res.status(404).send({message: 'no organisations found.'});
 			}
 		});
 	} else {
 		debug('GET:*, invalid access from user: ' + req.user.id + ', requesting orgs: ' + req.params.id);
-		res.status(403).send('organisations not valid for user: ' + req.user.id);
+		return res.status(403).send({message: 'organisations not valid for user: ' + req.user.id});
 	}
 }
 
@@ -110,21 +104,20 @@ export function getOrganisationById(req, res) {
 		Organisation.findById(req.params.id, (err, organisation) => {
 			if (err) {
 				debug('GET:id, err: ' + JSON.stringify(err));
-				res.status(500).send('error finding organisation : ' + JSON.stringify(err));
-				return;
+				return res.status(500).send({message: 'error finding organisation : ' + err.message});
 			}
 
 			if (organisation) {
 				debug('GET:id, success');
-				res.send(organisation);
+				return res.send({organisation: organisation});
 			} else {
 				debug('GET:id, org: ' + req.params.id + ' not found.');
-				res.status(404).send('no organisation found with the provided id.');
+				return res.status(404).send({message: 'no organisation found with the provided id.'});
 			}
 		});
 	} else {
 		debug('GET:id, invalid access from user: ' + req.user.id + ', requesting org: ' + req.params.id);
-		res.status(403).send('organisation not valid for user: ' + req.user.id);
+		return res.status(403).send({message: 'organisation not valid for user: ' + req.user.id});
 	}
 }
 
@@ -135,20 +128,18 @@ export function getOrganisationMembers(req, res) {
 	debug('GET:id/members, called');
 
 	if ((req.user.org_id === req.params.id) || (req.user.role === SUPER)) {
-		User.find({org_id: req.params.id, active: true}, (err, users) => {
+		User.find({org_id: req.params.id, active: true}, (err, members) => {
 			if (err) {
 				debug('GET:id/members, err: ' + JSON.stringify(err));
-				res.status(500).send('error finding organisation members: ' + JSON.stringify(err));
-				return;
+				return res.status(500).send({message: 'error finding organisation members: ' + err.message});
 			}
 
 			debug('GET:id/members, success');
-			res.status(200).send(users);
-			return;
+			return res.status(200).send({orgMembers: members});
 		});
 	} else {
 		debug('GET:id/members, invalid request from user: ' + req.user.id);
-		res.status(403).send('User does not have permission to see these organisation members');
+		return res.status(403).send({message: 'User does not have permission to see these organisation members'});
 	}
 }
 
@@ -160,69 +151,34 @@ export function putOrganisation(req, res) {
 
 	// Check the user belongs to this org
 	if (req.params.id === req.user.org_id) {
-		// Check we have a name
-		if (req.body.name) {
-			// Check it's not empty
-			if (req.body.name !== '') {
-				// If the provided name is valid check it's not already in use
-				Organisation.find({name: req.body.name}, (err, organisation) => {
+		// Ok let's get the org to update
+		Organisation.findById(req.params.id, (err, organisation) => {
+			if (err) {
+				debug('PUT, err: ' + JSON.stringify(err));
+				return res.status(500).send({message: 'Error finding organisation : ' + err.message});
+			}
+
+			// Let's do the update
+			if (organisation) {
+				organisation.name = req.body.name;
+
+				organisation.save((err) => {
 					if (err) {
-						debug('PUT, err: ' + JSON.stringify(err));
-						res.status(500).send('error finding organisation : ' + JSON.stringify(err));
-						return;
+						debug('PUT, error saving organisation');
+						return res.status(500).send({message: 'Error creating organisation: ' + err.message});
 					}
 
-					// IF we got an organisation the name's in use opps
-					if (organisation) {
-						debug('PUT, organisation exists with the name: ' + req.body.name);
-						res.status(400).SendStream('An organisation with the name ' + req.body.name + ' already exists.');
-						return;
-					} else {
-
-						// Ok let's get the org to update
-						Organisation.findById(req.params.id, (err, organisation) => {
-							if (err) {
-								debug('PUT, err: ' + JSON.stringify(err));
-								res.status(500).send('error finding organisation : ' + JSON.stringify(err));
-								return;
-							}
-
-							// Finally let's do the update
-							if (organisation) {
-								organisation.name = req.body.name;
-
-								organisation.save((err) => {
-									if (err) {
-										debug('PUT, error saving organisation');
-										res.status(500).send(err);
-										return;
-									}
-
-									debug('PUT, success');
-									res.sendStatus(200);
-									return;
-								});
-							} else {
-								debug('GET:*, org: no organisations found.');
-								res.status(404).send('no organisations found.');
-								return;
-							}
-						});
-					}
+					debug('PUT, success');
+					return res.status(200).send({organisation: organisation});
 				});
 			} else {
-				debug('PUT, name was empty');
-				res.status(400).SendStream('The provided organisation name was empty.');
-				return;
+				debug('GET:*, org: no organisations found.');
+				return res.status(404).send({message: 'no organisations found.'});
 			}
-		} else {
-			debug('PUT, name was not provided');
-			res.status(400).SendStream('The organisation name was not provided.');
-			return;
-		}
+		});
 	} else {
 		debug('PUT, invalid update from user: ' + req.user.id + ', updating org: ' + req.params.id);
-		res.status(403).send('organisation not valid for user: ' + req.user.id);
+		return res.status(403).send({message: 'organisation not valid for user: ' + req.user.id});
 	}
 }
 
@@ -240,8 +196,7 @@ export function deleteOrganisation(req, res) {
 		Organisation.findById(req.params.id, (err, organisation) => {
 			if (err) {
 				debug('DELETE, err: ' + JSON.stringify(err));
-				res.status(500).send('error finding organisation : ' + JSON.stringify(err));
-				return;
+				return res.status(500).send({message: 'error finding organisation : ' + err.message});
 			}
 
 			if (organisation) {
@@ -250,8 +205,7 @@ export function deleteOrganisation(req, res) {
 				User.updateMany({org_id: req.params.id}, {active: false}, (err) => {
 					if (err) {
 						debug('DELETE, err: ' + JSON.stringify(err));
-						res.status(500).send('error deactivating members organisation : ' + JSON.stringify(err));
-						return;
+						return res.status(500).send({message: 'error deactivating members organisation : ' + err.message});
 					}
 
 					// Deactivate organisation
@@ -260,21 +214,19 @@ export function deleteOrganisation(req, res) {
 					organisation.save((err) => {
 						if (err) {
 							debug('DELETE, error saving organiosation');
-							res.status(500).send(err);
-							return;
+							return res.status(500).send({message: 'Error saving change: ' + err.message});
 						}
 						debug('DELETE, success');
-						res.sendStatus(200);
-						return;
+						return res.status(200).send({message: 'Success!'});
 					});
 				});
 			} else {
 				debug('DELETE, org: ' + req.params.id + ' not found for user: ' + req.user.id);
-				res.status(404).send('no organisation found for account ' + req.user.id);
+				return res.status(404).send({message: 'no organisation found for account ' + req.user.id});
 			}
 		});
 	} else {
 		debug('DELETE, invalid delete from user: ' + req.user.id + ', deleting org: ' + req.params.id);
-		res.status(403).send('User does not have permission to delete this org.');
+		return res.status(403).send({message: 'User does not have permission to delete this org.'});
 	}
 }

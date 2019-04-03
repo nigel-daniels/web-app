@@ -102,7 +102,7 @@ export function signup(req, res) {
 								}
 
 								debug('signup, success.');
-								res.sendStatus(200);
+								res.status(200).send({message: 'Success!'});
 								return;
 							});
 						});
@@ -147,7 +147,7 @@ export function authenticate(req, res) {
 	debug('authenticate, called.');
 	if (req.isAuthenticated()) {
 		debug('authenticate, ok.');
-		res.sendStatus(200);
+		res.status(200).send({message: 'Success!'});;
 	} else {
 		debug('authenticate, not ok.');
 		res.status(401).send({message: 'Authentication failure.'});
@@ -188,7 +188,7 @@ export function forgotPassword(req, res) {
 				}
 
 				debug('forgotPassword, email sent ok.');
-				res.sendStatus(200);
+				res.status(200).send({message: 'Success!'});
 				return;
 			});
 		} else {
@@ -241,7 +241,7 @@ export function logout(req, res) {
 	req.session.destroy();
 	req.logout();
 	debug('logout, done.');
-	res.sendStatus(200);
+	res.status(200).send({message: 'Success!'});
 	return;
 }
 

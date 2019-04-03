@@ -3,14 +3,16 @@
  * Author: Nigel Daniels
  * MIT Licensed
  */
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
 import Debug from 'debug';
 
 import { Main } from '../Main';
 
 let debug = Debug('ProfileView');
 
-export class Profile extends React.Component {
+class Profile extends Component {
 	render () {
 
 		debug('render, called.');
@@ -23,3 +25,16 @@ export class Profile extends React.Component {
 	  }
 	}
 }
+
+ProfileView.propTypes = {
+	isworking:		PropTypes.bool,
+	loggedin:		PropTypes.bool,
+	user:			PropTypes.object,
+	err:			PropTypes.string,
+
+	saveUser: 		PropTypes.func,
+	deleteUser: 	PropTypes.func,
+	changePassword:	PropTypes.func
+};
+
+export default ProfileView;
