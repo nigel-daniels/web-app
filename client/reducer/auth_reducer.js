@@ -12,7 +12,7 @@ let debug = Debug('auth_reducer');
 const INITIAL_STATE = {
 	loggedin: false,
 	isworking: false,
-	user: null,
+	profile: null,
 	err: null
 };
 
@@ -42,8 +42,8 @@ export default function reducer(state = INITIAL_STATE, action) {
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
-			failure: prevState => ({ ...prevState, loggedin: false, err: payload.message }),
-			success: prevState => ({ ...prevState, loggedin: true, user: payload.user })
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, loggedin: true, profile: payload.user })
 		});
 	}
 	case actions.AUTHENTICATE: {
@@ -60,8 +60,35 @@ export default function reducer(state = INITIAL_STATE, action) {
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
-			failure: prevState => ({ ...prevState, loggedin: false, err: payload.message }),
-			success: prevState => ({ ...prevState, loggedin: false })
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, loggedin: false, profile: null })
+		});
+	}
+	case actions.UPDATE_PROFILE: {
+		debug('UPDATE_PROFILE is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, profile: payload.user })
+		});
+	}
+	case actions.CHANGE_PASSWORD: {
+		debug('CHANGE_PASSWORD is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState })
+		});
+	}
+	case actions.CLOSE_ACCOUNT: {
+		debug('CLOSE_ACCOUNT is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, loggedin: false, profile: null })
 		});
 	}
 	default:

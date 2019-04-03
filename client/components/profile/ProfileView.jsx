@@ -29,12 +29,12 @@ class Profile extends Component {
 ProfileView.propTypes = {
 	isworking:		PropTypes.bool,
 	loggedin:		PropTypes.bool,
-	user:			PropTypes.object,
+	profile:			PropTypes.object,
 	err:			PropTypes.string,
 
-	saveUser: 		PropTypes.func,
-	deleteUser: 	PropTypes.func,
-	changePassword:	PropTypes.func
+	updateProfile: 	PropTypes.func,
+	changePassword:	PropTypes.func,
+	closeAccount:	PropTypes.func
 };
 
 export default ProfileView;

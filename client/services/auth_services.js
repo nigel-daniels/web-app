@@ -73,3 +73,45 @@ export const logout = () => {
 		.then((response) => {debug('logout, fetch ok.');return response;})
 		.catch((error) => {debug('logout, fetch, caught err.'); throw error;});
 };
+
+export const updateProfile = (newProfile) => {
+	debug('updateProfile, called.');
+
+	let init = {
+		...coreInit,
+		method:			'PUT',
+		body:			JSON.stringify(newProfile)
+	};
+
+	return fetchOk('/user', init)
+		.then((response) => {debug('updateProfile, fetch ok.');return response;})
+		.catch((error) => {debug('updateProfile, fetch, caught err.'); throw error;});
+};
+
+export const changePassword = (newProfile) => {
+	debug('changePassword, called.');
+
+	let init = {
+		...coreInit,
+		method:			'PUT',
+		body:			JSON.stringify(newProfile)
+	};
+
+	return fetchOk('/user', init)
+		.then((response) => {debug('changePassword, fetch ok.');return response;})
+		.catch((error) => {debug('changePassword, fetch, caught err.'); throw error;});
+};
+
+export const closeAccount = (id) => {
+	debug('closeAccount, called.');
+
+	let init = {
+		...coreInit,
+		method:			'DELETE',
+		body:			JSON.stringify({'id': id})
+	};
+
+	return fetchOk('/user', init)
+		.then((response) => {debug('closeAccount, fetch ok.');return response;})
+		.catch((error) => {debug('closeAccount, fetch, caught err.'); throw error;});
+};

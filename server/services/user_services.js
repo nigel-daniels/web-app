@@ -142,7 +142,7 @@ export function putUser(req, res) {
 					}
 
 					debug('PUT, success!');
-					return res.status(200).send({message: 'Success!'}); // NLS
+					return res.status(200).send({user: user});
 				});
 			} else {
 				debug('PUT, requested user was not found.');

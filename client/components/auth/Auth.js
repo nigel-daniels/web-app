@@ -4,11 +4,11 @@
  * MIT Licensed
  */
 import {connect} from 'react-redux';
-import LoginView from './LoginView';
+import AuthRoute from './AuthRoute';
 import * as actions from '../../actions';
 import Debug from 'debug';
 
-let debug = Debug('Login');
+let debug = Debug('Auth');
 
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
@@ -23,11 +23,10 @@ const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	debug('mapDispatchToProps, dispatch: ' + JSON.stringify(dispatch));
 	return {
-		login: (email, password) => {dispatch(actions.login(email, password));},
-		signup: (firstName, lastName, organisation, email, password) => {dispatch(actions.signup(firstName, lastName, organisation, email, password));}
+		authenticate: (email, password) => {dispatch(actions.authenticate(email, password));}
 	};
 };
 
-const Login = connect(mapStateToProps, mapDispatchToProps)(LoginView);
+const Auth = connect(mapStateToProps, mapDispatchToProps)(AuthRoute);
 
-export default Login;
+export default Auth;

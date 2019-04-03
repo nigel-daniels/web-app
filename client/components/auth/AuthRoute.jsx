@@ -9,6 +9,24 @@ import Debug from 'debug';
 
 let debug = Debug('AuthRoute');
 
+class AuthRoute extends Route {
+	render() {<Route {...rest} render={(props) => (
+		isAuthenticated()
+			? (<Component {...props} />)
+			: (<Redirect to={{ pathname: '/login', state: { from: props.location}}} />)
+	)} />}
+};
+
+LoginView.propTypes = {
+	isworking:	PropTypes.bool,
+	loggedin:	PropTypes.bool,
+	err:		PropTypes.string,
+
+	authenticate:		PropTypes.func
+};
+
+export default AuthRoute;
+/*
 function isAuthenticated() {
 	debug('isAuthenticated, called');
 	let result = false;
@@ -32,3 +50,4 @@ export const AuthRoute = ({component: Component, ...rest}) => (
 			: (<Redirect to={{ pathname: '/login', state: { from: props.location}}} />)
 	)} />
 );
+*/

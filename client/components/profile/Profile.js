@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 	return {
 		isworking:	state.auth.isworking,
 		loggedin: 	state.auth.loggedin,
-		user:		state.auth.user,
+		profile:	state.auth.profile,
 		err:		state.auth.err
 	};
 };
@@ -23,9 +23,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		saveUser: (firstName, lastName, email) => {dispatch(actions.saveUser(firstName, lastName, email));},
-		deleteUser: (id) => {dispatch(actions.deleteUser(firstName, lastName, email));},
-		changePassword: (password) => {dispatch(actions.changePassword(password));}
+		updateProfile: (firstName, lastName, email) => {dispatch(actions.updateProfile(firstName, lastName, email));},
+		changePassword: (password) => {dispatch(actions.changePassword(password));},
+		closeAccount: (id) => {dispatch(actions.closeAccount(id));}
+
 	};
 };
 

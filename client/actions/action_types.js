@@ -8,6 +8,9 @@ export const LOGIN = 'LOGIN';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';
 
 // User Action Types
 export const ADD_USER = 'ADD_USER';

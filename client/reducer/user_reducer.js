@@ -9,6 +9,12 @@ import Debug from 'debug';
 
 let debug = Debug('user_reducer');
 
+const INITIAL_STATE = {
+	isworking: false,
+	user: null,
+	err: null
+};
+
 export default function reducer(state = new Map(), action) {
 	debug('reducer called');
 	switch (action.type) {
@@ -18,7 +24,11 @@ export default function reducer(state = new Map(), action) {
 	}
 	case actions.GET_USER:
 	case actions.GET_USERS:
-	case actions.UPDATE_USER:
+	case actions.UPDATE_USER: {
+		debug('case is UPDATE_USER');
+		return updateUser(state, action);
+	}
+
 	case actions.DELETE_USER:
 			//console.log('reducer, SET_ENTRIES: state = ' + JSON.stringify(state));
 			//return setEntries(state, action.entries);
