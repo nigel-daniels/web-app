@@ -15,7 +15,7 @@ class ResetView extends Component {
 
 	componentDidMount() {
 		debug('componentDidMount, called.');
-		//var _this = this;
+		var id = $('#app-script').attr('id');
 
 		debug('componentDidMount, activate tooltips.');
 		$(function () {
@@ -28,7 +28,7 @@ class ResetView extends Component {
 				debug('reset, submit event = ' + event);
 				if (!event.isDefaultPrevented()) {
 					event.preventDefault();  // Stop us from navigating away b4 request is done
-					this.props.login($('#password').val());
+					this.props.reset(id, $('#password').val());
 				}
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');

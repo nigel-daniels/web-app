@@ -23,7 +23,7 @@ class ForgotView extends Component {
 			.on('submit', (event) => {
 				if (!event.isDefaultPrevented()) {
 					event.preventDefault();
-					this.forgot(event.originalEvent);
+					this.forgot($('#forgot-email').val());
 				}
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
