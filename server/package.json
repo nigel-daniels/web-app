@@ -39,9 +39,6 @@
     "passport-local": "^1.0.0",
     "react": "^16.8.5",
     "react-dom": "^16.3.3",
-    "redux": "^4.0.1",
-    "redux-persist": "^5.10.0",
-    "redux-persist-mongodb-storage": "^1.0.2",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.2.0"
   },
