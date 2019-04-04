@@ -13,23 +13,10 @@ let debug = Debug('Profile');
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.auth.isworking,
-		loggedin: 	state.auth.loggedin,
-		profile:	state.auth.profile,
-		err:		state.auth.err
+		isworking:	state.auth.isworking
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	debug('mapDispatchToProps, called');
-	return {
-		updateProfile: (firstName, lastName, email) => {dispatch(actions.updateProfile(firstName, lastName, email));},
-		changePassword: (password) => {dispatch(actions.changePassword(password));},
-		closeAccount: (id) => {dispatch(actions.closeAccount(id));}
-
-	};
-};
-
-const Profile = connect(mapStateToProps, mapDispatchToProps)(ProfileView);
+const Profile = connect(mapStateToProps)(ProfileView);
 
 export default Profile;

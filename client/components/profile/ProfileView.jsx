@@ -9,6 +9,7 @@ import Debug from 'debug';
 
 import { Main } from '../Main';
 import Details from './forms/Details';
+import Password from './forms/Password';
 
 let debug = Debug('ProfileView');
 
@@ -31,10 +32,10 @@ class ProfileView extends Component {
 					</ul>
 					<div className="tab-content" id="profile-content">
 						<div className="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-						  	Details Form
+						  	<Details/>
 						</div>
 						<div className="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-							Password Form
+							<Password/>
 						</div>
 					</div>
 				</div>
@@ -44,14 +45,7 @@ class ProfileView extends Component {
 };
 
 ProfileView.propTypes = {
-	isworking:		PropTypes.bool,
-	loggedin:		PropTypes.bool,
-	profile:		PropTypes.object,
-	err:			PropTypes.string,
-
-	updateProfile: 	PropTypes.func,
-	changePassword:	PropTypes.func,
-	closeAccount:	PropTypes.func
+	isworking:		PropTypes.bool
 };
 
 export default ProfileView;

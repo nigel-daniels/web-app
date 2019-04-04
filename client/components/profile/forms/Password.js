@@ -4,11 +4,11 @@
  * MIT Licensed
  */
 import {connect} from 'react-redux';
-import DetailsView from './DetailsView';
+import PasswordView from './PasswordView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
-let debug = Debug('Details');
+let debug = Debug('Password');
 
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
@@ -21,11 +21,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		updateProfile: (firstName, lastName, email) => {dispatch(actions.updateProfile(firstName, lastName, email));},
-		closeAccount: (id) => {dispatch(actions.closeAccount(id));}
+		changePassword: (password) => {dispatch(actions.changePassword(password));}
 	};
 };
 
-const Details = connect(mapStateToProps, mapDispatchToProps)(DetailsView);
+const Password = connect(mapStateToProps, mapDispatchToProps)(PasswordView);
 
-export default Details;
+export default Password;

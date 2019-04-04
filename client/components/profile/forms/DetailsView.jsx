@@ -17,29 +17,30 @@ class DetailsView extends Component {
     	if (this.props.isworking) {
       	return null;
     	} else {
+        debug('render, profile: ' + JSON.stringify(this.props.profile));
   			return 	<form>
 				<div className="form-group row">
-					<label for="first-name" className="col-sm-3 col-form-label">First Name</label>
+					<label htlmfor="first-name" className="col-sm-3 col-form-label">First Name</label>
 					<div className="col-sm-9">
-						<input type="text" className="form-control" id="first-name" placeholder="Your first name."/>
+						<input type="text" className="form-control" id="first-name" placeholder="Your first name." defaultValue={this.props.profile.firstName}/>
 					</div>
 				</div>
 				<div className="form-group row">
-					<label for="last-name" className="col-sm-3 col-form-label">Last Name</label>
+					<label htlmfor="last-name" className="col-sm-3 col-form-label">Last Name</label>
 					<div className="col-sm-9">
-						<input type="text" className="form-control" id="last-name" placeholder="Your last name."/>
+						<input type="text" className="form-control" id="last-name" placeholder="Your last name." defaultValue={this.props.profile.lastName}/>
 					</div>
 				</div>
 				<div className="form-group row">
-					<label for="organisation" className="col-sm-3 col-form-label">Organisation</label>
+					<label htlmfor="organisation" className="col-sm-3 col-form-label">Organisation</label>
 					<div className="col-sm-9">
-						<input type="text" className="form-control" id="organisation" placeholder="Your organisation." readonly/>
+						<input type="text" className="form-control" id="organisation" placeholder="Your organisation." readOnly defaultValue={this.props.profile.organisation}/>
 					</div>
 				</div>
 				<div className="form-group row">
-					<label for="email" className="col-sm-3 col-form-label">Email</label>
+					<label htlmfor="email" className="col-sm-3 col-form-label">Email</label>
 					<div className="col-sm-9">
-						<input type="email" className="form-control" id="email" placeholder="Email"/>
+						<input type="email" className="form-control" id="email" placeholder="Your email" defaultValue={this.props.profile.email}/>
 					</div>
 				</div>
 				<div className="form-group row">
@@ -54,9 +55,7 @@ class DetailsView extends Component {
 
 DetailsView.propTypes = {
 	isworking:		PropTypes.bool,
-	loggedin:		PropTypes.bool,
 	profile:		PropTypes.object,
-	err:			PropTypes.string,
 
 	updateProfile: 	PropTypes.func,
 	closeAccount:	PropTypes.func
