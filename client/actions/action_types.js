@@ -8,6 +8,7 @@ export const LOGIN = 'LOGIN';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
+export const FORGOT = 'FORGOT';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';

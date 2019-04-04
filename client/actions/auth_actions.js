@@ -13,6 +13,7 @@ export const login = (email, password) => ({type: types.LOGIN, promise: services
 export const authenticate = (email, password) => ({ type: types.AUTHENTICATE, payload: {email, password}});
 export const logout = () => ({ type: types.LOGOUT, promise: services.logout()});
 export const signup = (firstName, lastName, organisation, email, password) => ({ type: types.SIGNUP, promise: services.signup(firstName, lastName, organisation, email, password)});
+export const forgot = (email) => ({ type: types.FORGOT, promise: services.forgot(email)});
 export const updateProfile = (newProfile) =>  ({ type: types.UPDATE_PROFILE, promise: services.updateProfile(newProfile)});
 export const changePassword = (newProfile) => ({ type: types.CHANGE_PASSWORD, promise: services.changePassword(newProfile)});
 export const closeAccount = (id) => ({type: types.CLOSE_ACCOUNT, promise: services.closeAccount(id)});
