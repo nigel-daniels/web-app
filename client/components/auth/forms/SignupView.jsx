@@ -119,11 +119,11 @@ class SignupView extends Component {
 	                <span className="help-block with-errors"></span>
 	            </div>
 	            <div className="form-group">
-	                <input type="checkbox" id="terms" tabIndex={70} data-error="You need to read and agree to the terms and conditions." required/> I agree to the <a data-toggle="modal" data-target="#terms-modal">terms and conditions.</a>
+	                <input type="checkbox" id="terms" tabIndex={70} data-error="You need to read and agree to the terms and conditions." required/> I agree to the <a href="#" data-toggle="modal" data-target="#terms-modal">terms and conditions.</a>
 	                <span className="help-block with-errors"></span>
 	            </div>
 	            <div className="form-group">
-	                <input type="checkbox" id="privacy" tabIndex={75} data-error="You need to read agree to the privacy policy." required/> I agree to the <a data-toggle="modal" data-target="#privacy-modal">privacy policy.</a>
+	                <input type="checkbox" id="privacy" tabIndex={75} data-error="You need to read agree to the privacy policy." required/> I agree to the <a  href="#" data-toggle="modal" data-target="#privacy-modal">privacy policy.</a>
 	                <span className="help-block with-errors"></span>
 	            </div>
 	            <div className="form-group">
