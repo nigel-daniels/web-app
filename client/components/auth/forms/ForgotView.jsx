@@ -42,7 +42,7 @@ class ForgotView extends Component {
 
 		return 	<form className="form-horizontal forgot-form" id="forgot-form">
             <div className="form-group">
-                <label htmlfor="forgot-email" className="sr-only">Email</label>
+                <label htmlFor="forgot-email" className="sr-only">Email</label>
                 <div className="input-group">
                     <div className="input-group-prepend login-name-addon">
                         <span className="input-group-text">

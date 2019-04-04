@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
+import {Cookies} from './modals/Cookies';
 import Login from './forms/Login';
 import Signup from './forms/Signup';
 import Forgot from './forms/Forgot';
@@ -149,9 +150,10 @@ class AuthView extends Component {
 	  				</div>
 	  				<div className="footer">
 	  					<p>
-	  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a id="cookies">Cookie Policy</a>
+	  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
 	  					</p>
 	  				</div>
+					<Cookies/>
 	  			</div>;
 	  		}
 	    }
