@@ -60,10 +60,10 @@ class MainMenuView extends Component {
 		          <img alt="SAIC" src="images/saic.png" height="30" width="30"/>
 		        </a>
 				<button type="button" className="navbar-toggler mr-auto" data-toggle="collapse" data-target="#links" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
-					<span className="fas fa-bars"></span>
+					<span className="fa fa-bars"></span>
 				</button>
         		<button type="button" className="navbar-toggler ml-auto" data-toggle="collapse" data-target="#account" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation">
-					<span className="fas fa-user"></span>
+					<span className="fa fa-user"></span>
 				</button>
 
 				<div id="links" className="navbar-collapse collapse">
