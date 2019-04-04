@@ -51,7 +51,16 @@ export default function reducer(state = INITIAL_STATE, action) {
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
-			failure: prevState => ({ ...prevState, loggedin: false, err: payload.message }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState })
+		});
+	}
+    case actions.RESET: {
+		debug('RESET is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState })
 		});
 	}

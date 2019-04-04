@@ -116,13 +116,6 @@ debug('Set initial static hosting for the client');
 debug('dir name: ' + __dirname);
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function(req, res) {
-	debug('/ called, serving index.');
-	debug('env = ' + env);
-	//let IndexView = React.createFactory(Index);
-	//res.send(ReactDOMServer.renderToString(IndexView({env: env})));
-	res.render('index', {env: env}); // removed {layout: false} parameter
-});
 
 // Log all of the requests
 if (env === 'development') {

@@ -4,9 +4,9 @@
  * MIT Licensed
  */
 import {User, ADMIN, SUPER, STAFF} from '../models/User';
-import debugModule from 'debug';
+import Debug from 'debug';
 
-const debug = debugModule('user_service');
+const debug = Debug('user_service');
 
 /* ***************************************
  *  GET The current user

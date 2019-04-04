@@ -3,16 +3,17 @@
  * Author: Nigel Daniels
  * MIT Licensed
  */
-import {signup, forgotPassword, getResetPage, resetPassword, login, loginRedirect, authenticate, logout} from '../services';
+import {start, signup, forgot, reset, resetPassword, login, loginRedirect, authenticate, logout} from '../services';
 
 export default function (app, passport) {
+    app.get('/', start);
 	app.post('/signup', signup);
 	//	app.post('/invite', services.invite);
 	//	app.get('/accept', services.getAcceptPage);
 	//	app.post('/accept', services.acceptInvite);
 
-	app.post('/forgot', forgotPassword);
-	app.get('/reset', getResetPage);
+	app.post('/forgot', forgot);
+	app.get('/reset/:id', reset);
 	app.post('/reset', resetPassword);
 
 	app.post('/login', login);

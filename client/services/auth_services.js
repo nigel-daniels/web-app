@@ -59,6 +59,22 @@ export const forgot = (email) => {
 
 };
 
+export const reset = (id, password) => {
+	debug('reset, called.');
+
+	let init = {
+		...coreInit,
+		method:			'POST',
+		body:			JSON.stringify({'id': id, 'password': password})
+	};
+
+	debug('reset, init is: ' + JSON.stringify(init));
+	return fetchOk('/reset', init)
+		.then((response) => {debug('reset, fetch ok.');return response;})
+		.catch((error) => {debug('reset, fetch, caught err.'); throw error;});
+
+};
+
 export const authenticate = (email, password) => {
 	debug('authenticate, called.');
 

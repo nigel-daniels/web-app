@@ -8,10 +8,26 @@ import stringify from 'json-stringify-safe';
 import mailConfig from '../config/mail';
 import Organisation from '../models/Organisation';
 import User, {ADMIN, SUPER} from '../models/User';
-import debugModule from 'debug';
+import Debug from 'debug';
 import passport from 'passport';
 
-const debug = debugModule('auth_service');
+const debug = Debug('auth_service');
+
+/* ***************************************
+ *  GET, Start the app
+ * ***************************************/
+export function start(req, res) {
+	debug('start, called.');
+
+	if (Debug.enabled) {
+		debug('start, env = development');
+		return res.render('index', {env: 'development'});
+	} else {
+		debug('start, env = production');
+		return res.render('index', {env: 'production'});
+	}
+}
+
 
 /* ***************************************
  *  POST, Sign up a new user
@@ -154,7 +170,7 @@ export function authenticate(req, res) {
 	}
 }
 
-export function forgotPassword(req, res) {
+export function forgot(req, res) {
 	debug('forgotPassword, called.');
 	var resetPasswordUrl = 'https://' + req.headers.host + '/reset';
 
@@ -168,7 +184,7 @@ export function forgotPassword(req, res) {
 
 		if (user) {
 			debug('forgotPassword, found user.');
-			resetPasswordUrl += '/?id=' + user._id;
+			resetPasswordUrl += '/' + user._id;
 
 			debug('forgotPassword, creating smtpTransport.');
 			var smtpTransport = nodemailer.createTransport(mailConfig);
@@ -176,7 +192,7 @@ export function forgotPassword(req, res) {
 			var mailOpts =  {
 				from:		'no.reply@initiatethinking.com',
 				to:			user.email,
-				subject:	'Initiate Thinking Demo App - Password Request',
+				subject:	'Web Demo App - Password Request',
 				text:		'Please use this link to reset your password: ' + resetPasswordUrl
 			};
 
@@ -199,11 +215,17 @@ export function forgotPassword(req, res) {
 	});
 }
 
-export function getResetPage(req, res) {
-	debug('getResetPage, called');
-	debug('getResetPage, id: ' + req.query.id);
-	res.redirect('/reset/' + req.query.id);
-	return;
+export function reset(req, res) {
+	debug('reset, called');
+	debug('reset, id: ' + req.param.id);
+
+    if (Debug.enabled) {
+	   debug('reset, env = development');
+       return res.render('reset', {env: 'development', id: req.param.id});
+	} else {
+		debug('reset, env = production');
+		return res.render('reset', {env: 'production', id: req.param.id});
+	}
 }
 
 export function resetPassword(req, res) {
