@@ -65,8 +65,66 @@
 					  </li>
 					</ul>
 					<div class="tab-content" id="profile-content">
-					  <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">...</div>
-					  <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">...</div>
+					  <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+						  	<form>
+								<div class="form-group row">
+								  <label for="first-name" class="col-sm-3 col-form-label">First Name</label>
+								  <div class="col-sm-9">
+									<input type="text" class="form-control" id="first-name" placeholder="Your first name.">
+								  </div>
+								</div>
+								<div class="form-group row">
+								  <label for="last-name" class="col-sm-3 col-form-label">Last Name</label>
+								  <div class="col-sm-9">
+									<input type="text" class="form-control" id="last-name" placeholder="Your last name.">
+								  </div>
+								</div>
+								<div class="form-group row">
+								  <label for="organisation" class="col-sm-3 col-form-label">Organisation</label>
+								  <div class="col-sm-9">
+									<input type="text" class="form-control" id="organisation" placeholder="Your organisation." readonly>
+								  </div>
+								</div>
+								  <div class="form-group row">
+								    <label for="email" class="col-sm-3 col-form-label">Email</label>
+								    <div class="col-sm-9">
+								      <input type="email" class="form-control" id="email" placeholder="Email">
+								    </div>
+								  </div>
+								  <div class="form-group row">
+								    <div class="col-sm-9">
+								      <button type="submit" class="btn btn-primary">Update</button>
+								    </div>
+								  </div>
+							</form>
+					  </div>
+					  <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						  <form>
+								<div class="form-group row">
+								  <label for="current-password" class="col-sm-3 col-form-label">Current Password</label>
+								  <div class="col-sm-9">
+									<input type="password" class="form-control" id="current-password" placeholder="Your current password.">
+								  </div>
+								</div>
+								<div class="form-group row">
+								  <label for="new-password" class="col-sm-3 col-form-label">New Password</label>
+								  <div class="col-sm-9">
+									<input type="password" class="form-control" id="new-password" placeholder="Type new password.">
+								  </div>
+								</div>
+								<div class="form-group row">
+								  <label for="new-password-verify" class="col-sm-3 col-form-label">Verify New Password</label>
+								  <div class="col-sm-9">
+									<input type="password" class="form-control" id="new-password-verify" placeholder="Re-type new password here.">
+								  </div>
+								</div>
+								<div class="form-group row">
+								  <div class="col-sm-9">
+									<button type="submit" class="btn btn-primary">Change</button>
+								  </div>
+								</div>
+						  </form>
+					  </div>
 					</div>
 				</div>
 			</div>
