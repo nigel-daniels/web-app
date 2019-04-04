@@ -46,6 +46,15 @@ export default function reducer(state = INITIAL_STATE, action) {
 			success: prevState => ({ ...prevState, loggedin: true, profile: payload.user })
 		});
 	}
+    case actions.FORGOT: {
+		debug('FORGOT is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, loggedin: false, err: payload.message }),
+			success: prevState => ({ ...prevState })
+		});
+	}
 	case actions.AUTHENTICATE: {
 		debug('AUTHENTICATE is called');
 		return handle(state, action, {
@@ -79,7 +88,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
-			success: prevState => ({ ...prevState })
+			success: prevState => ({ ...prevState, profile: payload.user })
 		});
 	}
 	case actions.CLOSE_ACCOUNT: {

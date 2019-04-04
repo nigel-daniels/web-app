@@ -43,6 +43,21 @@ export const login = (email, password) => {
 
 };
 
+export const forgot = (email) => {
+	debug('forgot, called.');
+
+	let init = {
+		...coreInit,
+		method:			'POST',
+		body:			JSON.stringify({'email': email})
+	};
+
+	debug('forgot, init is: ' + JSON.stringify(init));
+	return fetchOk('/forgot', init)
+		.then((response) => {debug('forgot, fetch ok.');return response;})
+		.catch((error) => {debug('forgot, fetch, caught err.'); throw error;});
+
+};
 
 export const authenticate = (email, password) => {
 	debug('authenticate, called.');
