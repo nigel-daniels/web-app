@@ -6,48 +6,65 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
-
-import { Main } from '../../Main';
+import {rfc5322} from '../../constants';
 
 let debug = Debug('DetailsView');
 
 class DetailsView extends Component {
+
+	componentDidMount() {
+		debug('componentDidMount, called.');
+
+		debug('componentDidMount, activate tooltips.');
+		$(function () {
+			$('[data-toggle="tooltip"]').popover();
+		});
+
+		debug('componentDidMount, set validator on signup-form.');
+		$('#profile-form').validator()
+			.on('submit', (event) => {
+				debug('update, submit');
+				if (!event.isDefaultPrevented()) {event.preventDefault();}
+
+				this.props.updateProfile(this.props.profile._id, $('#first-name').val(), $('#last-name').val(),
+					$('#email').val(), this.props.profile.org_id, this.props.profile.role);
+			})
+			.off('input.bs.validator change.bs.validator focusout.bs.validator');
+	}
+
   	render () {
     	debug('render, called.');
     	if (this.props.isworking) {
       		return null;
     	} else {
         	debug('render, profile: ' + JSON.stringify(this.props.profile));
-  			return 	<form>
+  			return 	<form className="form-horizontal profile-form" id="profile-form">
 				<div className="form-group row">
-					<label htlmfor="first-name" className="col-sm-3 col-form-label">First Name</label>
-					<div className="col-sm-9">
-						<input type="text" className="form-control" id="first-name" placeholder="Your first name." defaultValue={this.props.profile.firstName}/>
+					<label htlmfor="first-name" className="col-sm-3 col-form-label">Name</label>
+					<div className="col-sm-9 form-group input-block">
+						<input type="text" className="form-control" id="first-name" tabIndex={5} placeholder="Your first name." defaultValue={this.props.profile.firstName} required/>
+						<input type="text" className="form-control" id="last-name" tabIndex={10} placeholder="Your last name." defaultValue={this.props.profile.lastName} required/>
 					</div>
 				</div>
-				<div className="form-group row">
-					<label htlmfor="last-name" className="col-sm-3 col-form-label">Last Name</label>
-					<div className="col-sm-9">
-						<input type="text" className="form-control" id="last-name" placeholder="Your last name." defaultValue={this.props.profile.lastName}/>
-					</div>
-				</div>
+				<span className="help-block with-errors"></span>
 				<div className="form-group row">
 					<label htlmfor="organisation" className="col-sm-3 col-form-label">Organisation</label>
 					<div className="col-sm-9">
-						<input type="text" className="form-control" id="organisation" placeholder="Your organisation." readOnly defaultValue={this.props.profile.organisation}/>
+						<input type="text" className="form-control" id="organisation" tabIndex={15} placeholder="Your organisation." readOnly defaultValue={this.props.profile.organisation} data-error="A valid e-mail is required." required/>
 					</div>
 				</div>
 				<div className="form-group row">
 					<label htlmfor="email" className="col-sm-3 col-form-label">Email</label>
 					<div className="col-sm-9 form-group input-block">
-						<input type="email" className="form-control" id="email" placeholder="Your e-mail" defaultValue={this.props.profile.email}/>
-						<input type="email" className="form-control" id="email2" placeholder="Validate e-mail" defaultValue={this.props.profile.email}/>
+						<input type="email" className="form-control" id="email" tabIndex={20} pattern={rfc5322} placeholder="Your e-mail" defaultValue={this.props.profile.email}/>
+						<input type="email" className="form-control" id="email2" tabIndex={25} pattern={rfc5322} placeholder="Validate e-mail" defaultValue={this.props.profile.email} data-error="A confirmation e-mail is required." data-match="#email" data-match-error="The e-mails do not match." required/>
 					</div>
 				</div>
+				<span className="help-block with-errors"></span>
 				<div className="form-group row">
 					<span className="col-sm-3"></span>
 					<div className="col-sm-9">
-						<button type="submit" className="btn btn-primary">Update</button>
+						<button type="submit" className="btn btn-primary" id="update" tabIndex={30}>Update</button>
 					</div>
 				</div>
 			</form>;
@@ -59,8 +76,8 @@ DetailsView.propTypes = {
 	isworking:		PropTypes.bool,
 	profile:		PropTypes.object,
 
-	updateProfile: 	PropTypes.func,
-	closeAccount:	PropTypes.func
+	updateProfile: 	PropTypes.func//,
+	//closeAccount:	PropTypes.func
 };
 
 export default DetailsView;

@@ -26,7 +26,12 @@ export default function reducer(state = new Map(), action) {
 	case actions.GET_USERS:
 	case actions.UPDATE_USER: {
 		debug('case is UPDATE_USER');
-		return updateUser(state, action);
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, loggedin: true, profile: payload.user })
+		});
 	}
 
 	case actions.DELETE_USER:

@@ -15,30 +15,30 @@ class PasswordView extends Component {
   	render () {
     	debug('render, called.');
     	if (this.props.isworking) {
-      	return null;
+      		return null;
     	} else {
-        debug('render, profile: ' + JSON.stringify(this.props.profile));
+        	debug('render, profile: ' + JSON.stringify(this.props.profile));
   			return 	<form>
-                <div className="form-group row">
-                    <label htlmfor="current-password" className="col-sm-3 col-form-label">Current Password</label>
-                    <div className="col-sm-9">
-                        <input type="password" className="form-control" id="current-password" placeholder="Your current password."/>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <label htlmfor="new-password" className="col-sm-3 col-form-label">New Password</label>
-                    <div className="col-sm-9 form-group input-block">
-                        <input type="password" className="form-control" id="new-password" placeholder="Type new password."/>
+				<div className="form-group row">
+					<label htlmfor="current-password" className="col-sm-3 col-form-label">Current Password</label>
+					<div className="col-sm-9">
+						<input type="password" className="form-control" id="current-password" placeholder="Your current password."/>
+					</div>
+				</div>
+				<div className="form-group row">
+					<label htlmfor="new-password" className="col-sm-3 col-form-label">New Password</label>
+					<div className="col-sm-9 form-group input-block">
+						<input type="password" className="form-control" id="new-password" placeholder="Type new password."/>
 						<input type="password2" className="form-control" id="new-password" placeholder="Validate new password."/>
-                    </div>
-                </div>
-                <div className="form-group row">
+					</div>
+				</div>
+				<div className="form-group row">
 					<span className="col-sm-3"></span>
-                    <div className="col-sm-9">
-                        <button type="submit" className="btn btn-primary">Change</button>
-                    </div>
-                </div>
-            </form>;
+					<div className="col-sm-9">
+						<button type="submit" className="btn btn-primary">Change</button>
+					</div>
+				</div>
+			</form>;
 	  	}
 	}
 };

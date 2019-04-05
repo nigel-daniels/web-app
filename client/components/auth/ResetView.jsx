@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Redirect} from 'react-router-dom';
+import {passwordPattern} from '../constants';
 import {Cookies} from './modals/Cookies';
 
 import Debug from 'debug';
@@ -20,10 +21,10 @@ class ResetView extends Component {
 
 		debug('componentDidMount, activate tooltips.');
 		$(function () {
-			$('[data-toggle="tooltip"]').popover();
+			$('[data-toggle="tooltip"]').tooltip();
 		});
 
-        debug('componentDidMount, set validator on reset-form.');
+		debug('componentDidMount, set validator on reset-form.');
 		$('#reset-form').validator()
 			.on('submit', (event) => {
 				debug('reset, submit event = ' + event);
@@ -51,11 +52,8 @@ class ResetView extends Component {
 	render() {
 		debug('render, called.');
 
-		const passwordPattern = '(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$';
-
-		debug('render loggedin = ' + this.props.loggedin);
 	    if (this.props.isworking) {
-	      return null;
+	      	return null;
 	    } else {
 	  		if (this.props.loggedin) {
 	  			debug('render, loggedin true, redirecting to \'/home\'.');
@@ -85,37 +83,37 @@ class ResetView extends Component {
 	  							<div className="panel-body">
 
 	  								<div className="login-view">
-                                        <form className="form-horizontal reset-form" id="reset-form">
-                                            <div className="form-group input-block-ico">
-                                                <label htmlFor="password" className="sr-only">Password</label>
-                                                <div className="input-group" data-toggle="tooltip" title="Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.">
-                                                    <div className="input-group-prepend login-name-addon">
-                                                        <span className="input-group-text">
-                                                            <span className="fa fa-key" aria-hidden="true"/>
-                                                        </span>
-                                                    </div>
-                                                    <input type="password" id="password" pattern={passwordPattern} className="form-control" tabIndex={55} placeholder="Password" data-error="A valid password is required." required/>
-                                                </div>
-                                                <div className="input-group">
-                                                    <div className="input-group-prepend login-name-addon">
-                                                        <span className="input-group-text">
-                                                            <span className="fa fa-key" aria-hidden="true"/>
-                                                        </span>
-                                                    </div>
-                                                    <input type="password" id="password2" pattern={passwordPattern} className="form-control" tabIndex={60} placeholder="Validate password" data-error="A confirmation password is required." data-match="#password" data-match-error="The passwords do not match." required/>
-                                                </div>
-                                                <span className="help-block with-errors"></span>
-                                            </div>
-                                            <div className="form-group">
-                                                <button className="btn btn-primary btn-block" type="submit" id="reset" tabIndex={80}>Reset</button>
-                                            </div>
-                                        </form>
-                                        <div className="row login-footer">
-                                            <div className="col-md-6 login-footer-left">
-                                                <a id="reset-login" href="/" tabIndex={100}>Go to Login</a>
-                                            </div>
-                                        </div>
-                                    </div>
+										<form className="form-horizontal reset-form" id="reset-form">
+											<div className="form-group input-block-ico">
+												<label htmlFor="password" className="sr-only">Password</label>
+												<div className="input-group" data-toggle="tooltip" title="Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.">
+													<div className="input-group-prepend login-name-addon">
+														<span className="input-group-text">
+															<span className="fa fa-key" aria-hidden="true"/>
+														</span>
+													</div>
+													<input type="password" id="password" pattern={passwordPattern} className="form-control" tabIndex={55} placeholder="Password" data-error="A valid password is required." required/>
+												</div>
+												<div className="input-group">
+													<div className="input-group-prepend login-name-addon">
+														<span className="input-group-text">
+															<span className="fa fa-key" aria-hidden="true"/>
+														</span>
+													</div>
+													<input type="password" id="password2" pattern={passwordPattern} className="form-control" tabIndex={60} placeholder="Validate password" data-error="A confirmation password is required." data-match="#password" data-match-error="The passwords do not match." required/>
+												</div>
+												<span className="help-block with-errors"></span>
+											</div>
+											<div className="form-group">
+												<button className="btn btn-primary btn-block" type="submit" id="reset" tabIndex={80}>Reset</button>
+											</div>
+										</form>
+										<div className="row login-footer">
+											<div className="col-md-6 login-footer-left">
+												<a id="reset-login" href="/" tabIndex={100}>Go to Login</a>
+											</div>
+										</div>
+									</div>
 
 	  							</div>
 	  						</div>
@@ -139,7 +137,7 @@ ResetView.propTypes = {
 	loggedin:	PropTypes.bool,
 	err:		PropTypes.string,
 
-    reset:      PropTypes.func
+	reset:      PropTypes.func
 };
 
 export default ResetView;

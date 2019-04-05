@@ -219,9 +219,9 @@ export function reset(req, res) {
 	debug('reset, called');
 	debug('reset, id: ' + req.param.id);
 
-    if (Debug.enabled) {
-	   debug('reset, env = development');
-       return res.render('reset', {env: 'development', id: req.param.id});
+	if (Debug.enabled) {
+		debug('reset, env = development');
+		return res.render('reset', {env: 'development', id: req.param.id});
 	} else {
 		debug('reset, env = production');
 		return res.render('reset', {env: 'production', id: req.param.id});

@@ -3,7 +3,7 @@
  * Author: Nigel Daniels
  * MIT Licensed
  */
-import {User, ADMIN, SUPER, STAFF} from '../models/User';
+import User, {ADMIN, SUPER, STAFF} from '../models/User';
 import Debug from 'debug';
 
 const debug = Debug('user_service');
@@ -84,15 +84,18 @@ export function getUserById(req, res) {
  * ***************************************/
 export function putUser(req, res) {
 	debug('PUT, called.');
+	debug('PUT, param: ' + JSON.stringify(req.params));
+	debug('PUT, param: ' + JSON.stringify(req.body));
 
-	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id === req.params.user.org_id)) || (req.user._id === req.params.user._id)) {
-		User.findById(req.params.user._id, (err, user) => {
+	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id === req.params.user.org_id)) || (req.user._id === req.params.id)) {
+		User.findById(req.params.id, (err, user) => {
 			if (err) {
 				debug('PUT, error finding user: ' + JSON.stringify(err));
 				return res.status(500).send({message: 'Error finding user: ' + err.message});
 			}
 
 			if (user) {
+				debug('PUT, got user: ' + JSON.stringify(user));
 				// Validate required input values
 				debug('PUT, checking user values provided.');
 				if (!req.body.email) {
@@ -104,12 +107,14 @@ export function putUser(req, res) {
 				}
 
 				// Check the role is valid
-				if (!User.validateRole(req.body.role)) {
+				debug('PUT, checking user role.');
+				if (!user.validateRole(req.body.role)) {
 					debug('PUT, not a valid user role.');
 					return res.status(400).send({message: 'The user role provided is invalid.'}); // NLS
 				}
 
 				// Validate the email is not already in use
+				debug('PUT, checking user email.');
 				if (req.body.email !== user.email) {
 					debug('PUT, validating email is unique.');
 					User.findOne({email: req.body.email}, (err, user) => {
@@ -150,8 +155,8 @@ export function putUser(req, res) {
 			}
 		});
 	} else {
-		debug('PUT, invalid update from user: ' + req.user.id + ', updating user: ' + req.params.id);
-		return res.status(403).send({message: 'User: ' + req.user.id + ' does not have permission to update user: ' + req.params.id}); // NLS
+		debug('PUT, invalid update from user: ' + req.user._id + ', updating user: ' + req.params.user.id);
+		return res.status(403).send({message: 'User: ' + req.user._id + ' does not have permission to update user: ' + req.params.user.id}); // NLS
 	}
 }
 

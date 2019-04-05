@@ -46,7 +46,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 			success: prevState => ({ ...prevState, loggedin: true, profile: payload.user })
 		});
 	}
-    case actions.FORGOT: {
+	case actions.FORGOT: {
 		debug('FORGOT is called');
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
@@ -55,7 +55,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 			success: prevState => ({ ...prevState })
 		});
 	}
-    case actions.RESET: {
+	case actions.RESET: {
 		debug('RESET is called');
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),

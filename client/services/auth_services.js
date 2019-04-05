@@ -105,21 +105,23 @@ export const logout = () => {
 		.catch((error) => {debug('logout, fetch, caught err.'); throw error;});
 };
 
-export const updateProfile = (newProfile) => {
+export const updateProfile = (id, firstName, lastName, email, org_id, role) => {
 	debug('updateProfile, called.');
 
 	let init = {
 		...coreInit,
 		method:			'PUT',
-		body:			JSON.stringify(newProfile)
+		body:			JSON.stringify({'id': id, 'firstName': firstName,
+			'lastName': lastName, 'email': email, 'org_id': org_id, 'role': role})
 	};
 
-	return fetchOk('/user', init)
-		.then((response) => {debug('updateProfile, fetch ok.');return response;})
-		.catch((error) => {debug('updateProfile, fetch, caught err.'); throw error;});
+	debug('updateProfile, init is: ' + JSON.stringify(init));
+	return fetchOk('/user/' + id, init)
+		.then((response) => {debug('signup, response ok.');return response;})
+		.catch((error) => {debug('signup, fetch, caught err.'); throw error;});
 };
 
-export const changePassword = (newProfile) => {
+export const changePassword = (id, password) => {
 	debug('changePassword, called.');
 
 	let init = {

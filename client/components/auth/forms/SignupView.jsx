@@ -5,6 +5,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {passwordPattern, rfc5322} from '../../constants';
 import {Terms} from '../modals/Terms';
 import {Privacy} from '../modals/Privacy';
 import Debug from 'debug';
@@ -12,37 +13,29 @@ import Debug from 'debug';
 let debug = Debug('SignupView');
 
 class SignupView extends Component {
-    componentDidMount() {
+
+	componentDidMount() {
 		debug('componentDidMount, called.');
 
 		debug('componentDidMount, activate tooltips.');
 		$(function () {
-			$('[data-toggle="tooltip"]').popover();
+			$('[data-toggle="tooltip"]').tooltip();
 		});
 
-        debug('componentDidMount, set validator on signup-form.');
+		debug('componentDidMount, set validator on signup-form.');
 		$('#signup-form').validator()
 			.on('submit', (event) => {
-				if (!event.isDefaultPrevented()) {
-					event.preventDefault();
-					this.props.signup($('#firstName').val(), $('#lastName').val(),
-						$('#organisation').val(), $('#email').val(), $('#password').val());
-				}
+				debug('submit, validate and submit.');
+				if (!event.isDefaultPrevented()) {event.preventDefault();}
+
+				this.props.signup($('#firstName').val(), $('#lastName').val(),
+					$('#organisation').val(), $('#email').val(), $('#password').val());	
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
 	}
 
   	render () {
-        debug('render, called.');
-        const passwordPattern = '(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$';
-
-        const rfc5322 = '(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\\x01-\\x08\\x0b\\' +
-					'x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*")@(?:(?:[a-z0-9]' +
-					'(?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4]' +
-					'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]' +
-					')|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\' +
-					'x0b\\x0c\\x0e-\\x7f])+)\\])';
-
+		debug('render, called.');
 
 		return 	<div>
 			<form className="form-horizontal signup-form" id="signup-form">
@@ -119,11 +112,11 @@ class SignupView extends Component {
 	                <span className="help-block with-errors"></span>
 	            </div>
 	            <div className="form-group">
-	                <input type="checkbox" id="terms" tabIndex={70} data-error="You need to read and agree to the terms and conditions." required/> I agree to the <a href="#" data-toggle="modal" data-target="#terms-modal">terms and conditions.</a>
+	                <input type="checkbox" id="terms" tabIndex={70} data-error="You need to agree to our terms and conditions." required/> I agree to the <a href="#" data-toggle="modal" data-target="#terms-modal">terms and conditions.</a>
 	                <span className="help-block with-errors"></span>
 	            </div>
 	            <div className="form-group">
-	                <input type="checkbox" id="privacy" tabIndex={75} data-error="You need to read agree to the privacy policy." required/> I agree to the <a  href="#" data-toggle="modal" data-target="#privacy-modal">privacy policy.</a>
+	                <input type="checkbox" id="privacy" tabIndex={75} data-error="You need to agree to our privacy policy." required/> I agree to the <a  href="#" data-toggle="modal" data-target="#privacy-modal">privacy policy.</a>
 	                <span className="help-block with-errors"></span>
 	            </div>
 	            <div className="form-group">
@@ -137,7 +130,7 @@ class SignupView extends Component {
 };
 
 SignupView.propTypes = {
-	login:		PropTypes.func
+	signup:		PropTypes.func
 };
 
 export default SignupView;

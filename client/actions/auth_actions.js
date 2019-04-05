@@ -15,6 +15,6 @@ export const logout = () => ({ type: types.LOGOUT, promise: services.logout()});
 export const signup = (firstName, lastName, organisation, email, password) => ({ type: types.SIGNUP, promise: services.signup(firstName, lastName, organisation, email, password)});
 export const forgot = (email) => ({ type: types.FORGOT, promise: services.forgot(email)});
 export const reset = (id, password) => ({ type: types.RESET, promise: services.forgot(id, password)});
-export const updateProfile = (newProfile) =>  ({ type: types.UPDATE_PROFILE, promise: services.updateProfile(newProfile)});
+export const updateProfile = (id, firstName, lastName, email, org_id, role) =>  ({ type: types.UPDATE_PROFILE, promise: services.updateProfile(id, firstName, lastName, email, org_id, role)});
 export const changePassword = (newProfile) => ({ type: types.CHANGE_PASSWORD, promise: services.changePassword(newProfile)});
 export const closeAccount = (id) => ({type: types.CLOSE_ACCOUNT, promise: services.closeAccount(id)});

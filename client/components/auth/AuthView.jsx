@@ -5,6 +5,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {hidden} from '../constants';
 import {Redirect} from 'react-router-dom';
 import {Cookies} from './modals/Cookies';
 import Login from './forms/Login';
@@ -52,16 +53,6 @@ class AuthView extends Component {
 		}
 	}
 
-	componentDidMount() {
-		debug('componentDidMount, called.');
-		//var _this = this;
-
-		debug('componentDidMount, activate tooltips.');
-		$(function () {
-			$('[data-toggle="tooltip"]').popover();
-		});
-	}
-
 	componentDidUpdate() {
 		debug('componentDidUpdate, check if there is an err then notify if there is.');
 		if (this.props.err !== null) {
@@ -78,18 +69,14 @@ class AuthView extends Component {
 	render() {
 		debug('render, called.');
 
-        const hidden = {display: 'none'};
-
-		//const { from } = this.props.location.state || { from: { pathname: '/' }};
 		debug('render loggedin = ' + this.props.loggedin);
 	    if (this.props.isworking) {
-	      return null;
+	      	return null;
 	    } else {
 	  		if (this.props.loggedin) {
 	  			debug('render, loggedin true, redirecting to \'/home\'.');
 	  			return <Redirect to={{ pathname: '/home' }} />;
-	  		}
-	  		else {
+	  		} else {
 	  			debug('render, loggedin false, rendering login view.');
 	  			debug('render, props: ' + JSON.stringify(this.props));
 	  			return 	<div className="container-fluid">
@@ -113,34 +100,34 @@ class AuthView extends Component {
 	  							<div className="panel-body">
 
 	  								<div className="login-view">
-                                        <Login/>
-                                        <div className="row login-footer">
-                                            <div className="col-md-6 login-footer-left">
-                                                <a id="login-forgot" onClick={this.handleAction.bind(this)} tabIndex={15}>Forgot password?</a>
-                                            </div>
-                                            <div className="col-md-6 login-footer-right">
-                                                <a id="login-signup" onClick={this.handleAction.bind(this)} tabIndex={20}>Create account?</a>
-                                            </div>
-                                        </div>
-                                    </div>
+										<Login/>
+										<div className="row login-footer">
+											<div className="col-md-6 login-footer-left">
+												<a id="login-forgot" onClick={this.handleAction.bind(this)} tabIndex={15}>Forgot password?</a>
+											</div>
+											<div className="col-md-6 login-footer-right">
+												<a id="login-signup" onClick={this.handleAction.bind(this)} tabIndex={20}>Create account?</a>
+											</div>
+										</div>
+									</div>
 
 	  								<div className="signup-view"  style={hidden}>
 	  									<Signup/>
-                                        <div className="row login-footer">
-                                            <div className="col-md-6 login-footer-left">
-                                                <a id="signup-login" onClick={this.handleAction.bind(this)} tabIndex={85}>Back to Login</a>
-                                            </div>
-                                        </div>
+										<div className="row login-footer">
+											<div className="col-md-6 login-footer-left">
+												<a id="signup-login" onClick={this.handleAction.bind(this)} tabIndex={85}>Back to Login</a>
+											</div>
+										</div>
 	  								</div>
 
 	  								<div className="forgot-view"  style={hidden}>
 	  									<p className="forgot-copy">This will send a message to your registered account e-mail address, allowing you to reset your password.</p>
 	  									<Forgot/>
-                                        <div className="row login-footer">
-                                            <div className="col-md-6 login-footer-left">
-                                                <a id="forgot-login" onClick={this.handleAction.bind(this)} tabIndex={100}>Back to Login</a>
-                                            </div>
-                                        </div>
+										<div className="row login-footer">
+											<div className="col-md-6 login-footer-left">
+												<a id="forgot-login" onClick={this.handleAction.bind(this)} tabIndex={100}>Back to Login</a>
+											</div>
+										</div>
 	  								</div>
 
 	  							</div>

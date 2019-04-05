@@ -21,8 +21,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		updateProfile: (firstName, lastName, email) => {dispatch(actions.updateProfile(firstName, lastName, email));},
-		closeAccount: (id) => {dispatch(actions.closeAccount(id));}
+		updateProfile: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateProfile(id, firstName, lastName, email, org_id, role));},
+		closeAccount: (id) => {dispatch(actions.deleteUser(id));}
 	};
 };
 
