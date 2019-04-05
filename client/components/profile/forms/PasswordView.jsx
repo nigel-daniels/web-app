@@ -27,17 +27,13 @@ class PasswordView extends Component {
                 </div>
                 <div className="form-group row">
                     <label htlmfor="new-password" className="col-sm-3 col-form-label">New Password</label>
-                    <div className="col-sm-9">
+                    <div className="col-sm-9 form-group input-block">
                         <input type="password" className="form-control" id="new-password" placeholder="Type new password."/>
+						<input type="password2" className="form-control" id="new-password" placeholder="Validate new password."/>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label htlmfor="new-password-verify" className="col-sm-3 col-form-label">Verify New Password</label>
-                    <div className="col-sm-9">
-                        <input type="password" className="form-control" id="new-password-verify" placeholder="Re-type new password here."/>
-                    </div>
-                </div>
-                <div className="form-group row">
+					<span className="col-sm-3"></span>
                     <div className="col-sm-9">
                         <button type="submit" className="btn btn-primary">Change</button>
                     </div>

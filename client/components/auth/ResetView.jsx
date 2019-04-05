@@ -124,7 +124,7 @@ class ResetView extends Component {
 	  				</div>
 	  				<div className="footer">
 	  					<p>
-	  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a data-toggle="modal" data-target="#cookies">Cookie Policy</a>
+	  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a href="#" data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
 	  					</p>
 	  				</div>
 					<Cookies/>

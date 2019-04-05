@@ -15,9 +15,9 @@ class DetailsView extends Component {
   	render () {
     	debug('render, called.');
     	if (this.props.isworking) {
-      	return null;
+      		return null;
     	} else {
-        debug('render, profile: ' + JSON.stringify(this.props.profile));
+        	debug('render, profile: ' + JSON.stringify(this.props.profile));
   			return 	<form>
 				<div className="form-group row">
 					<label htlmfor="first-name" className="col-sm-3 col-form-label">First Name</label>
@@ -39,11 +39,13 @@ class DetailsView extends Component {
 				</div>
 				<div className="form-group row">
 					<label htlmfor="email" className="col-sm-3 col-form-label">Email</label>
-					<div className="col-sm-9">
-						<input type="email" className="form-control" id="email" placeholder="Your email" defaultValue={this.props.profile.email}/>
+					<div className="col-sm-9 form-group input-block">
+						<input type="email" className="form-control" id="email" placeholder="Your e-mail" defaultValue={this.props.profile.email}/>
+						<input type="email" className="form-control" id="email2" placeholder="Validate e-mail" defaultValue={this.props.profile.email}/>
 					</div>
 				</div>
 				<div className="form-group row">
+					<span className="col-sm-3"></span>
 					<div className="col-sm-9">
 						<button type="submit" className="btn btn-primary">Update</button>
 					</div>
