@@ -23,9 +23,10 @@ class ForgotView extends Component {
 		debug('componentDidMount, set validator on forgot-form.');
 		$('#forgot-form').validator()
 			.on('submit', (event) => {
-				if (!event.isDefaultPrevented()) {event.preventDefault();}
-
-				this.props.forgot($('#forgot-email').val());			
+				if (!event.isDefaultPrevented()) {
+					event.preventDefault();
+					this.props.forgot($('#forgot-email').val());
+				}
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
 	}

@@ -26,10 +26,11 @@ class SignupView extends Component {
 		$('#signup-form').validator()
 			.on('submit', (event) => {
 				debug('submit, validate and submit.');
-				if (!event.isDefaultPrevented()) {event.preventDefault();}
-
-				this.props.signup($('#firstName').val(), $('#lastName').val(),
-					$('#organisation').val(), $('#email').val(), $('#password').val());	
+				if (!event.isDefaultPrevented()) {
+					event.preventDefault();
+					this.props.signup($('#firstName').val(), $('#lastName').val(),
+						$('#organisation').val(), $('#email').val(), $('#password').val());
+				}
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
 	}

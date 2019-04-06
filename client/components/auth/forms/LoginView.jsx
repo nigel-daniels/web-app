@@ -18,9 +18,11 @@ class LoginView extends Component {
 		$('#login-form').validator()
 			.on('submit', (event) => {
 				debug('login, submit event = ' + event);
-				if (!event.isDefaultPrevented()) {event.preventDefault();}
+				if (!event.isDefaultPrevented()) {
+					event.preventDefault();
+					this.props.login($('#login-email').val(), $('#login-password').val());
+				}
 
-				this.props.login($('#login-email').val(), $('#login-password').val());
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
 	}
