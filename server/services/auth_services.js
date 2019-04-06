@@ -5,7 +5,7 @@
  */
 import * as nodemailer from 'nodemailer';
 import stringify from 'json-stringify-safe';
-import mailConfig from '../config/mail';
+import mailConfig from '../config/mail.json';
 import Organisation from '../models/Organisation';
 import User, {ADMIN, SUPER} from '../models/User';
 import Debug from 'debug';
@@ -19,13 +19,8 @@ const debug = Debug('auth_service');
 export function start(req, res) {
 	debug('start, called.');
 
-	if (Debug.enabled) {
-		debug('start, env = development');
-		return res.render('index', {env: 'development'});
-	} else {
-		debug('start, env = production');
-		return res.render('index', {env: 'production'});
-	}
+	let env = Debug.enabled ? 'development' : 'production';
+	return res.render('index', {'env': env});
 }
 
 
@@ -129,6 +124,9 @@ export function signup(req, res) {
 	});
 }
 
+/* ***************************************
+ *  POST, Login to the system
+ * ***************************************/
 export function login(req, res, next) {
 	debug('login, called.');
 
@@ -154,11 +152,17 @@ export function login(req, res, next) {
 	})(req, res, next);
 }
 
+/* ***************************************
+ *  GET, routes back to the top level
+ * ***************************************/
 export function loginRedirect(req, res) {
 	debug('loginRedirect, called.');
 	return res.redirect('/');
 }
 
+/* ***************************************
+ *  GET, validates login state
+ * ***************************************/
 export function authenticate(req, res) {
 	debug('authenticate, called.');
 	if (req.isAuthenticated()) {
@@ -170,12 +174,15 @@ export function authenticate(req, res) {
 	}
 }
 
+/* ***************************************
+ *  POST, send mail to reset password
+ * ***************************************/
 export function forgot(req, res) {
 	debug('forgotPassword, called.');
 	var resetPasswordUrl = 'https://' + req.headers.host + '/reset';
 
 	debug('forgotPassword, finding user.');
-	User.findOne({username: req.body.username}, function(err, user) {
+	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) {
 			debug('forgotPassword, finding user err: ' + err.message);
 			res.status(500).send({message: 'Error finding user.', cause: err.message});
@@ -215,19 +222,20 @@ export function forgot(req, res) {
 	});
 }
 
+/* ***************************************
+ *  GET, serve up the reset page
+ * ***************************************/
 export function reset(req, res) {
 	debug('reset, called');
-	debug('reset, id: ' + req.param.id);
+	debug('reset, id: ' + req.params.id);
 
-	if (Debug.enabled) {
-		debug('reset, env = development');
-		return res.render('reset', {env: 'development', id: req.param.id});
-	} else {
-		debug('reset, env = production');
-		return res.render('reset', {env: 'production', id: req.param.id});
-	}
+	let env = Debug.enabled ? 'development' : 'production';
+	return res.render('reset', {'env': env, 'id': req.params.id});
 }
 
+/* ***************************************
+ *  POST, new password
+ * ***************************************/
 export function resetPassword(req, res) {
 	debug('resetPassword, called.');
 	debug('resetPassword, body: ' + JSON.stringify(req.body));
@@ -252,6 +260,9 @@ export function resetPassword(req, res) {
 	}
 }
 
+/* ***************************************
+ *  GET, logout and end session
+ * ***************************************/
 export function logout(req, res) {
 	debug('logout, called.');
 	req.session.destroy();
@@ -261,6 +272,9 @@ export function logout(req, res) {
 	return;
 }
 
+/* ***************************************
+ *  Internal method
+ * ***************************************/
 export function isAuthenticated(req, res, next) {
 	debug('isAuthenticated, called.');
 	if (req.isAuthenticated()) {

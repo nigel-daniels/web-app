@@ -12,19 +12,6 @@ let debug = Debug('MainMenuView');
 
 class MainMenuView extends Component {
 
-	componentDidUpdate() {
-		debug('componentDidUpdate, check if there is an err then notify if there is.');
-		if (this.props.err !== null) {
-			$.notify({
-				title: '<strong>Signup Error</strong>',
-				icon: 'fa fa-exclamation-triangle',
-				message: this.props.err
-			},{
-				type: 'danger'
-			});
-		}
-	}
-
 	userMenu(role) {
 		debug('userMenu, called.');
 
@@ -86,7 +73,6 @@ class MainMenuView extends Component {
 MainMenuView.propTypes = {
 	loggedin:	PropTypes.bool,
 	profile:	PropTypes.object,
-	err:		PropTypes.string,
 
 	logout:		PropTypes.func
 };

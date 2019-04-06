@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		reset: (email) => {dispatch(actions.reset(id, password));}
+		changePassword: (id, password) => {dispatch(actions.changePassword(id, password));}
 	};
 };
 

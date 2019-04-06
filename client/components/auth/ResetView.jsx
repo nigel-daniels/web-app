@@ -27,10 +27,10 @@ class ResetView extends Component {
 		debug('componentDidMount, set validator on reset-form.');
 		$('#reset-form').validator()
 			.on('submit', (event) => {
-				debug('reset, submit event = ' + event);
+				debug('reset, submit id:  ' + id);
 				if (!event.isDefaultPrevented()) {
 					event.preventDefault();  // Stop us from navigating away b4 request is done
-					this.props.reset(id, $('#password').val());
+					this.props.changePassword(id, $('#password').val());
 				}
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
@@ -40,7 +40,7 @@ class ResetView extends Component {
 		debug('componentDidUpdate, check if there is an err then notify if there is.');
 		if (this.props.err !== null) {
 			$.notify({
-				title: '<strong>Signup Error</strong>',
+				title: '<strong>Error</strong>',
 				icon: 'fa fa-exclamation-triangle',
 				message: this.props.err
 			},{
@@ -69,7 +69,7 @@ class ResetView extends Component {
 	  						<div className="login-brand">
 	  							<div className="row">
 	  								<span className="col-xs-2 login-logo">
-	  									<img alt="Logo" src="images/saic.png" height="40" width="40"/>
+	  									<img alt="Logo" src="/../images/saic.png" height="40" width="40"/>
 	  								</span>
 	  								<span className="col-xs-10 login-main-title">
 	  									<h1>Web App Demo</h1>
@@ -133,11 +133,11 @@ class ResetView extends Component {
 };
 
 ResetView.propTypes = {
-	isworking:	PropTypes.bool,
-	loggedin:	PropTypes.bool,
-	err:		PropTypes.string,
+	isworking:			PropTypes.bool,
+	loggedin:			PropTypes.bool,
+	err:				PropTypes.string,
 
-	reset:      PropTypes.func
+	changePassword:     PropTypes.func
 };
 
 export default ResetView;

@@ -15,11 +15,6 @@ class ForgotView extends Component {
 	componentDidMount() {
 		debug('componentDidMount, called.');
 
-		debug('componentDidMount, activate tooltips.');
-		$(function () {
-			$('[data-toggle="tooltip"]').popover();
-		});
-
 		debug('componentDidMount, set validator on forgot-form.');
 		$('#forgot-form').validator()
 			.on('submit', (event) => {

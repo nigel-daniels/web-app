@@ -57,7 +57,7 @@ class AuthView extends Component {
 		debug('componentDidUpdate, check if there is an err then notify if there is.');
 		if (this.props.err !== null) {
 			$.notify({
-				title: '<strong>Signup Error</strong>',
+				title: '<strong>Error</strong>',
 				icon: 'fa fa-exclamation-triangle',
 				message: this.props.err
 			},{

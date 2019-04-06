@@ -13,7 +13,7 @@ let debug = Debug('Forgot');
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		forgot: (email) => {dispatch(actions.signup(email));}
+		forgot: (email) => {dispatch(actions.forgot(email));}
 	};
 };
 

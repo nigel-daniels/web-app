@@ -10,27 +10,28 @@ let debug = Debug('Reset');
 
 export default class Reset extends React.Component {
 
-   render () {
-       debug('rendering');
-       debug('env = ' + this.props.env);
-       return (
-           <html lang="en">
-               <head>
-                   <meta charSet="utf-8"/>
-                   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	render () {
+		debug('rendering');
+		debug('env = ' + this.props.env);
+		debug('id = ' + this.props.id);
+		return (
+			<html lang="en">
+				<head>
+					<meta charSet="utf-8"/>
+					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-                   <title>Base Web App</title>
-               </head>
+					<title>Base Web App</title>
+				</head>
 
-               <body>
-                   <div id="app">
-                       {this.props.children}
-                   </div>
+				<body>
+					<div id="app">
+						{this.props.children}
+					</div>
 
-                   <script id="app-script" type="text/javascript" src="client.js" data-env={this.props.env} id={this.props.id}></script>
+					<script id="app-script" type="text/javascript" src="/../client.js" data-env={this.props.env} id={this.props.id}></script>
 
-               </body>
-           </html>
-       );
-   }
+				</body>
+			</html>
+		);
+	}
 }
