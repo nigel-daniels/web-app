@@ -65,11 +65,11 @@ export const reset = (id, password) => {
 	let init = {
 		...coreInit,
 		method:			'POST',
-		body:			JSON.stringify({'id': id, 'password': password})
+		body:			JSON.stringify({'password': password})
 	};
 
 	debug('reset, init is: ' + JSON.stringify(init));
-	return fetchOk('/reset', init)
+	return fetchOk('/reset/' + id, init)
 		.then((response) => {debug('reset, fetch ok.');return response;})
 		.catch((error) => {debug('reset, fetch, caught err.'); throw error;});
 
@@ -122,15 +122,16 @@ export const updateProfile = (id, firstName, lastName, email, org_id, role) => {
 };
 
 export const changePassword = (id, password) => {
-	debug('changePassword, called.');
+	debug('changePassword, called with password: ' + password);
 
 	let init = {
 		...coreInit,
 		method:			'PUT',
-		body:			JSON.stringify(newProfile)
+		body:			JSON.stringify({'password': password})
 	};
 
-	return fetchOk('/user', init)
+	debug('changePassword, init: ' + JSON.stringify(init));
+	return fetchOk('/reset/' + id, init)
 		.then((response) => {debug('changePassword, fetch ok.');return response;})
 		.catch((error) => {debug('changePassword, fetch, caught err.'); throw error;});
 };
@@ -140,11 +141,10 @@ export const closeAccount = (id) => {
 
 	let init = {
 		...coreInit,
-		method:			'DELETE',
-		body:			JSON.stringify({'id': id})
+		method:			'DELETE'
 	};
 
-	return fetchOk('/user', init)
+	return fetchOk('/user/' + id, init)
 		.then((response) => {debug('closeAccount, fetch ok.');return response;})
 		.catch((error) => {debug('closeAccount, fetch, caught err.'); throw error;});
 };

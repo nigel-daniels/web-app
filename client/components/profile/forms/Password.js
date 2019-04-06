@@ -13,7 +13,6 @@ let debug = Debug('Password');
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.auth.isworking,
 		profile:	state.auth.profile
 	};
 };
@@ -21,7 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		changePassword: (password) => {dispatch(actions.changePassword(password));}
+		changePassword: (id, password) => {dispatch(actions.changePassword(id, password));}
 	};
 };
 

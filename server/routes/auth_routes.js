@@ -6,7 +6,7 @@
 import {start, signup, forgot, reset, resetPassword, login, loginRedirect, authenticate, logout} from '../services';
 
 export default function (app, passport) {
-    app.get('/', start);
+	app.get('/', start);
 	app.post('/signup', signup);
 	//	app.post('/invite', services.invite);
 	//	app.get('/accept', services.getAcceptPage);
@@ -14,7 +14,7 @@ export default function (app, passport) {
 
 	app.post('/forgot', forgot);
 	app.get('/reset/:id', reset);
-	app.post('/reset', resetPassword);
+	app.put('/reset/:id', resetPassword);
 
 	app.post('/login', login);
 	app.get('/login', loginRedirect);

@@ -14,6 +14,19 @@ import Password from './forms/Password';
 let debug = Debug('ProfileView');
 
 class ProfileView extends Component {
+	componentDidUpdate() {
+		debug('componentDidUpdate, check if there is an err then notify if there is.');
+		if (this.props.err !== null) {
+			$.notify({
+				title: '<strong>Signup Error</strong>',
+				icon: 'fa fa-exclamation-triangle',
+				message: this.props.err
+			},{
+				type: 'danger'
+			});
+		}
+	}
+
   	render () {
     	debug('render, called.');
     	if (this.props.isworking) {
@@ -45,7 +58,8 @@ class ProfileView extends Component {
 };
 
 ProfileView.propTypes = {
-	isworking:		PropTypes.bool
+	isworking:		PropTypes.bool,
+	err:			PropTypes.string
 };
 
 export default ProfileView;

@@ -100,7 +100,7 @@ export function signup(req, res) {
 							let role = count === 0 ? SUPER : ADMIN;
 
 							debug('signup, creating user');
-							let userDoc = {
+							let new_user = {
 								firstName: 		req.body.firstName,
 								lastName: 		req.body.lastName,
 								email:			req.body.email,
@@ -108,9 +108,9 @@ export function signup(req, res) {
 								role:			role,
 								org_id: 		org.id
 							};
-							debug('signup, ' + JSON.stringify(userDoc));
+							debug('signup, ' + JSON.stringify(new_user));
 
-							User.create(userDoc, (err, user) => {
+							User.create(new_user, (err, user) => {
 								if (err) {
 									debug('signup, err creating user: ' + JSON.stringify(err));
 									res.status(500).send({message: 'Error creating user', cause: err.message});
@@ -175,7 +175,7 @@ export function forgot(req, res) {
 	var resetPasswordUrl = 'https://' + req.headers.host + '/reset';
 
 	debug('forgotPassword, finding user.');
-	User.User.findOne({username: req.body.username}, function(err, user) {
+	User.findOne({username: req.body.username}, function(err, user) {
 		if (err) {
 			debug('forgotPassword, finding user err: ' + err.message);
 			res.status(500).send({message: 'Error finding user.', cause: err.message});
@@ -230,32 +230,26 @@ export function reset(req, res) {
 
 export function resetPassword(req, res) {
 	debug('resetPassword, called.');
-	User.User.findById(req.body.id, function(err, user) {
-		if (err) {
-			res.status(500).send({message: 'Error finding user', cause: err.message});
-			return;
-		} else {
-			if (user) {
-				if (req.body.password) {
-					User.updatePassword(user._id, req.body.password, function(err) {
-						if (err) {
-							res.status(500).send({message: 'Error updating password', cause: err.message});
-							return;
-						}
-
-						res.sendStatus(200);
-						return;
-					});
+	debug('resetPassword, body: ' + JSON.stringify(req.body));
+	if (req.body.password) {
+		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
+			if (err) {
+				res.status(500).send({message: 'Error updating user', cause: err.message});
+				return;
+			} else {
+				if (user) {
+					res.status(200).send({'user': user});
+					return;
 				} else {
-					res.status(400).send({message: 'No password provided.'});
+					res.status(404).send({message: 'The user requested was not found.'});
 					return;
 				}
-			} else {
-				res.status(404).send({message: 'The user requested was not found.'});
-				return;
 			}
-		}
-	});
+		});
+	} else {
+		res.status(400).send({message: 'No password provided.'});
+		return;
+	}
 }
 
 export function logout(req, res) {

@@ -20,7 +20,7 @@ let debug = Debug('App');
 export class App extends React.Component{
 	render () {
 		debug('render, called.');
-    debug('Profile: ' + Profile);
+		debug('Profile: ' + Profile);
 
 		return 	<BrowserRouter>
 			<Switch>
@@ -28,9 +28,9 @@ export class App extends React.Component{
 				<AuthRoute exact path='/home' component={Home}/>
 				<AuthRoute path='/action' component={Action1}/>
 				<AuthRoute path='/about' component={About}/>
-                <AuthRoute path='/profile' component={Profile}/>
+				<AuthRoute path='/profile' component={Profile}/>
 				<Route path='/login' component={Auth}/>
-                <Route path='/reset' component={Reset}/>
+				<Route path='/reset' component={Reset}/>
 				<Route component={NotFound}/>
 			</Switch>
 		</BrowserRouter>;

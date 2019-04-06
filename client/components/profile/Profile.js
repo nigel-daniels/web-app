@@ -13,7 +13,8 @@ let debug = Debug('Profile');
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.auth.isworking
+		isworking:	state.auth.isworking,
+		err:		state.auth.err
 	};
 };
 
