@@ -41,7 +41,6 @@ class ResetView extends Component {
 		if (this.props.err !== null) {
 			$.notify({
 				title: '<strong>Error</strong>',
-				icon: 'fa fa-exclamation-triangle',
 				message: this.props.err
 			},{
 				type: 'danger'
@@ -122,7 +121,7 @@ class ResetView extends Component {
 	  				</div>
 	  				<div className="footer">
 	  					<p>
-	  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a href="#" data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
+	  						(c)2019 Nigel Daniels <a href="#" data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
 	  					</p>
 	  				</div>
 					<Cookies/>

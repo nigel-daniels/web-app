@@ -15,10 +15,19 @@ import '@babel/polyfill';
 import 'bootstrap';
 import 'bootstrap-validator';
 import 'bootstrap-notify';
-import './css/index.css';
-import Debug from 'debug';
 
 // Now set up the local debug
+import Debug from 'debug';
+
+// Now import the appropriate css
+if ($('#app-script').attr('id') === undefined) {
+	import './css/index.css';
+} else {
+	import './css/reset.css';
+}
+
+
+
 let debug = Debug('index');
 
 if ($('#app-script').attr('data-env') === 'development') {
@@ -28,6 +37,7 @@ if ($('#app-script').attr('data-env') === 'development') {
 	Debug.disable();
 }
 
+// Ensure the notify is available
 debug('setting notify style');
 $.notifyDefaults({
 	type: 'minimalist'

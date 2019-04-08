@@ -11,7 +11,11 @@ module.exports = {
 
 	mode:			'development',
 
-	entry:      	'index.jsx',
+	entry:      	[
+		'core-js/modules/es6.promise',
+		'core-js/modules/es6.array.iterator',
+		'index.jsx'
+	],
 
 	output:	{
 		filename:	'client.js',
@@ -34,7 +38,7 @@ module.exports = {
 		rules:	[
 			{ enforce: 'pre', test: /\.jsx$/, loader: 'source-map-loader'},
 			{test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/},
-			{ test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, options: {presets: ['@babel/env']}},
+			{ test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/},//, options: {presets: ['@babel/env']}},
 			{ test: /\.css$/, loader: 'style-loader!css-loader'},
 			{ test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, loader: 'file-loader' },
 			{ test: /\.(png|jpg|gif)$/, loader: 'file-loader' }
