@@ -1,0 +1,44 @@
+doctype html
+html(lang='en')
+
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+		link(rel='stylesheet' href='css/reset.css')
+		title Base Web App
+
+	body
+		.container-fluid
+			.row
+				.col-md-4
+				.col-md-4
+					.login-brand.row
+						span.col-xs-2.login-logo
+							img(alt='Logo' src='/../images/saic.png' height='40' width='40')
+						span.col-xs-10.login-main-title
+							h1 Web App Demo
+					.panel.panel-default.login-panel
+						.panel-heading
+							h2.panel-title.login-title Reset Password
+						.panel-body
+							.login-view
+								form#reset-form.form-horizontal.reset-form(method='POST')
+									.form-group.input-block-ico
+										label.sr-only(for='password') Password
+									.input-group(data-toggle='tooltip' title='Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.')
+										.input-group-prepend.login-name-addon
+											span.input-group-text
+												span.fa.fa-key(aria-hidden='true')
+										input#password.form-control(type='password' name='password' tabindex='5' placeholder='Password' data-error='A valid password is required.' required='')
+									.input-group
+										.input-group-prepend.login-name-addon
+											span.input-group-text
+												span.fa.fa-key(aria-hidden='true')
+										input#password2.form-control(type='password' tabindex='10' placeholder='Validate password' data-error='A confirmation password is required.' data-match='#password' data-match-error='The passwords do not match.' required='')
+									span.help-block.with-errors
+									.form-group
+										button.btn.btn-primary.btn-block(type='submit' tabindex='15') Reset
+				.col-md-4
+		.footer
+			p
+				| (c)2019 Nigel Daniels.			

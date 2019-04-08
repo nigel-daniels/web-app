@@ -21,28 +21,14 @@ module.exports = {
 	devtool:		'source-map',
 
 	resolve: {
-		extensions: ['.js', '.jsx', '.json'],
+		extensions: ['.js', '.json'],
 		modules: 	['./', 'node_modules']
 	},
 
 	module: {
 		rules:[
-			{
-				test: /\.jsx?$/,
-				use: {
-					loader: 'babel-loader',
-				}
-			},
-			{
-				enforce: 'pre',
-				test: /\.jsx?$/,
-				loader: 'source-map-loader'
-			},
-			{
-				enforce: 'pre',
-				test: /\.js?$/,
-				loader: 'source-map-loader'
-			}
+			{ enforce: 'pre', test: /\.js?$/, loader: 'source-map-loader'},
+			{ test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/},
 		]
 	},
 

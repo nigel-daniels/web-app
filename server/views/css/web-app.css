@@ -1,0 +1,91 @@
+/**
+ * Copyright 2018 Initiate Thinking (https://www.initiatethinking.com)
+ * Author: Nigel Daniels
+ * MIT Licensed
+ */
+
+/* Make stacks of inputs with preceding icons into a block */
+.input-block-ico .input-group {
+	margin-bottom: -1px;
+}
+
+.input-block-ico .input-group:last-of-type {
+	margin-bottom: 0;
+}
+
+.input-block-ico .input-group-text {
+	border-radius: 0;
+	width: 42px;
+}
+
+.input-block-ico .input-group:first-of-type .input-group-text {
+	border-top-left-radius: 4px;
+}
+
+.input-block-ico .input-group:last-of-type .input-group-text {
+	border-bottom-left-radius: 4px;
+}
+
+.input-block-ico input {
+	border-radius: 0;
+}
+
+.input-block-ico .input-group:first-of-type input {
+	border-top-right-radius: 4px;
+}
+
+.input-block-ico .input-group:last-of-type input {
+	border-bottom-right-radius: 4px;
+}
+
+/* Error messages from the validator */
+.with-errors {
+	color: darkred;
+}
+
+ /*
+  * Login View
+  */
+.login-brand {
+	margin-bottom: 10px;
+}
+
+.login-brand .row {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%
+}
+
+.login-main-title h1 {
+    margin: 0;
+    margin-left: 15px;
+}
+
+.login-title {
+	text-align: center;
+}
+
+.login-form {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.login-footer {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 10px;
+}
+
+.login-footer-left {
+	padding: 0;
+	padding-left: 30px;
+	text-align: left;
+}
+
+.login-footer-right {
+	padding: 0;
+	padding-right: 30px;
+	text-align: right;
+}
+
+.

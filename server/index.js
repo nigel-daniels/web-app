@@ -18,9 +18,7 @@ import * as routes from './routes';
 import * as fs from 'fs';
 
 // React elements
-//import React from 'react';
-//import ReactDOMServer from 'react-dom/server';
-import jsxEngine from 'express-react-views';
+//import jsxEngine from 'express-react-views';
 // Set up debug for development
 import Debug from 'debug';
 
@@ -85,7 +83,6 @@ mongoose.connect(dbURL, { useNewUrlParser: true }, function onMongooseError(err)
 	}
 });
 
-
 // Now configure the application
 debug('Setting favicon');
 app.use(favicon(__dirname + '/images/favicon.ico'));
@@ -107,8 +104,8 @@ app.use(passport.session());
 
 // Now set up the initial view
 debug('Set basic view');
-app.set('view engine', 'jsx');
-app.engine('.jsx', jsxEngine.createEngine());
+app.set('view engine', 'pug');
+//app.engine('.jsx', jsxEngine.createEngine());
 app.set('views', __dirname + '/views');
 
 // Get the client

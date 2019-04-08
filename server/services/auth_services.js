@@ -223,14 +223,14 @@ export function reset(req, res) {
  * ***************************************/
 export function resetPassword(req, res) {
 	debug('resetPassword, called.');
-	debug('resetPassword, body: ' + JSON.stringify(req.body));
+
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
 			if (err) {
 				return res.status(500).send({message: 'Error updating user', cause: err.message});
 			} else {
 				if (user) {
-					return res.render('index', {'env': env});;
+					return res.redirect('/');
 				} else {
 					return res.status(404).send({message: 'The user requested was not found.'});
 				}
@@ -246,7 +246,7 @@ export function resetPassword(req, res) {
  * ***************************************/
 export function changePassword(req, res) {
 	debug('resetPassword, called.');
-	debug('resetPassword, body: ' + JSON.stringify(req.body));
+	
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
 			if (err) {
