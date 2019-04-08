@@ -32,45 +32,38 @@ export function signup(req, res) {
 	// Check we have required fields
 	debug('signup, req body: ' + JSON.stringify(req.body));
 	if (!req.body.email) {
-		res.status(400).send({message: 'The email is required.'});
-		return;
+		return res.status(400).send({message: 'The email is required.'});
 	}
 
 	if (!req.body.password) {
-		res.status(400).send({message: 'The password is required.'});
-		return;
+		return res.status(400).send({message: 'The password is required.'});
 	}
 
 	if (!req.body.organisation) {
-		res.status(400).send({message: 'An organisation is required.'});
-		return;
+		return res.status(400).send({message: 'An organisation is required.'});
 	}
 	debug('Organisation is: ' + req.body.organisation);
 	// Check the organisation does not already exists
 	Organisation.findOne({name: req.body.organisation}, (err, org) => {
 		if (err) {
 			debug('signup, err finding organisation: ' + JSON.stringify(err));
-			res.status(500).send({message: 'Error finding organisation,', cause: + err.message});
-			return;
+			return res.status(500).send({message: 'Error finding organisation,', cause: + err.message});
 		}
 
 		if (org) {
 			debug('signup, organisation exists.');
-			res.status(400).send({message: 'The organisation you want to create already exists, contact the administrator to join.'});  // NLS
-			return;
+			return res.status(400).send({message: 'The organisation you want to create already exists, contact the administrator to join.'});  // NLS
 		} else {
 			// Check the user email is not already in use
 			User.findOne({email: req.body.email}, (err, user) => {
 				if (err) {
 					debug('signup, err finding user: ' + JSON.stringify(err));
-					res.status(500).send({message: 'Error finding user, message: ', cause: err.message});
-					return;
+					return res.status(500).send({message: 'Error finding user, message: ', cause: err.message});
 				}
 
 				if (user) {
 					debug('signup, email already exists.');
-					res.status(400).send({message: 'The email ' + req.body.email + ' is in use.'});
-					return;
+					return res.status(400).send({message: 'The email ' + req.body.email + ' is in use.'});
 				} else {
 					debug('signup, user data is validated.');
 
@@ -79,8 +72,7 @@ export function signup(req, res) {
 					Organisation.create({name: req.body.organisation}, (err, org) => {
 						if (err) {
 							debug('signup, err creating organisation: ' + JSON.stringify(err));
-							res.status(500).send({message: 'Error creating organisation', cause: err.message});
-							return;
+							return res.status(500).send({message: 'Error creating organisation', cause: err.message});
 						}
 
 						debug('Created org: ' + JSON.stringify(org));
@@ -88,8 +80,7 @@ export function signup(req, res) {
 						User.countDocuments({}, (err, count) => {
 							if (err) {
 								debug('signup, err checking user count: ' + JSON.stringify(err));
-								res.status(500).send({message: 'Error checking user count.', cause: err.message});
-								return;
+								return res.status(500).send({message: 'Error checking user count.', cause: err.message});
 							}
 
 							let role = count === 0 ? SUPER : ADMIN;
@@ -108,13 +99,11 @@ export function signup(req, res) {
 							User.create(new_user, (err, user) => {
 								if (err) {
 									debug('signup, err creating user: ' + JSON.stringify(err));
-									res.status(500).send({message: 'Error creating user', cause: err.message});
-									return;
+									return res.status(500).send({message: 'Error creating user', cause: err.message});
 								}
 
 								debug('signup, success.');
-								res.status(200).send({message: 'Success!'});
-								return;
+								return res.status(200).send({message: 'Success!'});
 							});
 						});
 					});
@@ -185,8 +174,7 @@ export function forgot(req, res) {
 	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) {
 			debug('forgotPassword, finding user err: ' + err.message);
-			res.status(500).send({message: 'Error finding user.', cause: err.message});
-			return;
+			return res.status(500).send({message: 'Error finding user.', cause: err.message});
 		}
 
 		if (user) {
@@ -206,18 +194,15 @@ export function forgot(req, res) {
 			debug('forgotPassword, sending email.');
 			smtpTransport.sendMail(mailOpts, function(err) {
 				if (err) {
-					res.status(500).send({message: 'Error sending e-mail', cause: err.message}); // NLS
-					return;
+					return res.status(500).send({message: 'Error sending e-mail', cause: err.message}); // NLS
 				}
 
 				debug('forgotPassword, email sent ok.');
-				res.status(200).send({message: 'Success!'});
-				return;
+				return res.status(200).send({message: 'Success!'});
 			});
 		} else {
 			debug('forgotPassword, user ' + req.body.username + ' not found');
-			res.status(404).send({message: 'That user could not be found.'});
-			return;
+			return res.status(404).send({message: 'That user could not be found.'});
 		}
 	});
 }
@@ -242,24 +227,42 @@ export function resetPassword(req, res) {
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
 			if (err) {
-				res.status(500).send({message: 'Error updating user', cause: err.message});
-				return;
+				return res.status(500).send({message: 'Error updating user', cause: err.message});
 			} else {
 				if (user) {
-					res.status(200).send({'user': user});
-					return;
+					return res.render('index', {'env': env});;
 				} else {
-					res.status(404).send({message: 'The user requested was not found.'});
-					return;
+					return res.status(404).send({message: 'The user requested was not found.'});
 				}
 			}
 		});
 	} else {
-		res.status(400).send({message: 'No password provided.'});
-		return;
+		return res.status(400).send({message: 'No password provided.'});
 	}
 }
 
+/* ***************************************
+ *  PUT, password
+ * ***************************************/
+export function changePassword(req, res) {
+	debug('resetPassword, called.');
+	debug('resetPassword, body: ' + JSON.stringify(req.body));
+	if (req.body.password) {
+		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
+			if (err) {
+				return res.status(500).send({message: 'Error updating user', cause: err.message});
+			} else {
+				if (user) {
+					return res.status(200).send({'user': user});
+				} else {
+					return res.status(404).send({message: 'The user requested was not found.'});
+				}
+			}
+		});
+	} else {
+		return res.status(400).send({message: 'No password provided.'});
+	}
+}
 /* ***************************************
  *  GET, logout and end session
  * ***************************************/
@@ -268,8 +271,7 @@ export function logout(req, res) {
 	req.session.destroy();
 	req.logout();
 	debug('logout, done.');
-	res.status(200).send({message: 'Success!'});
-	return;
+	return res.status(200).send({message: 'Success!'});
 }
 
 /* ***************************************
@@ -283,6 +285,5 @@ export function isAuthenticated(req, res, next) {
 	}
 
 	debug('isAuthenticated, not ok.');
-	res.redirect('/');
-	return;
+	return res.redirect('/');
 }

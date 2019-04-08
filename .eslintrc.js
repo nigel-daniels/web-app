@@ -18,7 +18,6 @@ module.exports = {
 		'sourceType': 'module',
 		'allowImportExportEverywhere': true,
         'ecmaFeatures': {
-            //'experimentalObjectRestSpread': true,
             'jsx': true
         }
     },

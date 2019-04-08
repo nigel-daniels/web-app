@@ -3,6 +3,7 @@
  * Author: Nigel Daniels
  * MIT Licensed
  */
+import './css/index.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -18,15 +19,6 @@ import 'bootstrap-notify';
 
 // Now set up the local debug
 import Debug from 'debug';
-
-// Now import the appropriate css
-if ($('#app-script').attr('id') === undefined) {
-	import './css/index.css';
-} else {
-	import './css/reset.css';
-}
-
-
 
 let debug = Debug('index');
 

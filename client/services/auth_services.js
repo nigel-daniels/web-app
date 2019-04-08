@@ -131,7 +131,7 @@ export const changePassword = (id, password) => {
 	};
 
 	debug('changePassword, init: ' + JSON.stringify(init));
-	return fetchOk('/reset/' + id, init)
+	return fetchOk('/change/' + id, init)
 		.then((response) => {debug('changePassword, fetch ok.');return response;})
 		.catch((error) => {debug('changePassword, fetch, caught err.'); throw error;});
 };

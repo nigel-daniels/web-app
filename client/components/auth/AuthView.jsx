@@ -11,6 +11,7 @@ import {Cookies} from './modals/Cookies';
 import Login from './forms/Login';
 import Signup from './forms/Signup';
 import Forgot from './forms/Forgot';
+import Reset from './Reset';
 
 import Debug from 'debug';
 
@@ -78,70 +79,74 @@ class AuthView extends Component {
 	  			return <Redirect to={{ pathname: '/home' }} />;
 	  		} else {
 	  			debug('render, loggedin false, rendering login view.');
-	  			debug('render, props: ' + JSON.stringify(this.props));
-	  			return 	<div className="container-fluid">
-	  				<div className="row">
-	  					<div className="col-md-4"></div>
-	  					<div className="col-md-4">
-	  						<div className="login-brand">
-	  							<div className="row">
-	  								<span className="col-xs-2 login-logo">
-	  									<img alt="Logo" src="images/saic.png" height="40" width="40"/>
-	  								</span>
-	  								<span className="col-xs-10 login-main-title">
-	  									<h1>Web App Demo</h1>
-	  								</span>
-	  							</div>
-	  						</div>
-	  						<div className="panel panel-default login-panel">
-	  							<div className="panel-heading">
-	  								<h2 className="panel-title login-title">Login</h2>
-	  							</div>
-	  							<div className="panel-body">
+				if ($('#app-script').attr('data-env') === 'development') {
+		  			debug('render, props: ' + JSON.stringify(this.props));
+		  			return 	<div className="container-fluid">
+		  				<div className="row">
+		  					<div className="col-md-4"></div>
+		  					<div className="col-md-4">
+		  						<div className="login-brand">
+		  							<div className="row">
+		  								<span className="col-xs-2 login-logo">
+		  									<img alt="Logo" src="images/saic.png" height="40" width="40"/>
+		  								</span>
+		  								<span className="col-xs-10 login-main-title">
+		  									<h1>Web App Demo</h1>
+		  								</span>
+		  							</div>
+		  						</div>
+		  						<div className="panel panel-default login-panel">
+		  							<div className="panel-heading">
+		  								<h2 className="panel-title login-title">Login</h2>
+		  							</div>
+		  							<div className="panel-body">
 
-	  								<div className="login-view">
-										<Login/>
-										<div className="row login-footer">
-											<div className="col-md-6 login-footer-left">
-												<a id="login-forgot" onClick={this.handleAction.bind(this)} tabIndex={15}>Forgot password?</a>
-											</div>
-											<div className="col-md-6 login-footer-right">
-												<a id="login-signup" onClick={this.handleAction.bind(this)} tabIndex={20}>Create account?</a>
-											</div>
-										</div>
-									</div>
-
-	  								<div className="signup-view"  style={hidden}>
-	  									<Signup/>
-										<div className="row login-footer">
-											<div className="col-md-6 login-footer-left">
-												<a id="signup-login" onClick={this.handleAction.bind(this)} tabIndex={85}>Back to Login</a>
+		  								<div className="login-view">
+											<Login/>
+											<div className="row login-footer">
+												<div className="col-md-6 login-footer-left">
+													<a id="login-forgot" onClick={this.handleAction.bind(this)} tabIndex={15}>Forgot password?</a>
+												</div>
+												<div className="col-md-6 login-footer-right">
+													<a id="login-signup" onClick={this.handleAction.bind(this)} tabIndex={20}>Create account?</a>
+												</div>
 											</div>
 										</div>
-	  								</div>
 
-	  								<div className="forgot-view"  style={hidden}>
-	  									<p className="forgot-copy">This will send a message to your registered account e-mail address, allowing you to reset your password.</p>
-	  									<Forgot/>
-										<div className="row login-footer">
-											<div className="col-md-6 login-footer-left">
-												<a id="forgot-login" onClick={this.handleAction.bind(this)} tabIndex={100}>Back to Login</a>
+		  								<div className="signup-view"  style={hidden}>
+		  									<Signup/>
+											<div className="row login-footer">
+												<div className="col-md-6 login-footer-left">
+													<a id="signup-login" onClick={this.handleAction.bind(this)} tabIndex={85}>Back to Login</a>
+												</div>
 											</div>
-										</div>
-	  								</div>
+		  								</div>
 
-	  							</div>
-	  						</div>
-	  					</div>
-	  					<div className="col-md-4"></div>
-	  				</div>
-	  				<div className="footer">
-	  					<p>
-	  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a href="#" data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
-	  					</p>
-	  				</div>
-					<Cookies/>
-	  			</div>;
+		  								<div className="forgot-view"  style={hidden}>
+		  									<p className="forgot-copy">This will send a message to your registered account e-mail address, allowing you to reset your password.</p>
+		  									<Forgot/>
+											<div className="row login-footer">
+												<div className="col-md-6 login-footer-left">
+													<a id="forgot-login" onClick={this.handleAction.bind(this)} tabIndex={100}>Back to Login</a>
+												</div>
+											</div>
+		  								</div>
+
+		  							</div>
+		  						</div>
+		  					</div>
+		  					<div className="col-md-4"></div>
+		  				</div>
+		  				<div className="footer">
+		  					<p>
+		  						<span className="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2019 Nigel Daniels <a href="#" data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
+		  					</p>
+		  				</div>
+						<Cookies/>
+		  			</div>;
+				} else {
+					return <Reset/>;
+				}
 	  		}
 	    }
 	}

@@ -7,7 +7,6 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { AuthRoute } from './auth/AuthRoute';
 import Auth from './auth/Auth';
-import Reset from './auth/Reset';
 import { Home } from './home/Home';
 import { Action1 } from './action/Action1';
 import { About } from './about/About';
@@ -30,7 +29,6 @@ export class App extends React.Component{
 				<AuthRoute path='/about' component={About}/>
 				<AuthRoute path='/profile' component={Profile}/>
 				<Route path='/login' component={Auth}/>
-				<Route path='/reset' component={Reset}/>
 				<Route component={NotFound}/>
 			</Switch>
 		</BrowserRouter>;

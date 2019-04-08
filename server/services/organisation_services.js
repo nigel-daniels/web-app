@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 import Organisation from '../models/Organisation';
-import {User, ADMIN, SUPER} from '../models/User';
+import User, {ADMIN, SUPER} from '../models/User';
 import Debug from 'debug';
 
 const debug = Debug('organisation_service');
