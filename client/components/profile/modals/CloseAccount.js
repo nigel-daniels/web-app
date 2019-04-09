@@ -4,16 +4,15 @@
  * MIT Licensed
  */
 import {connect} from 'react-redux';
-import DetailsView from './DetailsView';
+import CloseAccountView from './CloseAccountView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
-let debug = Debug('Details');
+let debug = Debug('CloseAccount');
 
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.auth.isworking,
 		profile:	state.auth.profile
 	};
 };
@@ -21,10 +20,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		updateProfile: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateProfile(id, firstName, lastName, email, org_id, role));},
+		closeAccount: (id) => {dispatch(actions.closeAccount(id));}
 	};
 };
 
-const Details = connect(mapStateToProps, mapDispatchToProps)(DetailsView);
+const CloseAccount = connect(mapStateToProps, mapDispatchToProps)(CloseAccountView);
 
-export default Details;
+export default CloseAccount;

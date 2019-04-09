@@ -84,8 +84,6 @@ export function getUserById(req, res) {
  * ***************************************/
 export function putUser(req, res) {
 	debug('PUT, called.');
-	debug('PUT, param: ' + JSON.stringify(req.params));
-	debug('PUT, param: ' + JSON.stringify(req.body));
 
 	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id === req.params.user.org_id)) || (req.user._id === req.params.id)) {
 		User.findById(req.params.id, (err, user) => {

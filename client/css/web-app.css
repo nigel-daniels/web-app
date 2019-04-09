@@ -63,6 +63,12 @@
 	color: darkred;
 }
 
+/* Ensure btn display is nicely spaced */
+.btn-set .btn {
+	margin-inline: 10px;
+	margin-inline-start: 0px;
+}
+
  /*
   * Login View
   */

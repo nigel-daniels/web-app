@@ -5,6 +5,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CloseAccount from '../modals/CloseAccount';
 import Debug from 'debug';
 import {rfc5322} from '../../constants';
 
@@ -61,10 +62,12 @@ class DetailsView extends Component {
 
 			<div className="form-group row">
 				<span className="col-sm-3"></span>
-				<div className="col-sm-9">
+				<div className="col-sm-9 btn-set">
 					<button type="submit" className="btn btn-primary" id="update" tabIndex={30}>Update</button>
+					<button type="button" className="btn btn-outline-danger" id="close" data-toggle="modal" data-target="#close-modal" tabIndex={35}>Close Account</button>
 				</div>
 			</div>
+			<CloseAccount/>
 		</form>;
 	  	}
 	//}

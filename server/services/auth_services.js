@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 import * as nodemailer from 'nodemailer';
-import stringify from 'json-stringify-safe';
+//import stringify from 'json-stringify-safe';
 import mailConfig from '../config/mail.json';
 import Organisation from '../models/Organisation';
 import User, {ADMIN, SUPER} from '../models/User';
@@ -20,6 +20,7 @@ export function start(req, res) {
 	debug('start, called.');
 
 	let env = Debug.enabled ? 'development' : 'production';
+	
 	return res.render('index', {'env': env});
 }
 
@@ -246,7 +247,7 @@ export function resetPassword(req, res) {
  * ***************************************/
 export function changePassword(req, res) {
 	debug('resetPassword, called.');
-	
+
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
 			if (err) {
