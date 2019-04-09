@@ -51,9 +51,12 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{from:	'node_modules',	to:	'../dist/node_modules'},
 			{from: 	'views',		to: '../dist/views'},
-			{from: 	'css',			to: '../dist/public/css'},
 			{from:	'images', 		to: '../dist/images'},
-			{from:	'keys',			to:	'../dist/keys'}
+			{from:	'keys',			to:	'../dist/keys'},
+			{from:	'node_modules/bootstrap/dist/css/bootstrap.css',	to:	'../dist/public/css'},
+			{from:	'node_modules/font-awesome/css/font-awesome.css',	to:	'../dist/public/css'},
+			{from:	'node_modules/font-awesome/fonts',	to:	'../dist/public/fonts'},
+			{from: 	'css',			to: '../dist/public/css'}
 		])
 	]
 };
