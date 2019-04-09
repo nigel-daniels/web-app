@@ -109,7 +109,7 @@ app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 
 // Get the client
-debug('Set initial static hosting for the client');
+debug('Set initial static hosting for the client and css');
 debug('dir name: ' + __dirname);
 app.use(express.static(__dirname + '/public'));
 

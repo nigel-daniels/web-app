@@ -51,6 +51,7 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{from:	'node_modules',	to:	'../dist/node_modules'},
 			{from: 	'views',		to: '../dist/views'},
+			{from: 	'css',			to: '../dist/public/css'},
 			{from:	'images', 		to: '../dist/images'},
 			{from:	'keys',			to:	'../dist/keys'}
 		])
