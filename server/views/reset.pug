@@ -22,24 +22,23 @@ html(lang='en')
 						.panel-heading
 							h2.panel-title.login-title Reset Password
 						.panel-body
-							.login-view
-								form#reset-form.form-horizontal.reset-form(method='POST')
-									.form-group.input-block-ico
-										.input-group(data-toggle='tooltip' title='Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.')
-											.input-group-prepend.login-name-addon
-												span.input-group-text
-													span.fa.fa-key(aria-hidden='true')
-											input#password.form-control(type='password' name='password' tabindex='5' placeholder='Password' data-error='A valid password is required.' required='')
-										.input-group
-											.input-group-prepend.login-name-addon
-												span.input-group-text
-													span.fa.fa-key(aria-hidden='true')
-											input#password2.form-control(type='password' tabindex='10' placeholder='Validate password' data-error='A confirmation password is required.' data-match='#password' data-match-error='The passwords do not match.' required='')
-									span.help-block.with-errors
-									.form-group
-										button.btn.btn-primary.btn-block(type='submit' tabindex='15') Reset
+							form#reset-form.form-horizontal.reset-form(method='POST')
+								.form-group.input-block-ico
+									.input-group(data-toggle='tooltip' title='Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.')
+										.input-group-prepend.login-name-addon
+											span.input-group-text
+												span.fa.fa-key(aria-hidden='true')
+										input#password.form-control(type='password' name='password' tabindex='5' pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' placeholder='Password' data-error='A valid password is required.' required='')
+									.input-group
+										.input-group-prepend.login-name-addon
+											span.input-group-text
+												span.fa.fa-key(aria-hidden='true')
+										input#password2.form-control(type='password' tabindex='10' pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' placeholder='Validate password' data-error='A confirmation password is required.' data-match='#password' data-match-error='The passwords do not match.' required='')
+								span.help-block.with-errors
+								.form-group
+									button.btn.btn-primary.btn-block(type='submit' tabindex='15') Reset
 				.col-md-4
 			.footer
 				p
 					span.fa.fa-copyright 
-					| 2019 Nigel Daniels.			
+					| 2019 Nigel Daniels.
