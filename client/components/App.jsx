@@ -11,6 +11,7 @@ import { Home } from './home/Home';
 import { Action1 } from './action/Action1';
 import { About } from './about/About';
 import Profile from './profile/Profile';
+import Admin from './admin/Admin';
 import { NotFound } from './notfound/NotFound';
 import Debug from 'debug';
 
@@ -28,6 +29,7 @@ export class App extends React.Component{
 				<AuthRoute path='/action' component={Action1}/>
 				<AuthRoute path='/about' component={About}/>
 				<AuthRoute path='/profile' component={Profile}/>
+				<AuthRoute path='/admin' component={Admin}/>
 				<Route path='/login' component={Auth}/>
 				<Route component={NotFound}/>
 			</Switch>

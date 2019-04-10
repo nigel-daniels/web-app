@@ -66,6 +66,8 @@ class MainMenuView extends Component {
 				</div>
 
 			</nav>;
+		} else {
+			return <Redirect to={{ pathname: '/' }} />;
 		}
 	}
 };

@@ -36,7 +36,7 @@ $.notifyDefaults({
 });
 
 debug('creating redux store');
-const store = createStore(reducer, applyMiddleware(pack));
+export const store = createStore(reducer, applyMiddleware(pack));
 
 // Now set up the routing
 debug('Rendering provider');

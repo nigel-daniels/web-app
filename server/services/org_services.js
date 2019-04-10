@@ -7,12 +7,12 @@ import Organisation from '../models/Organisation';
 import User, {ADMIN, SUPER} from '../models/User';
 import Debug from 'debug';
 
-const debug = Debug('organisation_service');
+const debug = Debug('org_service');
 
 /* ***************************************
  *  POST Organisation
  * ***************************************/
-export function postOrganisation(req, res) {
+export function postOrg(req, res) {
 	debug('POST, called');
 
 	if (req.body.name && req.body.name) {
@@ -47,20 +47,20 @@ export function postOrganisation(req, res) {
 /* ***************************************
  *  GET The organisation the user is a member of
  * ***************************************/
-export function getOrganisation(req, res) {
+export function getOrg(req, res) {
 	debug('GET, called');
 
-	Organisation.findById(req.user.organisation, (err, organisation) => {
+	Organisation.findById(req.user.org_id, (err, org) => {
 		if (err) {
 			debug('GET, err: ' + JSON.stringify(err));
 			return res.status(500).send({message: 'error finding organisation : ' + err.message});
 		}
 
-		if (organisation) {
+		if (org) {
 			debug('GET, success');
-			return res.status(200).send({organisation: organisation});
+			return res.status(200).send({org: org});
 		} else {
-			debug('GET, org: ' + req.user.organisation + ' not found for user: ' + req.user.id);
+			debug('GET, org: ' + req.user.org_id + ' not found for user: ' + req.user.id);
 			return res.status(404).send({message: 'no organisation found for account ' + req.user.id});
 		}
 
@@ -70,7 +70,7 @@ export function getOrganisation(req, res) {
 /* ***************************************
  *  GET organisations
  * ***************************************/
-export function getOrganisations(req, res) {
+export function getOrgs(req, res) {
 	debug('GET:*, called');
 
 	if (req.user.role === SUPER) {
@@ -97,7 +97,7 @@ export function getOrganisations(req, res) {
 /* ***************************************
  *  GET organisation by provided id
  * ***************************************/
-export function getOrganisationById(req, res) {
+export function getOrgById(req, res) {
 	debug('GET:id, called');
 
 	if ((String(req.user.org_id) === req.params.id) || (req.user.role === SUPER)) {
@@ -124,7 +124,7 @@ export function getOrganisationById(req, res) {
 /* ***************************************
  *  GET organisation (active) members
  * ***************************************/
-export function getOrganisationMembers(req, res) {
+export function getOrgMembers(req, res) {
 	debug('GET:id/members, called');
 
 	if ((req.user.org_id === req.params.id) || (req.user.role === SUPER)) {
@@ -146,7 +146,7 @@ export function getOrganisationMembers(req, res) {
 /* ***************************************
  *  PUT Organisation
  *************************************** */
-export function putOrganisation(req, res) {
+export function putOrg(req, res) {
 	debug('PUT, called');
 
 	// Check the user belongs to this org
@@ -186,7 +186,7 @@ export function putOrganisation(req, res) {
  *  DELETE Organisation
  *  [User must be the owner and will be deactivated]
  *************************************** */
-export function deleteOrganisation(req, res) {
+export function deleteOrg(req, res) {
 	debug('DELETE, called');
 
 	// Is this user allowed to try and delete this org?

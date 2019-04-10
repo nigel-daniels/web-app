@@ -181,7 +181,7 @@ export function deleteUser(req, res) {
 					}
 
 					debug('DELETE, err: ' + JSON.stringify(err));
-					return res.status(200).send({message: 'Success!'});
+					return res.status(200).send({user: user});
 				});
 			} else {
 				debug('DELETE, invalid delete from user: ' + req.user.id + ', deleting user: ' + req.params.id);

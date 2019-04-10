@@ -64,9 +64,12 @@
 }
 
 /* Ensure btn display is nicely spaced */
-.btn-set .btn {
-	margin-inline: 10px;
-	margin-inline-start: 0px;
+.btn-set button {
+	margin-right: 10px;
+}
+
+.btn-set button:last-of-type {
+	margin-right: 0;
 }
 
  /*

@@ -31,54 +31,55 @@ class DetailsView extends Component {
 
   	render () {
     	debug('render, called.');
-    	//if (this.props.isworking) {
-      	//	return null;
-    	//} else {
-    	debug('render, profile: ' + JSON.stringify(this.props.profile));
-		return 	<form className="form-horizontal" id="profile-form">
-			<div className="form-group row">
-				<label htlmfor="first-name" className="col-sm-3 col-form-label">Name</label>
-				<div className="col-sm-9 form-group input-block">
-					<input type="text" className="form-control" id="first-name" tabIndex={5} placeholder="Your first name." defaultValue={this.props.profile.firstName} data-error="A first name is required." required/>
-					<input type="text" className="form-control" id="last-name" tabIndex={10} placeholder="Your last name." defaultValue={this.props.profile.lastName} data-error="A last name is required."required/>
-					<span className="help-block with-errors"></span>
+    	if (this.props.loggedin) {
+			debug('render, profile: ' + JSON.stringify(this.props.profile));
+			debug('render, org: ' + JSON.stringify(this.props.org));
+			return 	<form className="form-horizontal" id="profile-form">
+				<div className="form-group row">
+					<label htlmfor="first-name" className="col-sm-3 col-form-label">Name</label>
+					<div className="col-sm-9 form-group input-block">
+						<input type="text" className="form-control" id="first-name" tabIndex={5} placeholder="Your first name." defaultValue={this.props.profile.firstName} data-error="A first name is required." required/>
+						<input type="text" className="form-control" id="last-name" tabIndex={10} placeholder="Your last name." defaultValue={this.props.profile.lastName} data-error="A last name is required."required/>
+						<span className="help-block with-errors"></span>
+					</div>
 				</div>
-			</div>
 
-			<div className="form-group row">
-				<label htlmfor="organisation" className="col-sm-3 col-form-label">Organisation</label>
-				<div className="col-sm-9">
-					<input type="text" className="form-control" id="organisation" tabIndex={15} placeholder="Your organisation." readOnly defaultValue={this.props.profile.organisation}/>
+				<div className="form-group row">
+					<label htlmfor="organisation" className="col-sm-3 col-form-label">Organisation</label>
+					<div className="col-sm-9">
+						<input type="text" className="form-control" id="organisation" tabIndex={15} placeholder="Your organisation." readOnly defaultValue={this.props.org.name}/>
+					</div>
 				</div>
-			</div>
-			<div className="form-group row">
-				<label htlmfor="email" className="col-sm-3 col-form-label">Email</label>
-				<div className="col-sm-9 form-group input-block">
-					<input type="email" className="form-control" id="email" tabIndex={20} pattern={rfc5322} placeholder="Your e-mail" defaultValue={this.props.profile.email} data-error="A valid e-mail is required." required/>
-					<input type="email" className="form-control" id="email2" tabIndex={25} pattern={rfc5322} placeholder="Validate e-mail" defaultValue={this.props.profile.email} data-error="A valid e-mail is required." data-match="#email" data-match-error="The e-mails do not match." required/>
-					<span className="help-block with-errors"></span>
+				<div className="form-group row">
+					<label htlmfor="email" className="col-sm-3 col-form-label">Email</label>
+					<div className="col-sm-9 form-group input-block">
+						<input type="email" className="form-control" id="email" tabIndex={20} pattern={rfc5322} placeholder="Your e-mail" defaultValue={this.props.profile.email} data-error="A valid e-mail is required." required/>
+						<input type="email" className="form-control" id="email2" tabIndex={25} pattern={rfc5322} placeholder="Validate e-mail" defaultValue={this.props.profile.email} data-error="A valid e-mail is required." data-match="#email" data-match-error="The e-mails do not match." required/>
+						<span className="help-block with-errors"></span>
+					</div>
 				</div>
-			</div>
 
-			<div className="form-group row">
-				<span className="col-sm-3"></span>
-				<div className="col-sm-9 btn-set">
-					<button type="submit" className="btn btn-primary" id="update" tabIndex={30}>Update</button>
-					<button type="button" className="btn btn-outline-danger" id="close" data-toggle="modal" data-target="#close-modal" tabIndex={35}>Close Account</button>
+				<div className="form-group row">
+					<span className="col-sm-3"></span>
+					<div className="col-sm-9 btn-set">
+						<button type="submit" className="btn btn-primary" id="update" tabIndex={30}>Update</button>
+						<button type="button" className="btn btn-outline-danger" id="close" data-toggle="modal" data-target="#close-modal" tabIndex={35}>Close Account</button>
+					</div>
 				</div>
-			</div>
-			<CloseAccount/>
-		</form>;
+				<CloseAccount/>
+			</form>;
+    	} else {
+    		return null;
 	  	}
-	//}
+	}
 };
 
 DetailsView.propTypes = {
-	//isworking:		PropTypes.bool,
+	loggedin:		PropTypes.bool,
 	profile:		PropTypes.object,
+	org:			PropTypes.object,
 
-	updateProfile: 	PropTypes.func//,
-	//closeAccount:	PropTypes.func
+	updateProfile: 	PropTypes.func
 };
 
 export default DetailsView;

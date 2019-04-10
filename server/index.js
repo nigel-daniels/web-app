@@ -129,7 +129,7 @@ routes.auth_routes(app, passport);
 debug('Loading routes - user');
 routes.user_routes(app);
 debug('Loading routes - org');
-routes.organisation_routes(app);
+routes.org_routes(app);
 
 // Capture requests to shutdown and do it cleanly
 debug('Setting up shutdown cleanup, and responses.');

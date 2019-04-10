@@ -6,4 +6,4 @@
 export * from './auth_services';
 
 export * from './user_services';
-export * from './organisation_services';
+export * from './org_services';

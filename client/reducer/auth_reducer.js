@@ -106,7 +106,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
-			success: prevState => ({ ...prevState, loggedin: false, profile: null })
+			success: prevState => ({ ...prevState, profile: payload.user })
 		});
 	}
 	default:

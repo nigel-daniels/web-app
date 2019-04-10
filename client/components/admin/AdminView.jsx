@@ -8,12 +8,12 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import { Main } from '../Main';
-import Details from './forms/Details';
-import Password from './forms/Password';
+//import Details from './forms/Details';
+//import Password from './forms/Password';
 
-let debug = Debug('ProfileView');
+let debug = Debug('AdminView');
 
-class ProfileView extends Component {
+class AdminView extends Component {
 	componentDidUpdate() {
 		debug('componentDidUpdate, check if there is an err then notify if there is.');
 		if (this.props.err !== null) {
@@ -30,7 +30,7 @@ class ProfileView extends Component {
   	render () {
     	debug('render, called.');
     	if (this.props.isworking) {
-      		return null;
+      	return null;
     	} else {
   			return 	<Main>
 				<div id="profile" className="page-content">
@@ -45,10 +45,10 @@ class ProfileView extends Component {
 					</ul>
 					<div className="tab-content" id="profile-content">
 						<div className="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-						  	<Details/>
+
 						</div>
 						<div className="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-							<Password/>
+							
 						</div>
 					</div>
 				</div>
@@ -57,9 +57,9 @@ class ProfileView extends Component {
 	}
 };
 
-ProfileView.propTypes = {
+AdminView.propTypes = {
 	isworking:		PropTypes.bool,
 	err:			PropTypes.string
 };
 
-export default ProfileView;
+export default AdminView;
