@@ -34,21 +34,21 @@ class AdminView extends Component {
     	} else {
   			return 	<Main>
 				<div id="profile" className="page-content">
-					<h4 className="content-heading">Profile Page</h4>
-					<ul className="nav nav-tabs" id="profile-tab" role="tablist">
+					<h4 className="content-heading">Administration</h4>
+					<ul className="nav nav-tabs" id="admin-tab" role="tablist">
 						<li className="nav-item">
-							<a className="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="home" aria-selected="true">My Details</a>
+							<a className="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Members</a>
 						</li>
 						<li className="nav-item">
-					    	<a className="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="profile" aria-selected="false">Password</a>
+					    	<a className="nav-link" id="org-tab" data-toggle="tab" href="#org" role="tab" aria-controls="org" aria-selected="false">Organisation</a>
 						</li>
 					</ul>
-					<div className="tab-content" id="profile-content">
-						<div className="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+					<div className="tab-content" id="admin-content">
+						<div className="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
 
 						</div>
-						<div className="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-							
+						<div className="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
+
 						</div>
 					</div>
 				</div>

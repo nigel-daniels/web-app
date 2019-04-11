@@ -2,8 +2,8 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="./css/font-awesome/css/font-awesome.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.css"/>
-
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.3.0/datatables.min.css"/>
+	<!--link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css"-->
 
 	<!-- Custom styles for this template -->
 	<link href="css/test.css" rel="stylesheet">
@@ -58,87 +58,95 @@
 					<!--/div-->
 				</nav>
 				<div id="profile" class="page-content">
-					<h4 class="content-heading">Profile Page</h4>
-					<ul class="nav nav-tabs" id="profile-tab" role="tablist">
+					<h4 class="content-heading">Administration</h4>
+					<ul class="nav nav-tabs" id="admin-tab" role="tablist">
 					  <li class="nav-item">
-					    <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="home" aria-selected="true">My Details</a>
+					    <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Members</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="profile" aria-selected="false">Password</a>
+					    <a class="nav-link" id="org-tab" data-toggle="tab" href="#org" role="tab" aria-controls="org" aria-selected="false">Organisation</a>
 					  </li>
 					</ul>
-					<div class="tab-content" id="profile-content">
-					  <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-						  	<form>
-								<div class="form-group row">
-								  <label for="first-name" class="col-sm-3 col-form-label">First Name</label>
-								  <div class="col-sm-9">
-									<input type="text" class="form-control" id="first-name" placeholder="Your first name.">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label for="last-name" class="col-sm-3 col-form-label">Last Name</label>
-								  <div class="col-sm-9">
-									<input type="text" class="form-control" id="last-name" placeholder="Your last name.">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label for="organisation" class="col-sm-3 col-form-label">Organisation</label>
-								  <div class="col-sm-9">
-									<input type="text" class="form-control" id="organisation" placeholder="Your organisation." readonly>
-								  </div>
-								</div>
-								  <div class="form-group row">
-								    <label for="email" class="col-sm-3 col-form-label">Email</label>
-								    <div class="col-sm-9 form-group input-block">
-								      <input type="email" class="form-control" id="email" placeholder="E-mail">
-									  <input type="email" class="form-control" id="email2" placeholder="Validate e-mail">
-								    </div>
-								  </div>
-								  <div class="form-group row">
-								    <div class="col-sm-9">
-								      <button type="submit" class="btn btn-primary">Update</button>
-								    </div>
-								  </div>
-							</form>
+					<div class="tab-content" id="admin-content">
+					  <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+						  	<!-- User tab Content -->
+							<p><h5>Test Organisation Members</h5></p>
+							<table class="table table-striped table-hover" id="user-table"></table>
+							<!-- User tab content end -->
 					  </div>
-					  <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
-						  <form>
-								<div class="form-group row">
-								  <label for="current-password" class="col-sm-3 col-form-label">Current Password</label>
-								  <div class="col-sm-9">
-									<input type="password" class="form-control" id="current-password" placeholder="Your current password.">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label for="new-password" class="col-sm-3 col-form-label">New Password</label>
-								  <div class="col-sm-9">
-									<input type="password" class="form-control" id="new-password" placeholder="Type new password.">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label for="new-password-verify" class="col-sm-3 col-form-label">Verify New Password</label>
-								  <div class="col-sm-9">
-									<input type="password" class="form-control" id="new-password-verify" placeholder="Re-type new password here.">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <div class="col-sm-9">
-									<button type="submit" class="btn btn-primary">Change</button>
-								  </div>
-								</div>
-						  </form>
+					  <div class="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
+						  <!-- Org tab Content -->
+
+						  <!-- Org tab content end -->
 					  </div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.3.0/datatables.min.js"></script>
+		<!-- script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script -->
+		<script type="text/javascript">
+		var data = [{"_id":{"$oid":"5c9d085469df5601a5f95409"},"role":"SUPER","active":true,"firstName":"Nigel","lastName":"Daniels","email":"nigel.daniels@saicusa.com","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"},"__v":{"$numberInt":"0"}},
+		{"_id":{"$oid":"5ca64925a4426e01be3abefb"},"role":"ADMIN","active":true,"firstName":"Foo","lastName":"Baa","email":"foo@example.com","password":"$2b$10$Fsu7MdJqw.6JZM8t1aGmFeZq.F9cwxrlbwdjHb6WiFkU/mVaTAsuK","org_id":{"$oid":"5ca64925a4426e01be3abefa"},"__v":{"$numberInt":"0"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446d6"},"role":"ADMIN","active":true,"firstName":"Garret","lastName":"Jacobs","email":"Ramona_Block@hazel.me","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446d8"},"role":"STAFF","active":true,"firstName":"Madalyn","lastName":"Hudson","email":"Freeman@brady.me","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446da"},"role":"STAFF","active":true,"firstName":"Esther","lastName":"Considine","email":"Rodrigo@cullen.tv","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446dc"},"role":"STAFF","active":true,"firstName":"Nicole","lastName":"Altenwerth","email":"Katlyn_Torp@toy.ca","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446de"},"role":"STAFF","active":true,"firstName":"Kasandra","lastName":"Olson","email":"Kali@ronaldo.net","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446e0"},"role":"STAFF","active":true,"firstName":"Piper","lastName":"Aufderhar","email":"Jaylin@lois.org","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446e2"},"role":"STAFF","active":true,"firstName":"Claude","lastName":"Crooks","email":"Janis.Schuppe@chelsea.biz","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446e4"},"role":"ADMIN","active":false,"firstName":"Katelin","lastName":"Schoen","email":"Bo@name.tv","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446e6"},"role":"STAFF","active":true,"firstName":"Tavares","lastName":"Pollich","email":"Ryleigh_McClure@lauren.org","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446e8"},"role":"STAFF","active":true,"firstName":"Shemar","lastName":"Padberg","email":"Anastasia_Senger@madeline.info","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446ea"},"role":"STAFF","active":false,"firstName":"Kellie","lastName":"Lindgren","email":"Josiane.Upton@frederic.info","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446ec"},"role":"STAFF","active":true,"firstName":"Dasia","lastName":"Lueilwitz","email":"Monte.Kertzmann@norris.org","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446ee"},"role":"STAFF","active":true,"firstName":"Carlotta","lastName":"Kautzer","email":"Miracle.Beahan@coralie.io","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446f0"},"role":"STAFF","active":true,"firstName":"Josh","lastName":"Cummerata","email":"Kenneth@xavier.co.uk","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446f2"},"role":"STAFF","active":false,"firstName":"Prudence","lastName":"Turner","email":"Cade_Barrows@keshaun.com","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446f4"},"role":"STAFF","active":false,"firstName":"Ramona","lastName":"Pagac","email":"Janelle@ken.biz","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446f6"},"role":"STAFF","active":true,"firstName":"Marshall","lastName":"Hamill","email":"Ericka@melisa.me","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446f8"},"role":"STAFF","active":true,"firstName":"Boyd","lastName":"Jacobi","email":"Anna.Waters@green.ca","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446fa"},"role":"ADMIN","active":true,"firstName":"Pearl","lastName":"Pollich","email":"Skyla@thalia.net","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}},
+		{"_id":{"$oid":"5caf7a49c67d7609fe7446fc"},"role":"STAFF","active":true,"firstName":"Chad","lastName":"Powlowski","email":"Andrew@samara.ca","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"}}];
 
+		$(document).ready( function () {
+    		$('#user-table').DataTable({
+    			select: true,
+				data: data,
+			    columns: [
+			        { data: 'firstName', title: 'First Name' },
+			        { data: 'lastName', title: 'Last Name' },
+			        { data: 'email', title: 'E-mail', orderable: false },
+			        { data: 'role', title: 'Role', searchable: false },
+					{ data: 'active', title: 'Active Account', searchable: false}
+			    ],
+				rowCallback:	function(row, data) {
+					if (!data.active) {
+						$(row).addClass("table-secondary");
+					}
+				}
+			});
+		});
+		/*$('#user-table').bootstrapTable({
+		  url: './users.json',
+		  pagination: true,
+		  search: true,
+		  columns: [{
+		    field: 		'firstName',
+		    title: 		'First Name'
+		  }, {
+		    field: 'lastName',
+		    title: 'Last Name'
+		  }, {
+		    field: 'email',
+		    title: 'E-mail'
+		  } ]
+	  });*/
+		</script>
 	</body>
 
 </html>

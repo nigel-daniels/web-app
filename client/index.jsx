@@ -17,7 +17,7 @@ import 'bootstrap';
 import 'bootstrap-validator';
 import 'bootstrap-notify';
 import 'datatables.net-bs4';
-import 'datatables.net-responsive-bs4';
+import 'datatables.net-select-bs4';
 
 // Now set up the local debug
 import Debug from 'debug';

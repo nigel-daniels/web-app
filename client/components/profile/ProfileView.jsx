@@ -37,10 +37,10 @@ class ProfileView extends Component {
 					<h4 className="content-heading">Profile Page</h4>
 					<ul className="nav nav-tabs" id="profile-tab" role="tablist">
 						<li className="nav-item">
-							<a className="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="home" aria-selected="true">My Details</a>
+							<a className="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">My Details</a>
 						</li>
 						<li className="nav-item">
-					    	<a className="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="profile" aria-selected="false">Password</a>
+					    	<a className="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
 						</li>
 					</ul>
 					<div className="tab-content" id="profile-content">
