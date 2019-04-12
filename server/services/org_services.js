@@ -135,7 +135,7 @@ export function getOrgMembers(req, res) {
 			}
 
 			debug('GET:id/members, success');
-			return res.status(200).send({orgMembers: members});
+			return res.status(200).send({members: members});
 		});
 	} else {
 		debug('GET:id/members, invalid request from user: ' + req.user.id);

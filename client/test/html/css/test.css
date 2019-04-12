@@ -187,5 +187,8 @@
 
 
 /*
- * Profile page
+ * Admin page
  */
+.dt-center {
+	text-align: center;
+}

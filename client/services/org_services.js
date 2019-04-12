@@ -23,3 +23,18 @@ export const getUserOrg = () => {
 		.catch((error) => {debug('getUserOrg, fetch, caught err.'); throw error;});
 
 };
+
+export const getMembers = (org_id) => {
+	debug('getMembers, called.');
+
+	let init = {
+		...coreInit,
+		method:			'GET'
+	};
+
+	debug('getMembers, init is: ' + JSON.stringify(init));
+	return fetchOk('/org/' + org_id + '/members', init)
+		.then((response) => {debug('getMembers, response ok.');return response;})
+		.catch((error) => {debug('getMembers, fetch, caught err.'); throw error;});
+
+};

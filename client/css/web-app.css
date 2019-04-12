@@ -195,3 +195,15 @@
  .tab-content {
  	padding: 5px;
  }
+
+ /*
+ * Admin page
+ */
+.dt-center {
+	text-align: center;
+}
+
+table.dataTable tbody .selected {
+	color: white;
+	background-color: #0275d8;
+}

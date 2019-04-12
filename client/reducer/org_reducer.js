@@ -12,6 +12,7 @@ let debug = Debug('org_reducer');
 const INITIAL_STATE = {
 	isworking: false,
 	org: null,
+	members: null,
 	err: null
 };
 
@@ -33,6 +34,15 @@ export default function reducer(state = INITIAL_STATE, action) {
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, org: payload.org })
+		});
+	}
+	case actions.GET_MEMBERS: {
+		debug('GET_MEMBERS is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, members: payload.members })
 		});
 	}
 
