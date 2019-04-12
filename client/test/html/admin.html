@@ -3,7 +3,6 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="./css/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.3.0/datatables.min.css"/>
-	<!--link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css"-->
 
 	<!-- Custom styles for this template -->
 	<link href="css/test.css" rel="stylesheet">
@@ -88,7 +87,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.3.0/datatables.min.js"></script>
-		<!-- script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script -->
+
 		<script type="text/javascript">
 		var data = [{"_id":{"$oid":"5c9d085469df5601a5f95409"},"role":"SUPER","active":true,"firstName":"Nigel","lastName":"Daniels","email":"nigel.daniels@saicusa.com","password":"$2b$10$EnlNocyzYMdK64Naz/k3V.U6aDhSzC8k.LrZuDeM0QuA7l7GpLfSy","org_id":{"$oid":"5c9d085369df5601a5f95408"},"__v":{"$numberInt":"0"}},
 		{"_id":{"$oid":"5ca64925a4426e01be3abefb"},"role":"ADMIN","active":true,"firstName":"Foo","lastName":"Baa","email":"foo@example.com","password":"$2b$10$Fsu7MdJqw.6JZM8t1aGmFeZq.F9cwxrlbwdjHb6WiFkU/mVaTAsuK","org_id":{"$oid":"5ca64925a4426e01be3abefa"},"__v":{"$numberInt":"0"}},
@@ -121,31 +120,27 @@
 			        { data: 'firstName', title: 'First Name' },
 			        { data: 'lastName', title: 'Last Name' },
 			        { data: 'email', title: 'E-mail', orderable: false },
-			        { data: 'role', title: 'Role', searchable: false },
-					{ data: 'active', title: 'Active Account', searchable: false}
+			        { data: 'role', title: 'Role', className: 'dt-center', searchable: false },
+					{
+						data: 'active',
+						title: 'Active Account',
+						className: 'dt-center',
+						searchable: false,
+						orderable: false,
+						render:	function(data) {
+							return data ? '<span class="fa fa-user" aria-hidden="true"></span>' :'<span class="fa fa-user-o" aria-hidden="true"></span>';
+						}
+					}
 			    ],
 				rowCallback:	function(row, data) {
+					$(row).attr('id',data._id.$oid);
 					if (!data.active) {
-						$(row).addClass("table-secondary");
+						$(row).addClass('table-secondary');
 					}
 				}
 			});
 		});
-		/*$('#user-table').bootstrapTable({
-		  url: './users.json',
-		  pagination: true,
-		  search: true,
-		  columns: [{
-		    field: 		'firstName',
-		    title: 		'First Name'
-		  }, {
-		    field: 'lastName',
-		    title: 'Last Name'
-		  }, {
-		    field: 'email',
-		    title: 'E-mail'
-		  } ]
-	  });*/
+
 		</script>
 	</body>
 
