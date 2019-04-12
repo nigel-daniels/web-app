@@ -13,11 +13,11 @@ export class CloseAccountView extends Component {
 
 	componentDidMount() {
 		debug('componentDidMount, called.');
-		let _this = this;
+		//let _this = this;
 		debug('componentDidMount, set validator on signup-form.');
-		$('#close-ac-close').click(function () {
+		$('#close-ac-close').click(() => {
 			debug('close, clicked.');
-    		_this.props.closeAccount(_this.props.profile._id);
+    		this.props.closeAccount(this.props.profile._id);
   		});
 	}
 

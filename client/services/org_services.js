@@ -38,3 +38,50 @@ export const getMembers = (org_id) => {
 		.catch((error) => {debug('getMembers, fetch, caught err.'); throw error;});
 
 };
+
+export const getSelectedMember = (id) => {
+	debug('getSelectedMember, called.');
+
+	let init = {
+		...coreInit,
+		method:			'GET'
+	};
+
+	debug('getSelectedMember, init is: ' + JSON.stringify(init));
+	return fetchOk('/user/' + id, init)
+		.then((response) => {debug('getSelectedMember, response ok.');return response;})
+		.catch((error) => {debug('getSelectedMember, fetch, caught err.'); throw error;});
+
+};
+
+export const updateMember = (id, firstName, lastName, email, org_id, role) => {
+	debug('updateMember, called.');
+
+	let init = {
+		...coreInit,
+		method:			'PUT',
+		body:			JSON.stringify({'id': id, 'firstName': firstName,
+			'lastName': lastName, 'email': email, 'org_id': org_id, 'role': role})
+	};
+
+	debug('updateMember, init is: ' + JSON.stringify(init));
+	return fetchOk('/user/' + id, init)
+		.then((response) => {debug('updateMember, response ok.');return response;})
+		.catch((error) => {debug('updateMember, fetch, caught err.'); throw error;});
+
+};
+
+export const closeMemberAccount = (id) => {
+	debug('closeMemberAccount, called.');
+
+	let init = {
+		...coreInit,
+		method:			'DELETE'
+	};
+
+	debug('closeMemberAccount, init is: ' + JSON.stringify(init));
+	return fetchOk('/user/' + id, init)
+		.then((response) => {debug('closeMemberAccount, response ok.');return response;})
+		.catch((error) => {debug('closeMemberAccount, fetch, caught err.'); throw error;});
+
+};

@@ -14,8 +14,10 @@ const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
 		isworking:	state.org.isworking,
+		profile:	state.auth.profile,
 		org:		state.org.org,
-		members:	state.org.members
+		members:	state.org.members,
+		selectedMember: state.org.selectedMember
 	};
 };
 
@@ -23,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
 		getMembers: (org_id) => {dispatch(actions.getMembers(org_id));},
+		getSelectedMember: (id) => {dispatch(actions.getSelectedMember(id));}
 	};
 };
 

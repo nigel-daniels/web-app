@@ -25,3 +25,6 @@ export const DELETE_USER = 'DELETE_USER';
 // Organisation Action Types
 export const GET_USER_ORG = 'GET_USER_ORG';
 export const GET_MEMBERS = 'GET_MEMBERS';
+export const GET_SELECTED_MEMBER = 'GET_SELECTED_MEMBER';
+export const UPDATE_MEMBER = 'UPDATE_MEMBER';
+export const CLOSE_MEMBER_ACCOUNT = 'CLOSE_MEMBER_ACCOUNT';

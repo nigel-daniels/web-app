@@ -13,6 +13,7 @@ const INITIAL_STATE = {
 	isworking: false,
 	org: null,
 	members: null,
+	selectedMember: {},
 	err: null
 };
 
@@ -30,7 +31,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	case actions.GET_USER_ORG: {
 		debug('GET_USER_ORG is called');
 		return handle(state, action, {
-			start: prevState => ({...prevState, isworking: true, err: null}),
+			start: prevState => ({...prevState, isworking: true, org: null, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, org: payload.org })
@@ -39,13 +40,39 @@ export default function reducer(state = INITIAL_STATE, action) {
 	case actions.GET_MEMBERS: {
 		debug('GET_MEMBERS is called');
 		return handle(state, action, {
-			start: prevState => ({...prevState, isworking: true, err: null}),
+			start: prevState => ({...prevState, isworking: true, members: null, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, members: payload.members })
 		});
 	}
-
+	case actions.GET_SELECTED_MEMBER: {
+		debug('GET_SELECTED_MEMBER is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, selectedMember: {}, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, selectedMember: payload.user })
+		});
+	}
+	case actions.UPDATE_MEMBER: {
+		debug('GET_SELECTED_MEMBER is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, selectedMember: payload.user })
+		});
+	}
+	case actions.CLOSE_MEMBER_ACCOUNT: {
+		debug('GET_SELECTED_MEMBER is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, selectedMember: payload.user })
+		});
+	}
 	default:
 		return state;
 	}
