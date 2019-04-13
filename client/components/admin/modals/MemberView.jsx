@@ -11,6 +11,11 @@ import {rfc5322} from '../../constants';
 let debug = Debug('MemberView');
 
 export class MemberView extends Component {
+	componentWillMount() {
+		debug('componentWillMount, called.');
+		debug('set role: ' + this.props.selectedMember.role);
+		this.state = {role: this.props.selectedMember.role};
+	}
 
 	componentDidMount() {
 		debug('componentDidMount, called.');
@@ -34,6 +39,12 @@ export class MemberView extends Component {
 			debug('close, clicked.');
     		this.props.closeMemberAccount(this.props.selectedMember._id);
   		});
+	}
+
+	updateRole(event) {
+		debug('updateRole, called.');
+		debug('set role: ' + event.target.value);
+		setState({role: event.target.value});
 	}
 
 	render () {
@@ -68,7 +79,7 @@ export class MemberView extends Component {
 							<div className="form-group row">
 								<label htmlFor="role" className="col-sm-3 col-form-label">Role</label>
 								<div className="col-sm-9 form-group input-block">
-									<select className="form-control" id="role"defaultValue={this.props.selectedMember.role} >
+									<select className="form-control" id="role" value={this.state.role} onChange={this.updateRole}>
 										<option value="STAFF">Staff</option>
 										<option value="ADMIN">Administrator</option>
 										<option value="SUPER">Super User</option>
@@ -89,7 +100,7 @@ export class MemberView extends Component {
 }
 
 MemberView.propTypes = {
-	err:				PropTypes.object,
+	err:				PropTypes.string,
 	selectedMember:		PropTypes.object,
 
 	updateMember:		PropTypes.func,

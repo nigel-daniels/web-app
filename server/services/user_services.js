@@ -115,38 +115,58 @@ export function putUser(req, res) {
 				debug('PUT, checking user email.');
 				if (req.body.email !== user.email) {
 					debug('PUT, validating email is unique.');
-					User.findOne({email: req.body.email}, (err, user) => {
+					User.findOne({email: req.body.email}, (err, user_email) => {
 						if (err) {
 							debug('PUT, error finding user by email: ' + err.message);
 							return res.status(500).send({message: 'Error checking email, message: ' + err.message}); // NLS
 						}
 
-						if (user) {
+						if (user_email) {
 							debug('PUT, email is already in use.');
 							return res.status(400).send({message: 'The selected e-mail address is in use.'}); // NLS
 						}
+
+						debug('PUT, User is name: ' + user.firstName + ' ' + user.lastName + ', email: ' + user.email + ', role: ' + user.role);
+						// Ok Validation passed let's update the user
+						debug('userHandler - putUser, updating user values.');
+						user.firstName = req.body.firstName;
+						user.lastName = req.body.lastName;
+						user.email = req.body.email;
+						user.org_id = req.body.org_id;
+						user.role = req.body.role;
+
+						debug('PUT, saving the user.');
+						user.save((err) => {
+							if (err) {
+								debug('PUT, error saving user updates: ' + JSON.stringify(err));
+								return res.status(500).send({message: 'Error saving the user details, message: ' + err.message}); // NLS
+							}
+
+							debug('PUT, success!');
+							return res.status(200).send({user: user});
+						});
+					});
+				} else {
+					debug('PUT, User is name: ' + user.firstName + ' ' + user.lastName + ', email: ' + user.email + ', role: ' + user.role);
+					// Ok Validation passed let's update the user
+					debug('userHandler - putUser, updating user values.');
+					user.firstName = req.body.firstName;
+					user.lastName = req.body.lastName;
+					user.email = req.body.email;
+					user.org_id = req.body.org_id;
+					user.role = req.body.role;
+
+					debug('PUT, saving the user.');
+					user.save((err) => {
+						if (err) {
+							debug('PUT, error saving user updates: ' + JSON.stringify(err));
+							return res.status(500).send({message: 'Error saving the user details, message: ' + err.message}); // NLS
+						}
+
+						debug('PUT, success!');
+						return res.status(200).send({user: user});
 					});
 				}
-
-				debug('PUT, User is name: ' + user.firstName + ' ' + user.lastName + ', email: ' + user.email + ', role: ' + user.role);
-				// Ok Validation passed let's update the user
-				debug('userHandler - putUser, updating user values.');
-				user.firstName = req.body.firstName;
-				user.lastName = req.body.lastName;
-				user.email = req.body.email;
-				user.org_id = req.body.org_id;
-				user.role = req.body.role;
-
-				debug('PUT, saving the user.');
-				user.save((err) => {
-					if (err) {
-						debug('PUT, error saving user updates: ' + JSON.stringify(err));
-						return res.status(500).send({message: 'Error saving the user details, message: ' + err.message}); // NLS
-					}
-
-					debug('PUT, success!');
-					return res.status(200).send({user: user});
-				});
 			} else {
 				debug('PUT, requested user was not found.');
 				return res.status(404).send({message: 'The user requested was not found.'}); //NLS
