@@ -11,8 +11,9 @@ import {rfc5322} from '../../constants';
 let debug = Debug('MemberView');
 
 export class MemberView extends Component {
-	componentWillMount() {
-		debug('componentWillMount, called.');
+	constructor(props) {
+		super(props);
+		debug('constructor, called.');
 		debug('set role: ' + this.props.selectedMember.role);
 		this.state = {role: this.props.selectedMember.role};
 	}
