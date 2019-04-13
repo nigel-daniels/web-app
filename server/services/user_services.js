@@ -61,17 +61,23 @@ export function getUsers(req, res) {
 export function getUserById(req, res) {
 	debug('GET:id, called.');
 
-	let query = req.user.role === SUPER ? {_id: req.params.id} : {_id: req.params.id, role: req.user.role, active: true};
+	//let query = req.user.role === SUPER ? {_id: req.params.id} : {_id: req.params.id, active: true};
 
-	User.findOne(query, function(err, user) {
+	User.findOne({_id: req.params.id}, function(err, user) {
 		if (err) {
 			debug('GET:id, err: ' + JSON.stringify(err));
 			return res.status(500).send({message: 'Error finding users: ' + err.message});
 		}
 
 		if (user) {
-			debug('GET:id, success');
-			return res.status(200).send({user: user});
+			if ((req.user.role === SUPER) || user.org_id.equals(req.user.org_id)) {
+				debug('GET:id, success');
+				return res.status(200).send({user: user});
+			} else {
+				debug('GET:id, user not part of requesting users org.');
+				return res.status(403).send({message: 'User does not have permission to see this organisations members'});
+			}
+
 		} else {
 			debug('GET:id, user not found.');
 			return res.status(404).send({message: 'The user requested was not found.'});
@@ -85,7 +91,7 @@ export function getUserById(req, res) {
 export function putUser(req, res) {
 	debug('PUT, called.');
 
-	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id === req.params.user.org_id)) || (req.user._id === req.params.id)) {
+	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id.equals(req.params.user.org_id))) || (req.user._id.equals(req.params.id))) {
 		User.findById(req.params.id, (err, user) => {
 			if (err) {
 				debug('PUT, error finding user: ' + JSON.stringify(err));
@@ -191,7 +197,7 @@ export function deleteUser(req, res) {
 		}
 
 		if (user) {
-			if ((req.user.role === STAFF && req.param.id === req.user.id) || (req.user.role === ADMIN && req.user.org_id === user.org_id) || (req.user.role === SUPER)) {
+			if ((req.user.role === STAFF && req.param.id.equals(req.user.id)) || (req.user.role === ADMIN && req.user.org_id.equals(user.org_id)) || (req.user.role === SUPER)) {
 				user.active = false;
 
 				user.save((err) => {

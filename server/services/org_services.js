@@ -100,7 +100,7 @@ export function getOrgs(req, res) {
 export function getOrgById(req, res) {
 	debug('GET:id, called');
 
-	if ((String(req.user.org_id) === req.params.id) || (req.user.role === SUPER)) {
+	if ((req.user.org_id.equals(req.params.id)) || (req.user.role === SUPER)) {
 		Organisation.findById(req.params.id, (err, organisation) => {
 			if (err) {
 				debug('GET:id, err: ' + JSON.stringify(err));
@@ -126,8 +126,9 @@ export function getOrgById(req, res) {
  * ***************************************/
 export function getOrgMembers(req, res) {
 	debug('GET:id/members, called');
-
-	if ((req.user.org_id === req.params.id) || (req.user.role === SUPER)) {
+	debug('GET:id/members, org_id: ' + req.user.org_id);
+	debug('GET:id/members, req id: ' + req.params.id);
+	if ((req.user.org_id.equals(req.params.id)) || (req.user.role === SUPER)) {
 		User.find({org_id: req.params.id, active: true}, (err, members) => {
 			if (err) {
 				debug('GET:id/members, err: ' + JSON.stringify(err));
@@ -150,7 +151,7 @@ export function putOrg(req, res) {
 	debug('PUT, called');
 
 	// Check the user belongs to this org
-	if (req.params.id === req.user.org_id) {
+	if (req.params.id.equals(req.user.org_id)) {
 		// Ok let's get the org to update
 		Organisation.findById(req.params.id, (err, organisation) => {
 			if (err) {
@@ -190,7 +191,7 @@ export function deleteOrg(req, res) {
 	debug('DELETE, called');
 
 	// Is this user allowed to try and delete this org?
-	if (((req.params.id === req.user.org_id) && (req.user.role === ADMIN)) || req.user.role === SUPER) {
+	if (((req.params.id.equals(req.user.org_id)) && (req.user.role === ADMIN)) || req.user.role === SUPER) {
 
 		// Ok get the org to delete
 		Organisation.findById(req.params.id, (err, organisation) => {
