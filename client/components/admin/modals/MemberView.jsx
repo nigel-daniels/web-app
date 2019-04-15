@@ -36,7 +36,7 @@ export class MemberView extends Component {
     		this.props.updateMember(this.props.selectedMember._id, $('#first-name').val(), $('#last-name').val(), $('#email').val(), this.props.selectedMember.org_id, $('#role').val());
   		});
 
-		$('#closeMemberAccount').click(() => {
+		$('#member-close').click(() => {
 			debug('close, clicked.');
     		this.props.closeMemberAccount(this.props.selectedMember._id);
   		});
@@ -44,12 +44,29 @@ export class MemberView extends Component {
 
 	updateRole(event) {
 		debug('updateRole, called.');
-		debug('set role: ' + event.target.value);
-		setState({role: event.target.value});
+		this.setState({role: event.target.value});
+	}
+
+	getRoleSelector(role) {
+		debug('getRoleSelector, called.');
+		debug('getRoleSelector, role: ' + role);
+		if (this.props.profile.role === 'SUPER') {
+			return (<select className="form-control" id="role" value={role} onChange={this.updateRole.bind(this)}>
+				<option value="STAFF">Staff</option>
+				<option value="ADMIN">Administrator</option>
+				<option value="SUPER">Super User</option>
+			</select>);
+		} else {
+			return (<select className="form-control" id="role" value={role} onChange={this.updateRole.bind(this)}>
+				<option value="STAFF">Staff</option>
+				<option value="ADMIN">Administrator</option>
+			</select>);
+		}
 	}
 
 	render () {
 		debug('render, called.');
+
 		return <div className="modal fade" id="member-modal" tabIndex="-1" role="dialog" aria-labelledby="member-title" aria-hidden="true">
 			<div className="modal-dialog modal-dialog-centered" role="document">
 				<div className="modal-content">
@@ -80,11 +97,7 @@ export class MemberView extends Component {
 							<div className="form-group row">
 								<label htmlFor="role" className="col-sm-3 col-form-label">Role</label>
 								<div className="col-sm-9 form-group input-block">
-									<select className="form-control" id="role" value={this.state.role} onChange={this.updateRole}>
-										<option value="STAFF">Staff</option>
-										<option value="ADMIN">Administrator</option>
-										<option value="SUPER">Super User</option>
-									</select>
+									{this.getRoleSelector(this.props.selectedMember.role)}
 								</div>
 							</div>
 						</form>
@@ -102,6 +115,7 @@ export class MemberView extends Component {
 
 MemberView.propTypes = {
 	err:				PropTypes.string,
+	profile:			PropTypes.object,
 	selectedMember:		PropTypes.object,
 
 	updateMember:		PropTypes.func,

@@ -79,6 +79,8 @@ class MembersView extends Component {
 				if (this.props.profile.role === 'SUPER') {
 					debug('select, show modal.');
 					$('#member-modal').modal('show');
+				} else {
+					event.stopImmediatePropagation();
 				}
 			} else {
 				debug('select, show modal.');

@@ -90,8 +90,9 @@ export function getUserById(req, res) {
  * ***************************************/
 export function putUser(req, res) {
 	debug('PUT, called.');
-
-	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id.equals(req.params.user.org_id))) || (req.user._id.equals(req.params.id))) {
+	debug('PUT, req.user ' + JSON.stringify(req.user));
+	debug('PUT, req.body ' + JSON.stringify(req.body));
+	if ((req.user.role === SUPER) || ((req.user.role === ADMIN) && (req.user.org_id.equals(req.body.org_id))) || (req.user._id.equals(req.body.id))) {
 		User.findById(req.params.id, (err, user) => {
 			if (err) {
 				debug('PUT, error finding user: ' + JSON.stringify(err));

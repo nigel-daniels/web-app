@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
 		err:			state.org.err,
+		profile:		state.auth.profile,
 		selectedMember:	state.org.selectedMember
 	};
 };
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
 		updateMember: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateMember(id, firstName, lastName, email, org_id, role));},
-		closeMemberAccount: (id) => {dispatch(actions.closeAccount(id));}
+		closeMemberAccount: (id) => {dispatch(actions.closeMemberAccount(id));}
 	};
 };
 

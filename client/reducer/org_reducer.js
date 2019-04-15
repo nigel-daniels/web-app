@@ -56,7 +56,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 		});
 	}
 	case actions.UPDATE_MEMBER: {
-		debug('GET_SELECTED_MEMBER is called');
+		debug('UPDATE_MEMBER is called');
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -65,7 +65,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 		});
 	}
 	case actions.CLOSE_MEMBER_ACCOUNT: {
-		debug('GET_SELECTED_MEMBER is called');
+		debug('CLOSE_MEMBER_ACCOUNT is called');
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
