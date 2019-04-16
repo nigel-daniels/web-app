@@ -36,7 +36,6 @@ class MembersView extends Component {
 
 	createDataTable(data) {
 		debug('createDataTable, called.');
-		debug('createDataTable, data: ' + JSON.stringify(data));
 		this.userTable = $('#user-table').DataTable({
 			select: 'single',
 			data: data,
@@ -74,16 +73,16 @@ class MembersView extends Component {
 				}
 			]
 		});
+
 		this.userTable.on( 'select', ( event, table, type, indexes ) => {
 			let selected = table.data();
 			debug('select, ' + JSON.stringify(selected));
-			
-			this.props.getSelectedMember(selected._id);
-			if ((selected.role !== 'SUPER') || (this.props.profile.role === 'SUPER')) {
-				debug('select, show modal.');
-				$('#member-modal').modal('show');
-			}
-
+			this.props.getSelectedMember(selected._id, () => {
+				if ((selected.role !== 'SUPER') || (this.props.profile.role === 'SUPER')) {
+					debug('select callback, show modal.');
+					$('#member-modal').modal('show');
+				}
+			});
 		});
 	}
 

@@ -20,15 +20,13 @@ export default function reducer(state = INITIAL_STATE, action) {
 	debug('reducer is called');
 	const { type, payload } = action;
 
-	debug('start state is: ' + JSON.stringify(state));
 	debug('action : ' + JSON.stringify(action));
-	debug('type is: ' + type);
-	debug('payload : ' + JSON.stringify(payload));
 
 	switch (action.type) {
 
 	case actions.SIGNUP: {
 		debug('SIGNUP is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -39,6 +37,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 
 	case actions.LOGIN: {
 		debug('LOGIN is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -48,6 +47,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	}
 	case actions.FORGOT: {
 		debug('FORGOT is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -57,6 +57,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	}
 	case actions.RESET: {
 		debug('RESET is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -66,6 +67,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	}
 	case actions.AUTHENTICATE: {
 		debug('AUTHENTICATE is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -75,6 +77,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	}
 	case actions.LOGOUT: {
 		debug('LOGOUT is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -84,6 +87,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	}
 	case actions.UPDATE_PROFILE: {
 		debug('UPDATE_PROFILE is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
@@ -102,6 +106,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 	}
 	case actions.CLOSE_ACCOUNT: {
 		debug('CLOSE_ACCOUNT is called');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),

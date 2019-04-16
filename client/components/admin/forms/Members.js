@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
 		getMembers: (org_id) => {dispatch(actions.getMembers(org_id));},
-		getSelectedMember: (id) => {dispatch(actions.getSelectedMember(id));}
+		getSelectedMember: (id, callback) => {dispatch(actions.getSelectedMember(id)).then(callback);}
 	};
 };
 

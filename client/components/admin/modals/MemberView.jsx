@@ -38,8 +38,8 @@ export class MemberView extends Component {
 			});
 		}
 
-		debug('getcomponentDidMount, role: ' + role);
-		this.setState({role: this.props.selectedMember.role});
+		//debug('getcomponentDidMount, role: ' + role);
+		//this.setState({role: this.props.selectedMember.role});
 
 		debug('componentDidMount, set validator on signup-form.');
 		$('#member-update').click(() => {

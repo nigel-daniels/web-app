@@ -17,15 +17,21 @@ const INITIAL_STATE = {
 
 export default function reducer(state = new Map(), action) {
 	debug('reducer called');
+	const { type, payload } = action;
+
+	debug('action : ' + JSON.stringify(action));
+
 	switch (action.type) {
 	case actions.ADD_USER: {
 		debug('case is ADD_USER');
+		debug('payload : ' + JSON.stringify(payload));
 		return addUser(state, action);
 	}
 	case actions.GET_USER:
 	case actions.GET_USERS:
 	case actions.UPDATE_USER: {
 		debug('case is UPDATE_USER');
+		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
 			start: prevState => ({...prevState, isworking: true, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
