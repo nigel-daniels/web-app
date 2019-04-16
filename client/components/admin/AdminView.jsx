@@ -14,6 +14,11 @@ import Members from './forms/Members';
 let debug = Debug('AdminView');
 
 class AdminView extends Component {
+	shouldComponentUpdate() {
+		debug('shouldComponentUpdate, called.');
+		return this.props.isworking;
+	}
+
 	componentDidUpdate() {
 		debug('componentDidUpdate, check if there is an err then notify if there is.');
 		if (this.props.err !== null) {
@@ -29,31 +34,31 @@ class AdminView extends Component {
 
   	render () {
     	debug('render, called.');
-    	if (this.props.isworking) {
-      	return null;
-    	} else {
-  			return 	<Main>
-				<div id="profile" className="page-content">
-					<h4 className="content-heading">Administration</h4>
-					<ul className="nav nav-tabs" id="admin-tab" role="tablist">
-						<li className="nav-item">
-							<a className="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Members</a>
-						</li>
-						<li className="nav-item">
-					    	<a className="nav-link" id="org-tab" data-toggle="tab" href="#org" role="tab" aria-controls="org" aria-selected="false">Organisation</a>
-						</li>
-					</ul>
-					<div className="tab-content" id="admin-content">
-						<div className="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-							<Members/>
-						</div>
-						<div className="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
+    	//if (this.props.isworking) {
+      	//return null;
+    	//} else {
+		return 	<Main>
+			<div id="profile" className="page-content">
+				<h4 className="content-heading">Administration</h4>
+				<ul className="nav nav-tabs" id="admin-tab" role="tablist">
+					<li className="nav-item">
+						<a className="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Members</a>
+					</li>
+					<li className="nav-item">
+				    	<a className="nav-link" id="org-tab" data-toggle="tab" href="#org" role="tab" aria-controls="org" aria-selected="false">Organisation</a>
+					</li>
+				</ul>
+				<div className="tab-content" id="admin-content">
+					<div className="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+						<Members/>
+					</div>
+					<div className="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
 
-						</div>
 					</div>
 				</div>
-  			</Main>;
-	  	}
+			</div>
+		</Main>;
+	  //}
 	}
 };
 

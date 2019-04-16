@@ -11,8 +11,10 @@ import Debug from 'debug';
 let debug = Debug('Member');
 
 const mapStateToProps = (state) => {
-	debug('mapStateToProps: called');
+	debug('mapStateToProps, called');
+	debug('mapStateToProps, state: ' + JSON.stringify(state.org));
 	return {
+		isworking:		state.org.isworking,
 		err:			state.org.err,
 		profile:		state.auth.profile,
 		selectedMember:	state.org.selectedMember

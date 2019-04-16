@@ -15,8 +15,16 @@ export class MemberView extends Component {
 		super(props);
 		debug('constructor, called.');
 		debug('set role: ' + this.props.selectedMember.role);
-		this.state = {role: this.props.selectedMember.role};
+		this.state.role = this.props.selectedMember.role;
 	}
+
+	shouldComponentUpdate() {
+		debug('shouldComponentUpdate, called.');
+		debug('shouldComponentUpdate, role: ' + this.state.role);
+		this.setState({role: this.props.selectedMember.role});
+		return this.props.isworking;
+	}
+
 
 	componentDidMount() {
 		debug('componentDidMount, called.');
@@ -29,6 +37,9 @@ export class MemberView extends Component {
 				type: 'danger'
 			});
 		}
+
+		debug('getcomponentDidMount, role: ' + role);
+		this.setState({role: this.props.selectedMember.role});
 
 		debug('componentDidMount, set validator on signup-form.');
 		$('#member-update').click(() => {
@@ -49,7 +60,6 @@ export class MemberView extends Component {
 
 	getRoleSelector(role) {
 		debug('getRoleSelector, called.');
-		debug('getRoleSelector, role: ' + role);
 		if (this.props.profile.role === 'SUPER') {
 			return (<select className="form-control" id="role" value={role} onChange={this.updateRole.bind(this)}>
 				<option value="STAFF">Staff</option>
@@ -66,7 +76,6 @@ export class MemberView extends Component {
 
 	render () {
 		debug('render, called.');
-
 		return <div className="modal fade" id="member-modal" tabIndex="-1" role="dialog" aria-labelledby="member-title" aria-hidden="true">
 			<div className="modal-dialog modal-dialog-centered" role="document">
 				<div className="modal-content">
@@ -97,7 +106,7 @@ export class MemberView extends Component {
 							<div className="form-group row">
 								<label htmlFor="role" className="col-sm-3 col-form-label">Role</label>
 								<div className="col-sm-9 form-group input-block">
-									{this.getRoleSelector(this.props.selectedMember.role)}
+									{this.getRoleSelector(this.state.role)}
 								</div>
 							</div>
 						</form>
@@ -114,6 +123,7 @@ export class MemberView extends Component {
 }
 
 MemberView.propTypes = {
+	isworking:			PropTypes.bool,
 	err:				PropTypes.string,
 	profile:			PropTypes.object,
 	selectedMember:		PropTypes.object,

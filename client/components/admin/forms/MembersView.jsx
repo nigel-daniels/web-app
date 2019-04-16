@@ -12,6 +12,10 @@ import {rfc5322} from '../../constants';
 let debug = Debug('MembersView');
 
 class MembersView extends Component {
+	shouldComponentUpdate() {
+		debug('shouldComponentUpdate, called.');
+		return this.props.isworking;
+	}
 
 	componentDidMount() {
 		debug('componentDidMount, called.');
@@ -20,14 +24,14 @@ class MembersView extends Component {
 
 	componentDidUpdate() {
 		debug('componentDidUpdate, called.');
-		if (!this.props.isworking) {
-			if (!this.userTable) {
-				this.createDataTable(this.props.members);
-			} else {
-				this.userTable.destroy();
-				this.createDataTable(this.props.members);
-			}
+		//if (!this.props.isworking) {
+		if (!this.userTable) {
+			this.createDataTable(this.props.members);
+		} else {
+			this.userTable.destroy();
+			this.createDataTable(this.props.members);
 		}
+		//}
 	}
 
 	createDataTable(data) {
@@ -73,19 +77,13 @@ class MembersView extends Component {
 		this.userTable.on( 'select', ( event, table, type, indexes ) => {
 			let selected = table.data();
 			debug('select, ' + JSON.stringify(selected));
+			
 			this.props.getSelectedMember(selected._id);
-
-			if (selected.role === 'SUPER') {
-				if (this.props.profile.role === 'SUPER') {
-					debug('select, show modal.');
-					$('#member-modal').modal('show');
-				} else {
-					event.stopImmediatePropagation();
-				}
-			} else {
+			if ((selected.role !== 'SUPER') || (this.props.profile.role === 'SUPER')) {
 				debug('select, show modal.');
 				$('#member-modal').modal('show');
 			}
+
 		});
 	}
 
