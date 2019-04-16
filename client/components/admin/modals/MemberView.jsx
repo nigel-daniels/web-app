@@ -15,13 +15,13 @@ export class MemberView extends Component {
 		super(props);
 		debug('constructor, called.');
 		debug('set role: ' + this.props.selectedMember.role);
-		this.state.role = this.props.selectedMember.role;
+		this.state = {role: this.props.selectedMember.role};
 	}
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
-		debug('shouldComponentUpdate, role: ' + this.state.role);
-		this.setState({role: this.props.selectedMember.role});
+		//debug('shouldComponentUpdate, role: ' + this.state.role);
+		//this.setState({role: this.props.selectedMember.role});
 		return this.props.isworking;
 	}
 
