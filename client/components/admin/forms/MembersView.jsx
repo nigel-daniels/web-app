@@ -20,18 +20,20 @@ class MembersView extends Component {
 	componentDidMount() {
 		debug('componentDidMount, called.');
 		this.props.getMembers(this.props.org._id);
+
+		/*$('#member-modal').on('hidden.bs.modal', (event) => {
+			$('#member-modal').modal('dispose');
+		});*/
 	}
 
 	componentDidUpdate() {
 		debug('componentDidUpdate, called.');
-		//if (!this.props.isworking) {
 		if (!this.userTable) {
 			this.createDataTable(this.props.members);
 		} else {
 			this.userTable.destroy();
 			this.createDataTable(this.props.members);
 		}
-		//}
 	}
 
 	createDataTable(data) {
@@ -75,14 +77,15 @@ class MembersView extends Component {
 		});
 
 		this.userTable.on( 'select', ( event, table, type, indexes ) => {
-			let selected = table.data();
-			debug('select, ' + JSON.stringify(selected));
-			this.props.getSelectedMember(selected._id, () => {
+			if (!this.props.isworking) { // We need this to ensure a redraw does recall while we load!
+				let selected = table.data();
+				debug('select, ' + JSON.stringify(selected));
+				this.props.getSelectedMember(selected._id);
 				if ((selected.role !== 'SUPER') || (this.props.profile.role === 'SUPER')) {
 					debug('select callback, show modal.');
 					$('#member-modal').modal('show');
 				}
-			});
+			}
 		});
 	}
 
