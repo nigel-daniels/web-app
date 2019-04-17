@@ -20,10 +20,6 @@ class MembersView extends Component {
 	componentDidMount() {
 		debug('componentDidMount, called.');
 		this.props.getMembers(this.props.org._id);
-
-		/*$('#member-modal').on('hidden.bs.modal', (event) => {
-			$('#member-modal').modal('dispose');
-		});*/
 	}
 
 	componentDidUpdate() {
@@ -89,11 +85,13 @@ class MembersView extends Component {
 		});
 	}
 
+//<table className="table table-striped table-hover" id="user-table"></table>
   	render () {
     	debug('render, called.');
+		debug('render table');
 		return 	<div>
 			<h5>{this.props.org.name} Organisation Members</h5><br/>
-			<table className="table table-striped table-hover" id="user-table"></table>
+			<table className="table table-striped table-hover" id="user-table" style={{'width' : '100%'}}></table>
 			<Member/>
 		</div>;
 	}

@@ -82,11 +82,18 @@ export class MemberView extends Component {
 				<button type="button" id="member-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
 			</div>);
 		} else {
-			return (<div className="modal-footer">
-				<button type="button" id="member-update" className="btn btn-primary" onClick={this.handleUpdate.bind(this)} data-dismiss="modal">Update</button>
-				<button type="button" id="member-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button type="button" id="member-close" className="btn btn-outline-danger" onClick={this.handleClose.bind(this)} data-dismiss="modal">Close Account</button>
-			</div>);
+			if (this.props.selectedMember._id == this.props.profile._id) {
+				return (<div className="modal-footer">
+					<button type="button" id="member-update" className="btn btn-primary" onClick={this.handleUpdate.bind(this)} data-dismiss="modal">Update</button>
+					<button type="button" id="member-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				</div>);
+			} else {
+				return (<div className="modal-footer">
+					<button type="button" id="member-update" className="btn btn-primary" onClick={this.handleUpdate.bind(this)} data-dismiss="modal">Update</button>
+					<button type="button" id="member-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" id="member-close" className="btn btn-outline-danger" onClick={this.handleClose.bind(this)} data-dismiss="modal">Close Account</button>
+				</div>);
+			}
 		}
 	}
 
