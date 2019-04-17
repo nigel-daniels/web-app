@@ -13,6 +13,11 @@ let debug = Debug('DetailsView');
 
 class DetailsView extends Component {
 
+	shouldComponentUpdate() {
+		debug('shouldComponentUpdate, called.');
+		return this.props.isworking;
+	}
+
 	componentDidMount() {
 		debug('componentDidMount, called.');
 
@@ -75,6 +80,7 @@ class DetailsView extends Component {
 };
 
 DetailsView.propTypes = {
+	isworking:		PropTypes.bool,
 	loggedin:		PropTypes.bool,
 	profile:		PropTypes.object,
 	org:			PropTypes.object,

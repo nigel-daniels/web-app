@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+		link(rel='stylesheet' href='/../css/server.css')
+		title Base Web App
+
+	body
+	.container-fluid
+		.row
+			.col-md-4
+			.col-md-4
+				.login-brand
+					.row
+						span.col-xs-2.login-logo
+							img(alt='Logo' src='/../images/saic.png' height='40' width='40')
+						span.col-xs-10.login-main-title
+							h1 Web App Demo
+				.panel.panel-default.login-panel
+					.panel-heading
+						h2.panel-title.login-title 404 Not Found
+					.panel-body
+						.p #{url} cannot be found.
+			.col-md-4
+		.footer
+			p
+				span.fa.fa-copyright
+				| 2019 Nigel Daniels.

@@ -12,6 +12,7 @@ import {rfc5322} from '../../constants';
 let debug = Debug('MembersView');
 
 class MembersView extends Component {
+
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
 		return this.props.isworking;
@@ -85,15 +86,18 @@ class MembersView extends Component {
 		});
 	}
 
-//<table className="table table-striped table-hover" id="user-table"></table>
   	render () {
     	debug('render, called.');
 		debug('render table');
-		return 	<div>
-			<h5>{this.props.org.name} Organisation Members</h5><br/>
-			<table className="table table-striped table-hover" id="user-table" style={{'width' : '100%'}}></table>
-			<Member/>
-		</div>;
+		if (this.props.org) {
+			return 	<div>
+				<h5>{this.props.org.name} Organisation Members</h5><br/>
+				<table className="table table-striped table-hover" id="user-table" style={{'width' : '100%'}}></table>
+				<Member/>
+			</div>;
+		} else {
+			return null;
+		}
 	}
 };
 

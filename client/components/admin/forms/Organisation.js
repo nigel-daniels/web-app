@@ -4,18 +4,16 @@
  * MIT Licensed
  */
 import {connect} from 'react-redux';
-import DetailsView from './DetailsView';
+import OrganisationView from './OrganisationView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
-let debug = Debug('Details');
+let debug = Debug('Organisation');
 
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.auth.isworking,
-		loggedin:	state.auth.loggedin,
-		profile:	state.auth.profile,
+		isworking:	state.org.isworking,
 		org:		state.org.org
 	};
 };
@@ -23,10 +21,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		updateProfile: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateProfile(id, firstName, lastName, email, org_id, role));},
+		updateOrg: (id, name) => {dispatch(actions.updateOrg(id, name));},
 	};
 };
 
-const Details = connect(mapStateToProps, mapDispatchToProps)(DetailsView);
+const Organisation = connect(mapStateToProps, mapDispatchToProps)(OrganisationView);
 
-export default Details;
+export default Organisation;

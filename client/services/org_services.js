@@ -85,3 +85,19 @@ export const closeMemberAccount = (id) => {
 		.catch((error) => {debug('closeMemberAccount, fetch, caught err.'); throw error;});
 
 };
+
+export const updateOrg = (id, name) => {
+	debug('updateOrg, called.');
+
+	let init = {
+		...coreInit,
+		method:			'PUT',
+		body:			JSON.stringify({'id': id, 'name': name})
+	};
+
+	debug('updateOrg, init is: ' + JSON.stringify(init));
+	return fetchOk('/org/' + id, init)
+		.then((response) => {debug('updateOrg, response ok.');return response;})
+		.catch((error) => {debug('updateOrg, fetch, caught err.'); throw error;});
+
+};

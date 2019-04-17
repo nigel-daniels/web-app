@@ -13,6 +13,7 @@ let debug = Debug('Password');
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
+		isworking:	state.auth.isworking,
 		profile:	state.auth.profile
 	};
 };

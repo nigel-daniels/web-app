@@ -20,7 +20,7 @@ export function start(req, res) {
 	debug('start, called.');
 
 	let env = Debug.enabled ? 'development' : 'production';
-	
+
 	return res.render('index', {'env': env});
 }
 
@@ -123,7 +123,11 @@ export function login(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
     	if (err) {
 			debug('login, err: ' + JSON.stringify(err));
-      		return res.status(err.status).send({ message : err.message }); // will generate a 500 error
+			if (err.status) {
+      			return res.status(err.status).send({ message : err.message }); // will generate a 500 error
+			} else {
+				return res.status(500).send({ message : 'There was an error during authentication, ' + err.message + '.' });
+			}
     	}
 
     	if (!user) {

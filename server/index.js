@@ -144,6 +144,12 @@ app.use(function (req, res, next) {
 	res.status(503).send('Service is in the process of closing.');
 });
 
+// This needs to remain the last app.use to handle all 404's
+app.use(function (req, res, next) {
+	debug('404, on  ' + req.originalUrl);
+	return res.render('404', {'url': req.originalUrl});
+});
+
 // Now set up for https
 debug('Setting up https keys');
 var privateKey	= fs.readFileSync(__dirname + '/keys/test-key.pem');

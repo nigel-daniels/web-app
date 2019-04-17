@@ -14,6 +14,12 @@ import Password from './forms/Password';
 let debug = Debug('ProfileView');
 
 class ProfileView extends Component {
+
+	shouldComponentUpdate() {
+		debug('shouldComponentUpdate, called.');
+		return this.props.isworking;
+	}
+
 	componentDidUpdate() {
 		debug('componentDidUpdate, check if there is an err then notify if there is.');
 		if (this.props.err !== null) {

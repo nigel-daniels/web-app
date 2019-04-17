@@ -42,11 +42,7 @@ export class MemberView extends Component {
 	}
 
 	getBody() {
-		if (!this.props.selectedMember._id) {
-			return (<div className="modal-body">
-				Loading ...
-			</div>);
-		} else {
+		if (this.props.selectedMember) {
 			return (<div className="modal-body">
 				<form className="form-horizontal" id="profile-form" key={this.props.selectedMember._id}>
 					<div className="form-group row">
@@ -73,15 +69,15 @@ export class MemberView extends Component {
 					</div>
 				</form>
 			</div>);
+		} else {
+			return (<div className="modal-body">
+				Loading ...
+			</div>);
 		}
 	}
 
 	getFooter() {
-		if (!this.props.selectedMember._id) {
-			return (<div className="modal-footer">
-				<button type="button" id="member-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			</div>);
-		} else {
+		if (this.props.selectedMember) {
 			if (this.props.selectedMember._id == this.props.profile._id) {
 				return (<div className="modal-footer">
 					<button type="button" id="member-update" className="btn btn-primary" onClick={this.handleUpdate.bind(this)} data-dismiss="modal">Update</button>
@@ -94,6 +90,10 @@ export class MemberView extends Component {
 					<button type="button" id="member-close" className="btn btn-outline-danger" onClick={this.handleClose.bind(this)} data-dismiss="modal">Close Account</button>
 				</div>);
 			}
+		} else {
+			return (<div className="modal-footer">
+				<button type="button" id="member-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			</div>);
 		}
 	}
 

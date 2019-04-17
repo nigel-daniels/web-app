@@ -14,6 +14,11 @@ let debug = Debug('PasswordView');
 
 class PasswordView extends Component {
 
+	shouldComponentUpdate() {
+		debug('shouldComponentUpdate, called.');
+		return this.props.isworking;
+	}
+
 	componentDidMount() {
 		debug('componentDidMount, called.');
 
@@ -65,6 +70,7 @@ class PasswordView extends Component {
 };
 
 PasswordView.propTypes = {
+	isworking:		PropTypes.bool,
 	profile:		PropTypes.object,
 
 	changePassword: 	PropTypes.func

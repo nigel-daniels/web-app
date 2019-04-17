@@ -9,11 +9,12 @@ import Debug from 'debug';
 
 import { Main } from '../Main';
 import Members from './forms/Members';
-//import Password from './forms/Password';
+import Organisation from './forms/Organisation';
 
 let debug = Debug('AdminView');
 
 class AdminView extends Component {
+
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
 		return this.props.isworking;
@@ -34,9 +35,6 @@ class AdminView extends Component {
 
   	render () {
     	debug('render, called.');
-    	//if (this.props.isworking) {
-      	//return null;
-    	//} else {
 		return 	<Main>
 			<div id="profile" className="page-content">
 				<h4 className="content-heading">Administration</h4>
@@ -53,7 +51,7 @@ class AdminView extends Component {
 						<Members/>
 					</div>
 					<div className="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
-
+						<Organisation/>
 					</div>
 				</div>
 			</div>

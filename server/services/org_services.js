@@ -149,9 +149,9 @@ export function getOrgMembers(req, res) {
  *************************************** */
 export function putOrg(req, res) {
 	debug('PUT, called');
-
+	debug('PUT, params ' + JSON.stringify(req.params));
 	// Check the user belongs to this org
-	if (req.params.id.equals(req.user.org_id)) {
+	if (req.user.org_id.equals(req.params.id)) {
 		// Ok let's get the org to update
 		Organisation.findById(req.params.id, (err, organisation) => {
 			if (err) {
@@ -191,7 +191,7 @@ export function deleteOrg(req, res) {
 	debug('DELETE, called');
 
 	// Is this user allowed to try and delete this org?
-	if (((req.params.id.equals(req.user.org_id)) && (req.user.role === ADMIN)) || req.user.role === SUPER) {
+	if (((req.user.org_id.equals(req.params.id)) && (req.user.role === ADMIN)) || req.user.role === SUPER) {
 
 		// Ok get the org to delete
 		Organisation.findById(req.params.id, (err, organisation) => {
