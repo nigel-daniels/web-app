@@ -8,8 +8,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { AuthRoute } from './auth/AuthRoute';
 import Auth from './auth/Auth';
 import { Home } from './home/Home';
-import { Action1 } from './action/Action1';
-import { About } from './about/About';
+import Dashboard from './dashboard/Dashboard';
 import Profile from './profile/Profile';
 import Admin from './admin/Admin';
 import { NotFound } from './notfound/NotFound';
@@ -26,8 +25,7 @@ export class App extends React.Component{
 			<Switch>
 				<AuthRoute exact path='/' component={Auth}/>
 				<AuthRoute exact path='/home' component={Home}/>
-				<AuthRoute path='/action' component={Action1}/>
-				<AuthRoute path='/about' component={About}/>
+				<AuthRoute path='/dashboard' component={Dashboard}/>
 				<AuthRoute path='/profile' component={Profile}/>
 				<AuthRoute path='/admin' component={Admin}/>
 				<Route path='/login' component={Auth}/>

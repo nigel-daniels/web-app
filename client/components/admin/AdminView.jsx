@@ -56,7 +56,6 @@ class AdminView extends Component {
 				</div>
 			</div>
 		</Main>;
-	  //}
 	}
 };
 

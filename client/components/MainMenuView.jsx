@@ -56,8 +56,7 @@ class MainMenuView extends Component {
 				<div id="links" className="navbar-collapse collapse">
 					<ul className="navbar-nav mr-auto">
 						<li className="nav-item"><Link className="nav-link" to='/'>Home</Link></li>
-						<li className="nav-item"><Link className="nav-link" to="/action">Action 1</Link></li>
-						<li className="nav-item"><Link className="nav-link" to='/about'>About</Link></li>
+						<li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link></li>
 					</ul>
           		</div>
 
