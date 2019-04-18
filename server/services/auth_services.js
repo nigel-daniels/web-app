@@ -48,7 +48,7 @@ export function signup(req, res) {
 	Organisation.findOne({name: req.body.organisation}, (err, org) => {
 		if (err) {
 			debug('signup, err finding organisation: ' + JSON.stringify(err));
-			return res.status(500).send({message: 'Error finding organisation,', cause: + err.message});
+			return res.status(500).send({message: 'Error finding organisation: ' + err.message});
 		}
 
 		if (org) {
@@ -59,7 +59,7 @@ export function signup(req, res) {
 			User.findOne({email: req.body.email}, (err, user) => {
 				if (err) {
 					debug('signup, err finding user: ' + JSON.stringify(err));
-					return res.status(500).send({message: 'Error finding user, message: ', cause: err.message});
+					return res.status(500).send({message: 'Error finding user, message: ' + err.message});
 				}
 
 				if (user) {
@@ -73,7 +73,7 @@ export function signup(req, res) {
 					Organisation.create({name: req.body.organisation}, (err, org) => {
 						if (err) {
 							debug('signup, err creating organisation: ' + JSON.stringify(err));
-							return res.status(500).send({message: 'Error creating organisation', cause: err.message});
+							return res.status(500).send({message: 'Error creating organisation: ' + err.message});
 						}
 
 						debug('Created org: ' + JSON.stringify(org));
@@ -81,7 +81,7 @@ export function signup(req, res) {
 						User.countDocuments({}, (err, count) => {
 							if (err) {
 								debug('signup, err checking user count: ' + JSON.stringify(err));
-								return res.status(500).send({message: 'Error checking user count.', cause: err.message});
+								return res.status(500).send({message: 'Error checking user count: ' + err.message});
 							}
 
 							let role = count === 0 ? SUPER : ADMIN;
@@ -100,7 +100,7 @@ export function signup(req, res) {
 							User.create(new_user, (err, user) => {
 								if (err) {
 									debug('signup, err creating user: ' + JSON.stringify(err));
-									return res.status(500).send({message: 'Error creating user', cause: err.message});
+									return res.status(500).send({message: 'Error creating user: ' + err.message});
 								}
 
 								debug('signup, success.');
@@ -179,7 +179,7 @@ export function forgot(req, res) {
 	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) {
 			debug('forgotPassword, finding user err: ' + err.message);
-			return res.status(500).send({message: 'Error finding user.', cause: err.message});
+			return res.status(500).send({message: 'Error finding the user: ' + err.message});
 		}
 
 		if (user) {
@@ -199,7 +199,7 @@ export function forgot(req, res) {
 			debug('forgotPassword, sending email.');
 			smtpTransport.sendMail(mailOpts, function(err) {
 				if (err) {
-					return res.status(500).send({message: 'Error sending e-mail', cause: err.message}); // NLS
+					return res.status(500).send({message: 'Error sending e-mail: ' + err.message}); // NLS
 				}
 
 				debug('forgotPassword, email sent ok.');
@@ -232,17 +232,17 @@ export function resetPassword(req, res) {
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
 			if (err) {
-				return res.status(500).send({message: 'Error updating user', cause: err.message});
+				return res.render('error', {message: 'An error occured updating the password: ' + err.message}); // NLS
 			} else {
 				if (user) {
 					return res.redirect('/');
 				} else {
-					return res.status(404).send({message: 'The user requested was not found.'});
+					return res.render('error', {message: 'The user requested was not found.'}); // NLS
 				}
 			}
 		});
 	} else {
-		return res.status(400).send({message: 'No password provided.'});
+		return res.render('error', {message: 'No password was provided.'}); // NLS
 	}
 }
 
@@ -255,7 +255,7 @@ export function changePassword(req, res) {
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
 			if (err) {
-				return res.status(500).send({message: 'Error updating user', cause: err.message});
+				return res.status(500).send({message: 'Error occured updating the user: ' + err.message});
 			} else {
 				if (user) {
 					return res.status(200).send({'user': user});
@@ -298,7 +298,7 @@ export function invite(req, res) {
 
 		smtpTransport.sendMail(mailOpts, (err) => {
 			if (err) {
-				return res.status(500).send({message: 'Error sending invite e-mail', cause: err.message}); // NLS
+				return res.status(500).send({message: 'Error sending invite e-mail: ' + err.message}); // NLS
 			}
 
 			debug('invite, e-mail sent ok.');
@@ -317,7 +317,7 @@ export function getAcceptPage(req, res){
 	Organisation.findById(req.query.org_id, (err, org) => {
 		if (err) {
 			debug('accept, err: ' + JSON.stringify(err));
-			return res.render('accept_err', {message: 'Error finding the organisation to join: ' + err.message}); // NLS
+			return res.render('error', {message: 'Error finding the organisation to join: ' + err.message}); // NLS
 		}
 
 		if (org) {
@@ -326,7 +326,7 @@ export function getAcceptPage(req, res){
 			return res.render('accept', {email: req.query.email, org_id: org.org_id, org: org.name});
 		} else {
 			debug('accept, org: ' + req.query.org_id + ' not found .');
-			return res.render('accept_err', {message: 'The organisation does not, or no longer exists.'}); // NLS
+			return res.render('error', {message: 'The organisation does not, or no longer exists.'}); // NLS
 		}
 	});
 }
@@ -351,7 +351,7 @@ export function acceptInvite(req, res) {
 	User.create(new_user, (err, user) => {
 		if (err) {
 			debug('acceptInvite, err creating user: ' + JSON.stringify(err));
-			return res.render('accept_err', {message: 'Error creating the account: '+ err.message}); // NLS
+			return res.render('error', {message: 'Error creating the account: '+ err.message}); // NLS
 		}
 
 		debug('acceptInvite, success.');
