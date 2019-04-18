@@ -36,7 +36,7 @@ export class InviteView extends Component {
 				debug('update, submit');
 				if (!event.isDefaultPrevented()) {
 					event.preventDefault();
-					this.props.invite($('#invite-email').val());
+					this.props.invite($('#invite-email').val(), this.props.profile.org_id);
 					$('#invite-modal').modal('hide');
 				}
 			})
@@ -81,6 +81,7 @@ export class InviteView extends Component {
 
 InviteView.propTypes = {
 	isworking:			PropTypes.bool,
+	profile:			PropTypes.object,
 	err:				PropTypes.string,
 
 	invite:		PropTypes.func

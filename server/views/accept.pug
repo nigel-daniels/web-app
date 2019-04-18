@@ -1,0 +1,49 @@
+extends external_view.pug
+
+block panel
+	.panel.panel-default.login-panel
+		.panel-heading
+			h2.panel-title.login-title Invitation to #{org}
+		.panel-body
+			form#signup-form.form-horizontal.accept-form(method='POST')
+				.form-group.input-block-ico
+					label.sr-only(for='first') Your Name
+					.input-group
+						.input-group-prepend.login-name-addon
+							span.input-group-text
+								span.fa.fa-user(aria-hidden='true')
+						input#firstName.form-control(type='text' tabindex='25' placeholder='First/Given name' data-error='A first/given name is required.' required='')
+					.input-group
+						.input-group-prepend.login-name-addon
+							span.input-group-text
+								span.fa.fa-user(aria-hidden='true')
+						input#lastName.form-control(type='text' tabindex='30' placeholder='Last/Family name' data-error='A last/family name is required.' required='')
+					span.help-block.with-errors
+				.form-group.input-block-ico
+					label.sr-only(for='password') Password
+					.input-group(data-toggle='tooltip' title='' data-original-title='Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.')
+						.input-group-prepend.login-name-addon
+							span.input-group-text
+								span.fa.fa-key(aria-hidden='true')
+						input#password.form-control(type='password' pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' tabindex='55' placeholder='Password' data-error='A valid password is required.' required='')
+					.input-group
+						.input-group-prepend.login-name-addon
+							span.input-group-text
+								span.fa.fa-key(aria-hidden='true')
+						input#password2.form-control(type='password' pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' tabindex='60' placeholder='Validate password' data-error='A confirmation password is required.' data-match='#password' data-match-error='The passwords do not match.' required='')
+					span.help-block.with-errors
+				.form-group
+					input#terms(type='checkbox' tabindex='70' data-error='You need to agree to our terms and conditions.' required='')
+					|  I agree to the 
+					a(href='#' data-toggle='modal' data-target='#terms-modal') terms and conditions.
+					span.help-block.with-errors
+				.form-group
+					input#privacy(type='checkbox' tabindex='75' data-error='You need to agree to our privacy policy.' required='')
+					|  I agree to the 
+					a(href='#' data-toggle='modal' data-target='#privacy-modal') privacy policy.
+					span.help-block.with-errors
+				.form-group
+					button#accept.btn.btn-primary.btn-block(type='submit' tabindex='80') Accept Invitation
+				
+				include modals/terms_modal.pug
+				include modals/privacy_modal.pug 

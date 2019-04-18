@@ -1,11 +1,5 @@
-doctype html
-html(lang='en')
+extends header.pug
 
-	head
-		meta(charset='UTF-8')
-		meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-		title Base Web App
-
-	body
-		#app
-		script#app-script(type='text/javascript' src='client.js' data-env= env)
+block content
+	#app
+	script#app-script(type='text/javascript' src='client.js' data-env= env)

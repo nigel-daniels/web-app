@@ -22,6 +22,16 @@ class MembersView extends Component {
 	componentDidMount() {
 		debug('componentDidMount, called.');
 		this.props.getMembers(this.props.org._id);
+
+		if (this.props.err !== null) {
+			$.notify({
+				title: '<strong>Signup Error</strong>',
+				icon: 'fa fa-exclamation-triangle',
+				message: this.props.err
+			},{
+				type: 'danger'
+			});
+		}
 	}
 
 	componentDidUpdate() {
@@ -108,6 +118,7 @@ MembersView.propTypes = {
 	profile:		PropTypes.object,
 	org:			PropTypes.object,
 	members:		PropTypes.array,
+	err:			PropTypes.string,
 
 	getMembers: 		PropTypes.func,
 	getSelectedMember:	PropTypes.func

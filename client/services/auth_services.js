@@ -136,13 +136,13 @@ export const changePassword = (id, password) => {
 		.catch((error) => {debug('changePassword, fetch, caught err.'); throw error;});
 };
 
-export const invite = (email) => {
+export const invite = (email, org_id) => {
 	debug('invite, called.');
 
 	let init = {
 		...coreInit,
 		method:			'POST',
-		body:			JSON.stringify({'email': email})
+		body:			JSON.stringify({'email': email, 'org_id': org_id})
 	};
 
 	return fetchOk('/invite/', init)

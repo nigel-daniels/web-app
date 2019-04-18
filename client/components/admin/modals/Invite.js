@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 	debug('mapStateToProps, called');
 	return {
 		isworking:		state.org.isworking,
+		profile:		state.auth.profile,
 		err:			state.org.err
 	};
 };
@@ -21,7 +22,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		invite: (email) => {dispatch(invite(email));}
+		invite: (email, org_id) => {dispatch(invite(email, org_id));}
 	};
 };
 

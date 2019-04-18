@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 		profile:	state.auth.profile,
 		org:		state.org.org,
 		members:	state.org.members,
-		selectedMember: state.org.selectedMember
+		err: 		state.auth.err
 	};
 };
 

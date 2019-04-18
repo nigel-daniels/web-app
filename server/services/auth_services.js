@@ -293,7 +293,7 @@ export function invite(req, res) {
 			from:		'no.reply@initiatethinking.com',
 			to:			req.body.email,
 			subject:	'Web Demo App - Password Request',
-			text:		'You have been invited to join this service.  Please use this link to accept this invitation: https://' + req.headers.host + '/accept/?email='+ req.body.email + '&orgId=' + req.body.org_id
+			text:		'You have been invited to join this service.  Please use this link to accept this invitation: https://' + req.headers.host + '/accept/?email='+ req.body.email + '&org_id=' + req.body.org_id
 		};
 
 		smtpTransport.sendMail(mailOpts, (err) => {
@@ -317,15 +317,16 @@ export function getAcceptPage(req, res){
 	Organisation.findById(req.query.org_id, (err, org) => {
 		if (err) {
 			debug('accept, err: ' + JSON.stringify(err));
-			return res.status(500).send({message: 'error finding organisation : ' + err.message});
+			return res.render('accept_err', {message: 'Error finding the organisation to join: ' + err.message}); // NLS
 		}
 
 		if (org) {
+			debug('accept,found org: ' + org.name);
 			debug('accept, success');
-			return res.render('accept.pug', {email: req.query.email, org_id: org_id, org: org.name});
+			return res.render('accept', {email: req.query.email, org_id: org.org_id, org: org.name});
 		} else {
 			debug('accept, org: ' + req.query.org_id + ' not found .');
-			return res.status(404).send({message: 'The organisation could not be found.'});
+			return res.render('accept_err', {message: 'The organisation does not, or no longer exists.'}); // NLS
 		}
 	});
 }
@@ -350,7 +351,7 @@ export function acceptInvite(req, res) {
 	User.create(new_user, (err, user) => {
 		if (err) {
 			debug('acceptInvite, err creating user: ' + JSON.stringify(err));
-			return res.render('accept_err.jade', {message: 'Error creating user: '+ err.message});
+			return res.render('accept_err', {message: 'Error creating the account: '+ err.message}); // NLS
 		}
 
 		debug('acceptInvite, success.');

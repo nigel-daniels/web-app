@@ -1,0 +1,30 @@
+extends header.pug
+
+block styles
+	link(rel='stylesheet' href='/../css/server.css')
+
+
+block content
+	.container-fluid
+		.row
+			.col-md-4
+			.col-md-4
+				.login-brand
+					.row
+						span.col-xs-2.login-logo
+							img(alt='Logo' src='/../images/saic.png' height='40' width='40')
+						span.col-xs-10.login-main-title
+							h1 Web App Demo
+				block panel
+			.col-md-4
+		.footer
+			p
+				span.fa.fa-copyright(aria-hidden='true')
+				|  2019 Nigel Daniels 
+				a(href='#' data-toggle='modal' data-target='#cookies-modal') Cookie Policy
+
+		include modals/cookie_modal.pug
+		
+		script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js' integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1' crossorigin='anonymous')
+		script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous')

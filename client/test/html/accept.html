@@ -1,0 +1,166 @@
+<html lang="en" data-ublock-blocked="">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="./css/font-awesome/css/font-awesome.css">
+<!-- Custom styles for this template -->
+<link href="css/test.css" rel="stylesheet">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Base Web App</title>
+</head>
+
+<body>
+	<div id="app">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="login-brand">
+						<div class="row">
+							<span class="col-xs-2 login-logo">
+								<img alt="Logo" src="images/saic.png" height="40" width="40">
+							</span>
+							<span class="col-xs-10 login-main-title">
+								<h1>Web App Demo</h1>
+							</span>
+						</div>
+					</div>
+					<div class="panel panel-default login-panel">
+						<div class="panel-heading">
+							<h2 class="panel-title login-title">Sign Up</h2>
+						</div>
+						<div class="panel-body">
+							<form class="form-horizontal signup-form" id="signup-form" novalidate="true">
+								<div class="form-group input-block-ico">
+									<label for="first" class="sr-only">Your Name</label>
+									<div class="input-group">
+										<div class="input-group-prepend login-name-addon">
+											<span class="input-group-text">
+												<span class="fa fa-user" aria-hidden="true"></span>
+											</span>
+										</div>
+										<input type="text" id="firstName" class="form-control" tabindex="25" placeholder="First/Given name" data-error="A first/given name is required." required="">
+									</div>
+									<div class="input-group">
+										<div class="input-group-prepend login-name-addon">
+											<span class="input-group-text">
+												<span class="fa fa-user" aria-hidden="true"></span>
+											</span>
+										</div>
+										<input type="text" id="lastName" class="form-control" tabindex="30" placeholder="Last/Family name" data-error="A last/family name is required." required="">
+									</div>
+									<span class="help-block with-errors"></span>
+								</div>
+								<div class="form-group input-block-ico">
+									<label for="password" class="sr-only">Password</label>
+									<div class="input-group" data-toggle="tooltip" title="" data-original-title="Password must contain one or more upper case, lower case, number/special characters and be at least 8 characters long to be valid.">
+										<div class="input-group-prepend login-name-addon">
+											<span class="input-group-text">
+												<span class="fa fa-key" aria-hidden="true"></span>
+											</span>
+										</div>
+										<input type="password" id="password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="form-control" tabindex="55" placeholder="Password" data-error="A valid password is required." required="">
+									</div>
+									<div class="input-group">
+										<div class="input-group-prepend login-name-addon">
+											<span class="input-group-text">
+												<span class="fa fa-key" aria-hidden="true"></span>
+											</span>
+										</div>
+										<input type="password" id="password2" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" class="form-control" tabindex="60" placeholder="Validate password" data-error="A confirmation password is required." data-match="#password" data-match-error="The passwords do not match." required="">
+									</div>
+									<span class="help-block with-errors"></span>
+								</div>
+								<div class="form-group">
+									<input type="checkbox" id="terms" tabindex="70" data-error="You need to agree to our terms and conditions." required=""> I agree to the <a href="#" data-toggle="modal" data-target="#terms-modal">terms and conditions.</a>
+									<span class="help-block with-errors"></span>
+								</div>
+								<div class="form-group">
+									<input type="checkbox" id="privacy" tabindex="75" data-error="You need to agree to our privacy policy." required=""> I agree to the <a href="#" data-toggle="modal" data-target="#privacy-modal">privacy policy.</a>
+									<span class="help-block with-errors"></span>
+								</div>
+								<div class="form-group">
+									<button class="btn btn-primary btn-block disabled" type="submit" id="accept" tabindex="80">Accept Invitation</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="footer">
+				<p>
+					<span class="fa fa-copyright" aria-hidden="true"></span> 2019 Nigel Daniels <a href="#" data-toggle="modal" data-target="#cookies-modal">Cookie Policy</a>
+				</p>
+			</div>
+		</div>
+
+
+
+		<div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-labelledby="terms-title" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="terms-title">Terms and Conditions</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel blandit metus. Curabitur sit amet odio nec tortor pulvinar pulvinar id non tellus. Nunc fermentum tincidunt venenatis. Maecenas et diam quis est pharetra eleifend. Etiam sollicitudin, ex vel eleifend suscipit, nibh ligula rutrum tortor, vel hendrerit velit enim vel arcu. Nullam et quam ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in diam sodales, laoreet enim quis, efficitur ex. Ut ante mi, maximus non tellus ullamcorper, elementum eleifend ex. Quisque id velit dignissim odio dignissim rhoncus. Sed faucibus ut tortor et molestie. Nulla convallis aliquam sapien at placerat. Donec vulputate non massa eget gravida. Cras auctor eros risus, sed consequat odio gravida venenatis. Mauris tincidunt condimentum turpis, a commodo lectus ultrices vehicula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mattis, libero in porttitor efficitur, massa ante tempor neque, quis pharetra sapien sapien at risus. Suspendisse efficitur leo bibendum enim mollis hendrerit. Vivamus urna massa, mollis non finibus ut, vehicula ac leo. Nullam ornare metus eu porta varius. Aliquam fringilla nisl a faucibus iaculis.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="privacy-modal" tabindex="-1" role="dialog" aria-labelledby="privacy-title" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="privacy-title">Privacy</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel blandit metus. Curabitur sit amet odio nec tortor pulvinar pulvinar id non tellus. Nunc fermentum tincidunt venenatis. Maecenas et diam quis est pharetra eleifend. Etiam sollicitudin, ex vel eleifend suscipit, nibh ligula rutrum tortor, vel hendrerit velit enim vel arcu. Nullam et quam ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in diam sodales, laoreet enim quis, efficitur ex. Ut ante mi, maximus non tellus ullamcorper, elementum eleifend ex. Quisque id velit dignissim odio dignissim rhoncus. Sed faucibus ut tortor et molestie. Nulla convallis aliquam sapien at placerat. Donec vulputate non massa eget gravida. Cras auctor eros risus, sed consequat odio gravida venenatis. Mauris tincidunt condimentum turpis, a commodo lectus ultrices vehicula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mattis, libero in porttitor efficitur, massa ante tempor neque, quis pharetra sapien sapien at risus. Suspendisse efficitur leo bibendum enim mollis hendrerit. Vivamus urna massa, mollis non finibus ut, vehicula ac leo. Nullam ornare metus eu porta varius. Aliquam fringilla nisl a faucibus iaculis.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="cookies-modal" tabindex="-1" role="dialog" aria-labelledby="privacy-title" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="privacy-title">Cookie Policy</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel blandit metus. Curabitur sit amet odio nec tortor pulvinar pulvinar id non tellus. Nunc fermentum tincidunt venenatis. Maecenas et diam quis est pharetra eleifend. Etiam sollicitudin, ex vel eleifend suscipit, nibh ligula rutrum tortor, vel hendrerit velit enim vel arcu. Nullam et quam ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in diam sodales, laoreet enim quis, efficitur ex. Ut ante mi, maximus non tellus ullamcorper, elementum eleifend ex. Quisque id velit dignissim odio dignissim rhoncus. Sed faucibus ut tortor et molestie. Nulla convallis aliquam sapien at placerat. Donec vulputate non massa eget gravida. Cras auctor eros risus, sed consequat odio gravida venenatis. Mauris tincidunt condimentum turpis, a commodo lectus ultrices vehicula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mattis, libero in porttitor efficitur, massa ante tempor neque, quis pharetra sapien sapien at risus. Suspendisse efficitur leo bibendum enim mollis hendrerit. Vivamus urna massa, mollis non finibus ut, vehicula ac leo. Nullam ornare metus eu porta varius. Aliquam fringilla nisl a faucibus iaculis.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>
