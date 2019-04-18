@@ -340,10 +340,10 @@ export function acceptInvite(req, res) {
 	let new_user = {
 		firstName: 		req.body.firstName,
 		lastName: 		req.body.lastName,
-		email:			req.body.email,
+		email:			req.query.email,
 		password:		req.body.password,
 		role:			STAFF,
-		org_id: 		req.body.org_id
+		org_id: 		req.query.org_id
 	};
 
 	debug('acceptInvite, create: ' + JSON.stringify(new_user));

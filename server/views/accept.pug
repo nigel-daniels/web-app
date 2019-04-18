@@ -5,19 +5,19 @@ block panel
 		.panel-heading
 			h2.panel-title.login-title Invitation to #{org}
 		.panel-body
-			form#signup-form.form-horizontal.accept-form(method='POST')
+			form#accept-form.form-horizontal.accept-form(method='POST')
 				.form-group.input-block-ico
 					label.sr-only(for='first') Your Name
 					.input-group
 						.input-group-prepend.login-name-addon
 							span.input-group-text
 								span.fa.fa-user(aria-hidden='true')
-						input#firstName.form-control(type='text' tabindex='25' placeholder='First/Given name' data-error='A first/given name is required.' required='')
+						input#firstName.form-control(type='text' name='firstName' tabindex='25' placeholder='First/Given name' data-error='A first/given name is required.' required='')
 					.input-group
 						.input-group-prepend.login-name-addon
 							span.input-group-text
 								span.fa.fa-user(aria-hidden='true')
-						input#lastName.form-control(type='text' tabindex='30' placeholder='Last/Family name' data-error='A last/family name is required.' required='')
+						input#lastName.form-control(type='text' name='lastName' tabindex='30' placeholder='Last/Family name' data-error='A last/family name is required.' required='')
 					span.help-block.with-errors
 				.form-group.input-block-ico
 					label.sr-only(for='password') Password
@@ -25,7 +25,7 @@ block panel
 						.input-group-prepend.login-name-addon
 							span.input-group-text
 								span.fa.fa-key(aria-hidden='true')
-						input#password.form-control(type='password' pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' tabindex='55' placeholder='Password' data-error='A valid password is required.' required='')
+						input#password.form-control(type='password' name='password' pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$' tabindex='55' placeholder='Password' data-error='A valid password is required.' required='')
 					.input-group
 						.input-group-prepend.login-name-addon
 							span.input-group-text
@@ -43,10 +43,10 @@ block panel
 					a(href='#' data-toggle='modal' data-target='#privacy-modal') privacy policy.
 					span.help-block.with-errors
 				.form-group
-					button#accept.btn.btn-primary.btn-block(type='submit' tabindex='80') Accept Invitation
+					button.btn.btn-primary.btn-block(type='submit' tabindex='80') Accept Invitation
 				
-				include modals/terms_modal.pug
-				include modals/privacy_modal.pug 
+	include modals/terms_modal.pug
+	include modals/privacy_modal.pug 
 
 block page_scripts
 	script.
