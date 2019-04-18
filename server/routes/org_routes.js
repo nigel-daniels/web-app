@@ -3,15 +3,15 @@
  * Author: Nigel Daniels
  * MIT Licensed
  */
-import * as services from '../services';
+import {isAuthenticated, postOrg, getOrg, getOrgs, getOrgById, getOrgMembers, putOrg, deleteOrg} from '../services';
 
 export default function (app) {
 	// Post happens during authentication process
-	app.post('/org', services.isAuthenticated, services.postOrg);
-	app.get('/org', services.isAuthenticated, services.getOrg);
-	app.get('/org', services.isAuthenticated, services.getOrgs);
-	app.get('/org/:id', services.isAuthenticated, services.getOrgById);
-	app.get('/org/:id/members', services.isAuthenticated, services.getOrgMembers);
-	app.put('/org/:id', services.isAuthenticated, services.putOrg);
-	app.delete('/org/:id', services.isAuthenticated, services.deleteOrg);
+	app.post('/org', isAuthenticated, postOrg);
+	app.get('/org', isAuthenticated, getOrg);
+	app.get('/org', isAuthenticated, getOrgs);
+	app.get('/org/:id', isAuthenticated, getOrgById);
+	app.get('/org/:id/members', isAuthenticated, getOrgMembers);
+	app.put('/org/:id', isAuthenticated, putOrg);
+	app.delete('/org/:id', isAuthenticated, deleteOrg);
 }

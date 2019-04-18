@@ -7,7 +7,7 @@ import * as nodemailer from 'nodemailer';
 //import stringify from 'json-stringify-safe';
 import mailConfig from '../config/mail.json';
 import Organisation from '../models/Organisation';
-import User, {ADMIN, SUPER} from '../models/User';
+import User, {STAFF, ADMIN, SUPER} from '../models/User';
 import Debug from 'debug';
 import passport from 'passport';
 
@@ -224,7 +224,7 @@ export function reset(req, res) {
 }
 
 /* ***************************************
- *  POST, new password
+ *  POST, new password then redirect
  * ***************************************/
 export function resetPassword(req, res) {
 	debug('resetPassword, called.');
@@ -247,10 +247,10 @@ export function resetPassword(req, res) {
 }
 
 /* ***************************************
- *  PUT, password
+ *  PUT, new password
  * ***************************************/
 export function changePassword(req, res) {
-	debug('resetPassword, called.');
+	debug('changePassword, called.');
 
 	if (req.body.password) {
 		User.findByIdAndUpdate(req.params.id, {'password': req.body.password}, null, (err, user) => {
@@ -268,6 +268,98 @@ export function changePassword(req, res) {
 		return res.status(400).send({message: 'No password provided.'});
 	}
 }
+
+/* ***************************************
+ *  POST, invite a new user to an org
+ * ***************************************/
+export function invite(req, res) {
+	debug('invite, called');
+	debug('invite, email: ' + req.body.email + ', org_id: ' + req.body.org_id);
+
+	User.findOne({'email': req.body.email}, (err, user) => {
+		if (err) {
+			debug('invite, error finding user: ' + JSON.stringify(err));
+			return res.status(500).send({message:'Error finding user: ' + err.message}); // NLS
+		}
+
+		if (user) {
+			debug('invite, an account exists for this email address.');
+			return res.status(500).send({message: 'An account exists for this email address.'}); // NLS
+		}
+
+		var smtpTransport = nodemailer.createTransport(mailConfig);
+
+		var mailOpts =  {
+			from:		'no.reply@initiatethinking.com',
+			to:			req.body.email,
+			subject:	'Web Demo App - Password Request',
+			text:		'You have been invited to join this service.  Please use this link to accept this invitation: https://' + req.headers.host + '/accept/?email='+ req.body.email + '&orgId=' + req.body.org_id
+		};
+
+		smtpTransport.sendMail(mailOpts, (err) => {
+			if (err) {
+				return res.status(500).send({message: 'Error sending invite e-mail', cause: err.message}); // NLS
+			}
+
+			debug('invite, e-mail sent ok.');
+			return res.status(200).send({message: 'Success!'});
+		});
+
+	});
+}
+
+/* ***************************************
+ *  GET, accept load the accept page
+ * ***************************************/
+export function getAcceptPage(req, res){
+	debug('accept, called');
+	debug('accept, for email: ' + req.query.email + ', org_id: '+ req.query.org_id);
+	Organisation.findById(req.query.org_id, (err, org) => {
+		if (err) {
+			debug('accept, err: ' + JSON.stringify(err));
+			return res.status(500).send({message: 'error finding organisation : ' + err.message});
+		}
+
+		if (org) {
+			debug('accept, success');
+			return res.render('accept.pug', {email: req.query.email, org_id: org_id, org: org.name});
+		} else {
+			debug('accept, org: ' + req.query.org_id + ' not found .');
+			return res.status(404).send({message: 'The organisation could not be found.'});
+		}
+	});
+}
+
+/* ***************************************
+ *  POST, acceptInvite create the new user
+ * ***************************************/
+export function acceptInvite(req, res) {
+	debug('acceptInvite, called');
+
+	let new_user = {
+		firstName: 		req.body.firstName,
+		lastName: 		req.body.lastName,
+		email:			req.body.email,
+		password:		req.body.password,
+		role:			STAFF,
+		org_id: 		req.body.org_id
+	};
+
+	debug('acceptInvite, create: ' + JSON.stringify(new_user));
+
+	User.create(new_user, (err, user) => {
+		if (err) {
+			debug('acceptInvite, err creating user: ' + JSON.stringify(err));
+			return res.render('accept_err.jade', {message: 'Error creating user: '+ err.message});
+		}
+
+		debug('acceptInvite, success.');
+		return res.redirect('/');
+	});
+
+}
+
+
 /* ***************************************
  *  GET, logout and end session
  * ***************************************/

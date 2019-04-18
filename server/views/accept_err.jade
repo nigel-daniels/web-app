@@ -1,0 +1,31 @@
+extends layout
+	
+append content
+	.site-wrapper
+		.site-wrapper-inner
+			.cover-container
+				.masthead.clearfix
+				// .masthead .clearfix
+				.inner.cover
+					form.form-cover(method='POST')
+						img(src='../images/cover-logo.png', width='300px')
+						h2.form-signup-cover Ooops!
+						p #{msg}
+					// .form-cover
+				// .inner .cover
+				.mastfoot
+					.inner
+						p.text-muted
+							span.glyphicon.glyphicon-copyright-mark(aria-hidden='true')
+							|  2015 Axiomode Ltd.
+					// .inner
+				// .mastfoot
+			// .cover-container
+		// .site-wrapper-inner
+	// .site-wrapper
+
+append scripts
+	script(src='/js/lib/jquery-2.1.4.min.js', data-requiremodule='jquery', data-requirecontext='_', async='', charset='utf-8', type='text/javascript')
+	script(src='/js/lib/jquery.noty.packaged.js', data-requiremodule='noty', data-requirecontext='_', async='', charset='utf-8', type='text/javascript')
+	script(src='/js/lib/bootstrap.min.js', data-requiremodule='bootstrap', data-requirecontext='_', async='', charset='utf-8', type='text/javascript')
+	script(src='/js/lib/ie10-viewport-bug-workaround.js', data-requiremodule='ie10workaround', data-requirecontext='_', async='', charset='utf-8', type='text/javascript')
