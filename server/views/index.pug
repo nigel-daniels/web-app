@@ -1,5 +1,7 @@
-extends header.pug
+extends root.pug
 
 block content
 	#app
+		
+block scripts
 	script#app-script(type='text/javascript' src='client.js' data-env= env)

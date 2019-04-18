@@ -47,3 +47,9 @@ block panel
 				
 				include modals/terms_modal.pug
 				include modals/privacy_modal.pug 
+
+block page_scripts
+	script.
+		$(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+		});
