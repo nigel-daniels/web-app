@@ -16,4 +16,5 @@ export const forgot = (email) => ({ type: actions.FORGOT, promise: services.forg
 export const reset = (id, password) => ({ type: actions.RESET, promise: services.forgot(id, password)});
 export const updateProfile = (id, firstName, lastName, email, org_id, role) =>  ({ type: actions.UPDATE_PROFILE, promise: services.updateProfile(id, firstName, lastName, email, org_id, role)});
 export const changePassword = (id, password) => ({ type: actions.CHANGE_PASSWORD, promise: services.changePassword(id, password)});
+export const invite = (email) => ({type: actions.INVITE, promise: services.invite(email)});
 export const closeAccount = (id) => ({type: actions.CLOSE_ACCOUNT, promise: services.closeAccount(id), meta: {onSuccess: () => index.store.dispatch(logout())}});

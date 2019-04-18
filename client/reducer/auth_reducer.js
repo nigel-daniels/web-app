@@ -104,6 +104,15 @@ export default function reducer(state = INITIAL_STATE, action) {
 			success: prevState => ({ ...prevState, profile: payload.user })
 		});
 	}
+	case actions.INVITE: {
+		debug('INVITE is called');
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState })
+		});
+	}
 	case actions.CLOSE_ACCOUNT: {
 		debug('CLOSE_ACCOUNT is called');
 		debug('payload : ' + JSON.stringify(payload));

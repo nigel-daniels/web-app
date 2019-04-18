@@ -12,6 +12,7 @@ export const FORGOT = 'FORGOT';
 export const RESET = 'RESET';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const INVITE = 'INVITE';
 export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';
 
 // User Action Types

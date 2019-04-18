@@ -136,6 +136,20 @@ export const changePassword = (id, password) => {
 		.catch((error) => {debug('changePassword, fetch, caught err.'); throw error;});
 };
 
+export const invite = (email) => {
+	debug('invite, called.');
+
+	let init = {
+		...coreInit,
+		method:			'POST',
+		body:			JSON.stringify({'email': email})
+	};
+
+	return fetchOk('/invite/', init)
+		.then((response) => {debug('invite, fetch ok.');return response;})
+		.catch((error) => {debug('invite, fetch, caught err.'); throw error;});
+};
+
 export const closeAccount = (id) => {
 	debug('closeAccount, called.');
 

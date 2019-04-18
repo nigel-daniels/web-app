@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Member from '../modals/Member';
+import Invite from '../modals/Invite';
 import Debug from 'debug';
 import {rfc5322} from '../../constants';
 
@@ -94,6 +95,7 @@ class MembersView extends Component {
 				<h5>{this.props.org.name} Organisation Members</h5><br/>
 				<table className="table table-striped table-hover" id="user-table" style={{'width' : '100%'}}></table>
 				<Member/>
+				<Invite/>
 			</div>;
 		} else {
 			return null;
