@@ -33,8 +33,9 @@ class OrganisationView extends Component {
 
   	render () {
     	debug('render, called.');
+		debug('render, org: ' + JSON.stringify(this.props.org));
     	if (this.props.org) {
-			debug('render, org: ' + JSON.stringify(this.props.org));
+			//debug('render, org: ' + JSON.stringify(this.props.org));
 			return 	<form className="form-horizontal" id="organisation-form">
 				<div className="form-group row">
 					<label htmlFor="name" className="col-sm-3 col-form-label">Name</label>

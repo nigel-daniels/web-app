@@ -17,13 +17,13 @@ export function postOrg(req, res) {
 
 	if (req.body.name && req.body.name) {
 
-		Organisation.find({name: req.body.name}, (err, organisation) => {
+		Organisation.find({name: req.body.name}, (err, org) => {
 			if (err) {
 				debug('POST, err: ' + JSON.stringify(err));
 				return res.status(500).send({message: 'error finding organisation : ' + err.message});
 			}
 
-			if (organisation) {
+			if (org) {
 				debug('POST, organisation exists with the name: ' + req.body.name);
 				return res.status(400).SendStream({message: 'An organisation with the name ' + req.body.name + ' already exists.'});
 			}
@@ -35,7 +35,7 @@ export function postOrg(req, res) {
 				}
 
 				debug('POST, success');
-				return res.status(201).send({organisation: newOrg});
+				return res.status(201).send({org: newOrg});
 			});
 		});
 	} else {
@@ -74,15 +74,15 @@ export function getOrgs(req, res) {
 	debug('GET:*, called');
 
 	if (req.user.role === SUPER) {
-		Organisation.find({}, (err, organisations) => {
+		Organisation.find({}, (err, orgs) => {
 			if (err) {
 				debug('GET:*, err: ' + JSON.stringify(err));
 				return res.status(500).send({message: 'error finding organisations : ' + JSON.stringify(err)});
 			}
 
-			if (organisations) {
+			if (orgs) {
 				debug('GET:*, success');
-				return res.send(organisations);
+				return res.send(orgs);
 			} else {
 				debug('GET:*, org: no organisations found.');
 				return res.status(404).send({message: 'no organisations found.'});
@@ -101,15 +101,15 @@ export function getOrgById(req, res) {
 	debug('GET:id, called');
 
 	if ((req.user.org_id.equals(req.params.id)) || (req.user.role === SUPER)) {
-		Organisation.findById(req.params.id, (err, organisation) => {
+		Organisation.findById(req.params.id, (err, org) => {
 			if (err) {
 				debug('GET:id, err: ' + JSON.stringify(err));
 				return res.status(500).send({message: 'error finding organisation : ' + err.message});
 			}
 
-			if (organisation) {
+			if (org) {
 				debug('GET:id, success');
-				return res.send({organisation: organisation});
+				return res.send({org: org});
 			} else {
 				debug('GET:id, org: ' + req.params.id + ' not found.');
 				return res.status(404).send({message: 'no organisation found with the provided id.'});
@@ -153,24 +153,24 @@ export function putOrg(req, res) {
 	// Check the user belongs to this org
 	if (req.user.org_id.equals(req.params.id)) {
 		// Ok let's get the org to update
-		Organisation.findById(req.params.id, (err, organisation) => {
+		Organisation.findById(req.params.id, (err, org) => {
 			if (err) {
 				debug('PUT, err: ' + JSON.stringify(err));
 				return res.status(500).send({message: 'Error finding organisation : ' + err.message});
 			}
 
 			// Let's do the update
-			if (organisation) {
-				organisation.name = req.body.name;
+			if (org) {
+				org.name = req.body.name;
 
-				organisation.save((err) => {
+				org.save((err) => {
 					if (err) {
 						debug('PUT, error saving organisation');
 						return res.status(500).send({message: 'Error creating organisation: ' + err.message});
 					}
 
 					debug('PUT, success');
-					return res.status(200).send({organisation: organisation});
+					return res.status(200).send({org: org});
 				});
 			} else {
 				debug('GET:*, org: no organisations found.');
@@ -194,13 +194,13 @@ export function deleteOrg(req, res) {
 	if (((req.user.org_id.equals(req.params.id)) && (req.user.role === ADMIN)) || req.user.role === SUPER) {
 
 		// Ok get the org to delete
-		Organisation.findById(req.params.id, (err, organisation) => {
+		Organisation.findById(req.params.id, (err, org) => {
 			if (err) {
 				debug('DELETE, err: ' + JSON.stringify(err));
 				return res.status(500).send({message: 'error finding organisation : ' + err.message});
 			}
 
-			if (organisation) {
+			if (org) {
 
 				// Deactivate organisation members
 				User.updateMany({org_id: req.params.id}, {active: false}, (err) => {
@@ -210,9 +210,9 @@ export function deleteOrg(req, res) {
 					}
 
 					// Deactivate organisation
-					organisation.active = false;
+					org.active = false;
 
-					organisation.save((err) => {
+					org.save((err) => {
 						if (err) {
 							debug('DELETE, error saving organiosation');
 							return res.status(500).send({message: 'Error saving change: ' + err.message});

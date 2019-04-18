@@ -12,4 +12,4 @@ export const getMembers = (org_id) => ({ type: actions.GET_MEMBERS, promise: ser
 export const getSelectedMember = (id) => ({ type: actions.GET_SELECTED_MEMBER, promise: services.getSelectedMember(id)});
 export const updateMember = (id, firstName, lastName, email, org_id, role) => ({ type: actions.UPDATE_MEMBER, promise: services.updateMember(id, firstName, lastName, email, org_id, role), meta: {onSuccess: () => index.store.dispatch(getMembers(org_id))}});
 export const closeMemberAccount = (id) => ({ type: actions.CLOSE_MEMBER_ACCOUNT, promise: services.closeMemberAccount(id), meta: {onSuccess: (payload) => index.store.dispatch(getMembers(payload.user.org_id))}});
-export const updateOrg = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name), meta: {onSuccess: () => index.store.dispatch(getUserOrg())}});
+export const updateOrg = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name)});

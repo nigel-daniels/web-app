@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 	isworking: false,
 	org: null,
 	members: null,
-	selectedMember: {},
+	selectedMember: null,
 	err: null
 };
 
@@ -49,7 +49,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 		debug('GET_SELECTED_MEMBER is called');
 		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
-			start: prevState => ({...prevState, isworking: true, selectedMember: {}, err: null}),
+			start: prevState => ({...prevState, isworking: true, selectedMember: null, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, selectedMember: payload.user })
@@ -59,7 +59,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 		debug('UPDATE_MEMBER is called');
 		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
-			start: prevState => ({...prevState, isworking: true, selectedMember: {}, err: null}),
+			start: prevState => ({...prevState, isworking: true, selectedMember: null, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, selectedMember: payload.user })
@@ -82,7 +82,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 			start: prevState => ({...prevState, isworking: true, org: null, err: null}),
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
-			success: prevState => ({ ...prevState, selectedMember: payload.org })
+			success: prevState => ({ ...prevState, org: payload.org })
 		});
 	}
 	default:

@@ -36,7 +36,7 @@ class DetailsView extends Component {
 
   	render () {
     	debug('render, called.');
-    	if (this.props.loggedin) {
+    	if (this.props.profile && this.props.org) {
 			debug('render, profile: ' + JSON.stringify(this.props.profile));
 			debug('render, org: ' + JSON.stringify(this.props.org));
 			return 	<form className="form-horizontal" id="profile-form">
@@ -81,7 +81,6 @@ class DetailsView extends Component {
 
 DetailsView.propTypes = {
 	isworking:		PropTypes.bool,
-	loggedin:		PropTypes.bool,
 	profile:		PropTypes.object,
 	org:			PropTypes.object,
 
