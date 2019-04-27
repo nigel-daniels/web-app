@@ -15,4 +15,7 @@ export const updateMemberAdmin = (id, firstName, lastName, email, org_id, role) 
 export const closeMemberAccountAdmin = (id) => ({ type: actions.CLOSE_MEMBER_ACCOUNT, promise: services.closeMemberAccount(id), meta: {onSuccess: (payload) => index.store.dispatch(getMembers(payload.user.org_id))}});
 export const updateMemberSuper = (id, firstName, lastName, email, org_id, role) => ({ type: actions.UPDATE_MEMBER, promise: services.updateMember(id, firstName, lastName, email, org_id, role), meta: {onSuccess: () => index.store.dispatch(getAllMembers())}});
 export const closeMemberAccountSuper = (id) => ({ type: actions.CLOSE_MEMBER_ACCOUNT, promise: services.closeMemberAccount(id), meta: {onSuccess: () => index.store.dispatch(getAllMembers())}});
-export const updateOrg = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name)});
+export const getOrgs = () => ({type: actions.GET_ORGS, promise: services.getOrgs()});
+export const getSelectedOrg = (id) => ({type: actions.GET_SELECTED_ORG, promise: servcies.getSelectedOrg(id)});
+export const updateOrgAdmin = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name)});
+export const updateOrgSuper = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name), meta: {onSuccess: () => index.store.dispatch(getOrgs())}});

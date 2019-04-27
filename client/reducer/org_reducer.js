@@ -14,6 +14,8 @@ const INITIAL_STATE = {
 	org: null,
 	members: null,
 	selectedMember: null,
+	orgs: null,
+	selectedOrg: null,
 	err: null
 };
 
@@ -83,6 +85,26 @@ export default function reducer(state = INITIAL_STATE, action) {
 			finish: prevState => ({ ...prevState, isworking: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, selectedMember: payload.user })
+		});
+	}
+	case actions.GET_ORGS: {
+		debug('GET_ORGS is called');
+		debug('payload : ' + JSON.stringify(payload));
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, orgs: null, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, orgs: payload.orgs })
+		});
+	}
+	case actions.GET_SELECTED_ORG: {
+		debug('GET_SELECTED_ORG is called');
+		debug('payload : ' + JSON.stringify(payload));
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, selectedOrg: null, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, selectedOrg: payload.org })
 		});
 	}
 	case actions.UPDATE_ORG: {

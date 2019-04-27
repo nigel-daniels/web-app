@@ -25,7 +25,7 @@ class AdminOrganisationView extends Component {
 				debug('update, submit');
 				if (!event.isDefaultPrevented()) {
 					event.preventDefault();
-					this.props.updateOrg(this.props.org._id, $('#name').val());
+					this.props.updateOrgAdmin(this.props.org._id, $('#name').val());
 				}
 			})
 			.off('input.bs.validator change.bs.validator focusout.bs.validator');
@@ -62,7 +62,7 @@ AdminOrganisationView.propTypes = {
 	isworking:		PropTypes.bool,
 	org:			PropTypes.object,
 
-	updateOrg: 		PropTypes.func
+	updateOrgAdmin: PropTypes.func
 };
 
 export default AdminOrganisationView;

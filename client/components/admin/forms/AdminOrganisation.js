@@ -8,7 +8,7 @@ import AdminOrganisationView from './AdminOrganisationView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
-let debug = Debug('Organisation');
+let debug = Debug('AdminOrganisation');
 
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		updateOrg: (id, name) => {dispatch(actions.updateOrg(id, name));},
+		updateOrgAdmin: (id, name) => {dispatch(actions.updateOrgAdmin(id, name));}
 	};
 };
 

@@ -101,6 +101,36 @@ export const closeMemberAccount = (id) => {
 
 };
 
+export const getOrgs = () => {
+	debug('getOrgs, called.');
+
+	let init = {
+		...coreInit,
+		method:			'GET'
+	};
+
+	debug('getOrgs, init is: ' + JSON.stringify(init));
+	return fetchOk('/orgs', init)
+		.then((response) => {debug('getOrgs, response ok.');return response;})
+		.catch((error) => {debug('getOrgs, fetch, caught err.'); throw error;});
+
+};
+
+export const getSelectedOrg = (id) => {
+	debug('getSelectedOrg, called.');
+
+	let init = {
+		...coreInit,
+		method:			'GET'
+	};
+
+	debug('getSelectedOrg, init is: ' + JSON.stringify(init));
+	return fetchOk('/org/' + id, init)
+		.then((response) => {debug('getSelectedOrg, response ok.');return response;})
+		.catch((error) => {debug('getSelectedOrg, fetch, caught err.'); throw error;});
+
+};
+
 export const updateOrg = (id, name) => {
 	debug('updateOrg, called.');
 

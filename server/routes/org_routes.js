@@ -9,7 +9,7 @@ export default function (app) {
 	// Post happens during authentication process
 	app.post('/org', isAuthenticated, postOrg);
 	app.get('/org', isAuthenticated, getOrg);
-	app.get('/org', isAuthenticated, getOrgs);
+	app.get('/orgs', isAuthenticated, getOrgs);
 	app.get('/org/:id', isAuthenticated, getOrgById);
 	app.get('/org/:id/members', isAuthenticated, getOrgMembers);
 	app.get('/members', isAuthenticated, getAllMembers);

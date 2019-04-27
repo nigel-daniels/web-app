@@ -10,6 +10,7 @@ import Debug from 'debug';
 import { Main } from '../Main';
 import SuperMembers from './forms/SuperMembers';
 import AdminMembers from './forms/AdminMembers';
+import SuperOrganisation from './forms/SuperOrganisation';
 import AdminOrganisation from './forms/AdminOrganisation';
 
 let debug = Debug('AdminView');
@@ -38,6 +39,10 @@ class AdminView extends Component {
 		return this.props.profile.role === 'SUPER' ? <SuperMembers/> : <AdminMembers/>;
 	}
 
+	getOrganisationComponent() {
+		return this.props.profile.role === 'SUPER' ? <SuperOrganisation/> : <AdminOrganisation/>;
+	}
+
   	render () {
     	debug('render, called.');
 		return 	<Main>
@@ -56,7 +61,7 @@ class AdminView extends Component {
 						{this.getMemberComponent()}
 					</div>
 					<div className="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
-						<AdminOrganisation/>
+						{this.getOrganisationComponent()}
 					</div>
 				</div>
 			</div>

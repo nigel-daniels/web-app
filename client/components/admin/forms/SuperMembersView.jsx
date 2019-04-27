@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import Member from '../modals/Member';
 import Invite from '../modals/Invite';
 import Debug from 'debug';
-import {rfc5322} from '../../constants';
 
 let debug = Debug('MembersView');
 
