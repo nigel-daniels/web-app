@@ -8,8 +8,9 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import { Main } from '../Main';
-import Members from './forms/Members';
-import Organisation from './forms/Organisation';
+import SuperMembers from './forms/SuperMembers';
+import AdminMembers from './forms/AdminMembers';
+import AdminOrganisation from './forms/AdminOrganisation';
 
 let debug = Debug('AdminView');
 
@@ -33,6 +34,10 @@ class AdminView extends Component {
 		}
 	}
 
+	getMemberComponent() {
+		return this.props.profile.role === 'SUPER' ? <SuperMembers/> : <AdminMembers/>;
+	}
+
   	render () {
     	debug('render, called.');
 		return 	<Main>
@@ -48,10 +53,10 @@ class AdminView extends Component {
 				</ul>
 				<div className="tab-content" id="admin-content">
 					<div className="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
-						<Members/>
+						{this.getMemberComponent()}
 					</div>
 					<div className="tab-pane fade" id="org" role="tabpanel" aria-labelledby="org-tab">
-						<Organisation/>
+						<AdminOrganisation/>
 					</div>
 				</div>
 			</div>
@@ -60,6 +65,7 @@ class AdminView extends Component {
 };
 
 AdminView.propTypes = {
+	profile:		PropTypes.object,
 	isworking:		PropTypes.bool,
 	err:			PropTypes.string
 };

@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 import {connect} from 'react-redux';
-import OrganisationView from './OrganisationView';
+import AdminOrganisationView from './AdminOrganisationView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
@@ -25,6 +25,6 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const Organisation = connect(mapStateToProps, mapDispatchToProps)(OrganisationView);
+const AdminOrganisation = connect(mapStateToProps, mapDispatchToProps)(AdminOrganisationView);
 
-export default Organisation;
+export default AdminOrganisation;

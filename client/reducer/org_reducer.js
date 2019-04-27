@@ -45,6 +45,16 @@ export default function reducer(state = INITIAL_STATE, action) {
 			success: prevState => ({ ...prevState, members: payload.members })
 		});
 	}
+	case actions.GET_ALL_MEMBERS: {
+		debug('GET_ALL_MEMBERS is called');
+		debug('payload : ' + JSON.stringify(payload));
+		return handle(state, action, {
+			start: prevState => ({...prevState, isworking: true, members: null, err: null}),
+			finish: prevState => ({ ...prevState, isworking: false }),
+			failure: prevState => ({ ...prevState, err: payload.message }),
+			success: prevState => ({ ...prevState, members: payload.members })
+		});
+	}
 	case actions.GET_SELECTED_MEMBER: {
 		debug('GET_SELECTED_MEMBER is called');
 		debug('payload : ' + JSON.stringify(payload));

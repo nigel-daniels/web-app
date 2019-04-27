@@ -145,6 +145,54 @@ export function getOrgMembers(req, res) {
 }
 
 /* ***************************************
+ *  GET organisation (active) members
+ * ***************************************/
+export function getAllMembers(req, res) {
+	debug('GET/members, called');
+	if (req.user.role === SUPER) {
+		Organisation.find({active: true}, (err, orgs) => {
+			if (err) {
+				debug('GET/members, err: ' + JSON.stringify(err));
+				return res.status(500).send({message: 'error finding all organisations: ' + err.message});
+			}
+
+			if (orgs) {
+				User.find({active: true}, (err, members) => {
+					if (err) {
+						debug('GET/members, err: ' + JSON.stringify(err));
+						return res.status(500).send({message: 'error finding all members: ' + err.message});
+					}
+
+					if (members) {
+						members = members.map((member) => {
+							let org = orgs.find((org) => {
+								if (org._id.equals(member.org_id)) {
+									return org;
+								}
+							});
+							member.set('org_name', org.name, {strict: false});
+							return member;
+						});
+
+						debug('GET/members, success');
+						return res.status(200).send({members: members});
+					} else {
+						debug('GET/members, no members found.');
+						return res.status(403).send({message: 'No members were found.'});
+					}
+				});
+			} else {
+				debug('GET/members, no organisations found.');
+				return res.status(403).send({message: 'No organisations were found.'});
+			}
+		});
+	} else {
+		debug('GET/members, invalid request from user: ' + req.user.id);
+		return res.status(403).send({message: 'User does not have permission to see all members'});
+	}
+}
+
+/* ***************************************
  *  PUT Organisation
  *************************************** */
 export function putOrg(req, res) {

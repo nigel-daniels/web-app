@@ -9,7 +9,7 @@ import Debug from 'debug';
 
 let debug = Debug('OrganisationView');
 
-class OrganisationView extends Component {
+class AdminOrganisationView extends Component {
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
@@ -58,11 +58,11 @@ class OrganisationView extends Component {
 	}
 };
 
-OrganisationView.propTypes = {
+AdminOrganisationView.propTypes = {
 	isworking:		PropTypes.bool,
 	org:			PropTypes.object,
 
 	updateOrg: 		PropTypes.func
 };
 
-export default OrganisationView;
+export default AdminOrganisationView;

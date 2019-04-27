@@ -23,8 +23,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	debug('mapDispatchToProps, called');
 	return {
-		updateMember: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateMember(id, firstName, lastName, email, org_id, role));},
-		closeMemberAccount: (id) => {dispatch(actions.closeMemberAccount(id));}
+		updateMemberAdmin: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateMemberAdmin(id, firstName, lastName, email, org_id, role));},
+		closeMemberAccountAdmin: (id) => {dispatch(actions.closeMemberAccountAdmin(id));},
+		updateMemberSuper: (id, firstName, lastName, email, org_id, role) => {dispatch(actions.updateMemberSuper(id, firstName, lastName, email, org_id, role));},
+		closeMemberAccountSuper: (id) => {dispatch(actions.closeMemberAccountSuper(id));}
 	};
 };
 

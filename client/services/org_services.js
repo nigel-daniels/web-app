@@ -39,6 +39,21 @@ export const getMembers = (org_id) => {
 
 };
 
+export const getAllMembers = () => {
+	debug('getMembers, called.');
+
+	let init = {
+		...coreInit,
+		method:			'GET'
+	};
+
+	debug('getMembers, init is: ' + JSON.stringify(init));
+	return fetchOk('/members', init)
+		.then((response) => {debug('getMembers, response ok.');return response;})
+		.catch((error) => {debug('getMembers, fetch, caught err.'); throw error;});
+
+};
+
 export const getSelectedMember = (id) => {
 	debug('getSelectedMember, called.');
 

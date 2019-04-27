@@ -33,12 +33,21 @@ export class MemberView extends Component {
 
 	handleUpdate () {
 		debug('handleUpdate, called.');
-		this.props.updateMember(this.props.selectedMember._id, $('#first-name').val(), $('#last-name').val(), $('#email').val(), this.props.selectedMember.org_id, $('#role').val());
+		if (this.props.profile.role === 'SUPER') {
+			this.props.updateMemberSuper(this.props.selectedMember._id, $('#first-name').val(), $('#last-name').val(), $('#email').val(), this.props.selectedMember.org_id, $('#role').val());
+		} else {
+			this.props.updateMemberAdmin(this.props.selectedMember._id, $('#first-name').val(), $('#last-name').val(), $('#email').val(), this.props.selectedMember.org_id, $('#role').val());
+		}
+
 	}
 
 	handleClose() {
 		debug('handleCloseAc, called.');
-		this.props.closeMemberAccount(this.props.selectedMember._id);
+		if (this.props.profile.role === 'SUPER') {
+			this.props.closeMemberAccountSuper(this.props.selectedMember._id);
+		} else {
+			this.props.closeMemberAccountAdmin(this.props.selectedMember._id);
+		}
 	}
 
 	getBody() {
@@ -138,8 +147,10 @@ MemberView.propTypes = {
 	profile:			PropTypes.object,
 	selectedMember:		PropTypes.object,
 
-	updateMember:		PropTypes.func,
-	closeMemberAccount: PropTypes.func
+	updateMemberAdmin:			PropTypes.func,
+	closeMemberAccountAdmin: 	PropTypes.func,
+	updateMemberSuper:			PropTypes.func,
+	closeMemberAccountSuper: 	PropTypes.func
 };
 
 export default MemberView;

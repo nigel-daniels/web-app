@@ -12,7 +12,7 @@ import {rfc5322} from '../../constants';
 
 let debug = Debug('MembersView');
 
-class MembersView extends Component {
+class AdminMembersView extends Component {
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
@@ -113,7 +113,7 @@ class MembersView extends Component {
 	}
 };
 
-MembersView.propTypes = {
+AdminMembersView.propTypes = {
 	isworking:		PropTypes.bool,
 	profile:		PropTypes.object,
 	org:			PropTypes.object,
@@ -124,4 +124,4 @@ MembersView.propTypes = {
 	getSelectedMember:	PropTypes.func
 };
 
-export default MembersView;
+export default AdminMembersView;

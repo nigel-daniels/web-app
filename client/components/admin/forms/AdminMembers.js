@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 import {connect} from 'react-redux';
-import MembersView from './MembersView';
+import AdminMembersView from './AdminMembersView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
@@ -29,6 +29,6 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const Members = connect(mapStateToProps, mapDispatchToProps)(MembersView);
+const AdminMembers = connect(mapStateToProps, mapDispatchToProps)(AdminMembersView);
 
-export default Members;
+export default AdminMembers;
