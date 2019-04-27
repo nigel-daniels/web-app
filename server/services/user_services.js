@@ -4,6 +4,7 @@
  * MIT Licensed
  */
 import User, {ADMIN, SUPER, STAFF} from '../models/User';
+import Organisation from '../models/Organisation';
 import Debug from 'debug';
 
 const debug = Debug('user_service');
@@ -118,17 +119,24 @@ export function putUser(req, res) {
 					return res.status(400).send({message: 'The user role provided is invalid.'}); // NLS
 				}
 
-				// Validate the email is not already in use
-				debug('PUT, checking user email.');
-				if (req.body.email !== user.email) {
-					debug('PUT, validating email is unique.');
+				// We need to validate that there will be enough admins left before we do this
+				debug('checking for abdication');
+				User.countDocuments({'org_id': user.org_id, 'role': ADMIN}, function(err, count) {
+					debug('PUT, count is: ' + count);
+					if ((count === 1) && (user.role === ADMIN) && (req.body.role === STAFF)) {
+						debug('PUT, would be no administrators in this organisation.');
+						return res.status(400).send({message: 'This change would leave no administrators in that organisation.'}); //NLS
+					}
+
+					// Validate the email is not already in use
+					debug('PUT, checking user email.');
 					User.findOne({email: req.body.email}, (err, user_email) => {
 						if (err) {
 							debug('PUT, error finding user by email: ' + err.message);
 							return res.status(500).send({message: 'Error checking email, message: ' + err.message}); // NLS
 						}
 
-						if (user_email) {
+						if (user_email.email !== user.email) {
 							debug('PUT, email is already in use.');
 							return res.status(400).send({message: 'The selected e-mail address is in use.'}); // NLS
 						}
@@ -153,27 +161,7 @@ export function putUser(req, res) {
 							return res.status(200).send({user: user});
 						});
 					});
-				} else {
-					debug('PUT, User is name: ' + user.firstName + ' ' + user.lastName + ', email: ' + user.email + ', role: ' + user.role);
-					// Ok Validation passed let's update the user
-					debug('userHandler - putUser, updating user values.');
-					user.firstName = req.body.firstName;
-					user.lastName = req.body.lastName;
-					user.email = req.body.email;
-					user.org_id = req.body.org_id;
-					user.role = req.body.role;
-
-					debug('PUT, saving the user.');
-					user.save((err) => {
-						if (err) {
-							debug('PUT, error saving user updates: ' + JSON.stringify(err));
-							return res.status(500).send({message: 'Error saving the user details, message: ' + err.message}); // NLS
-						}
-
-						debug('PUT, success!');
-						return res.status(200).send({user: user});
-					});
-				}
+				});
 			} else {
 				debug('PUT, requested user was not found.');
 				return res.status(404).send({message: 'The user requested was not found.'}); //NLS
@@ -199,16 +187,26 @@ export function deleteUser(req, res) {
 
 		if (user) {
 			if ((req.user.role === STAFF && req.param.id.equals(req.user.id)) || (req.user.role === ADMIN && req.user.org_id.equals(user.org_id)) || (req.user.role === SUPER)) {
-				user.active = false;
-
-				user.save((err) => {
-					if (err){
-						debug('DELETE, err: ' + JSON.stringify(err));
-						return res.status(500).send({message: 'Error deleting user, message: ' + err.message});
+				// We need to validate that there will be enough admins left before we do this
+				debug('checking for abdication');
+				User.countDocuments({'org_id': user.org_id, 'role': ADMIN}, function(err, count) {
+					if ((count === 1) && (user.role === ADMIN)) {
+						debug('DELETE, would leave no administrators in that organisation.');
+						return res.status(400).send({message: 'This change would leave no administrators in that organisation.'}); //NLS
 					}
 
-					debug('DELETE, err: ' + JSON.stringify(err));
-					return res.status(200).send({user: user});
+					user.active = false;
+
+					user.save((err) => {
+						if (err){
+							debug('DELETE, err: ' + JSON.stringify(err));
+							return res.status(500).send({message: 'Error deleting user, message: ' + err.message});
+						}
+
+						debug('DELETE, err: ' + JSON.stringify(err));
+						return res.status(200).send({user: user});
+
+					});
 				});
 			} else {
 				debug('DELETE, invalid delete from user: ' + req.user.id + ', deleting user: ' + req.params.id);
