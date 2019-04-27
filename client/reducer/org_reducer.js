@@ -11,6 +11,8 @@ let debug = Debug('org_reducer');
 
 const INITIAL_STATE = {
 	isworking: false,
+	loadingMembers: false,
+	loadingOrgs: false,
 	org: null,
 	members: null,
 	selectedMember: null,
@@ -41,8 +43,8 @@ export default function reducer(state = INITIAL_STATE, action) {
 		debug('GET_MEMBERS is called');
 		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
-			start: prevState => ({...prevState, isworking: true, members: null, err: null}),
-			finish: prevState => ({ ...prevState, isworking: false }),
+			start: prevState => ({...prevState, loadingMembers: true, members: null, err: null}),
+			finish: prevState => ({ ...prevState, loadingMembers: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, members: payload.members })
 		});
@@ -91,8 +93,8 @@ export default function reducer(state = INITIAL_STATE, action) {
 		debug('GET_ORGS is called');
 		debug('payload : ' + JSON.stringify(payload));
 		return handle(state, action, {
-			start: prevState => ({...prevState, isworking: true, orgs: null, err: null}),
-			finish: prevState => ({ ...prevState, isworking: false }),
+			start: prevState => ({...prevState, loadingOrgs: true, orgs: null, err: null}),
+			finish: prevState => ({ ...prevState, loadingOrgs: false }),
 			failure: prevState => ({ ...prevState, err: payload.message }),
 			success: prevState => ({ ...prevState, orgs: payload.orgs })
 		});

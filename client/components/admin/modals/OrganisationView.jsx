@@ -7,11 +7,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-import {rfc5322} from '../../constants';
-
 let debug = Debug('OrganisationView');
 
-export class MemberView extends Component {
+export class OrganisationView extends Component {
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
@@ -29,6 +27,7 @@ export class MemberView extends Component {
 				type: 'danger'
 			});
 		}
+
 		debug('componentDidMount, set validator on signup-form.');
 		$('#organisation-form').validator()
 			.on('submit', (event) => {

@@ -82,7 +82,7 @@ export function getOrgs(req, res) {
 
 			if (orgs) {
 				debug('GET:*, success');
-				return res.send(orgs);
+				return res.send({orgs: orgs});
 			} else {
 				debug('GET:*, org: no organisations found.');
 				return res.status(404).send({message: 'no organisations found.'});

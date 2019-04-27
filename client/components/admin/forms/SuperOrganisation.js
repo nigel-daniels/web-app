@@ -13,9 +13,9 @@ let debug = Debug('SuperOrganisation');
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.org.isworking,
-		orgs:		state.org.orgs,
-		err: 		state.org.err
+		loadingOrgs:	state.org.loadingOrgs,
+		orgs:			state.org.orgs,
+		err: 			state.org.err
 	};
 };
 

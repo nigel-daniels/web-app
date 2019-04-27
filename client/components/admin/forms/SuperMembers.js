@@ -13,11 +13,11 @@ let debug = Debug('Details');
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');
 	return {
-		isworking:	state.org.isworking,
-		profile:	state.auth.profile,
-		org:		state.org.org,
-		members:	state.org.members,
-		err: 		state.auth.err
+		loadingMembers:	state.org.loadingMembers,
+		profile:		state.auth.profile,
+		org:			state.org.org,
+		members:		state.org.members,
+		err: 			state.org.err
 	};
 };
 

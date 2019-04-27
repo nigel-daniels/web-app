@@ -15,7 +15,7 @@ class SuperMembersView extends Component {
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
-		return this.props.isworking;
+		return this.props.loadingMembers;
 	}
 
 	componentDidMount() {
@@ -88,7 +88,7 @@ class SuperMembersView extends Component {
 		});
 
 		this.userTable.on( 'select', ( event, table, type, indexes ) => {
-			if (!this.props.isworking) { // We need this to ensure a redraw does recall while we load!
+			if (!this.props.loadingMembers) { // We need this to ensure a redraw does recall while we load!
 				let selected = table.data();
 				debug('select, ' + JSON.stringify(selected));
 				this.props.getSelectedMember(selected._id);
@@ -116,7 +116,7 @@ class SuperMembersView extends Component {
 };
 
 SuperMembersView.propTypes = {
-	isworking:		PropTypes.bool,
+	loadingMembers:	PropTypes.bool,
 	profile:		PropTypes.object,
 	org:			PropTypes.object,
 	members:		PropTypes.array,

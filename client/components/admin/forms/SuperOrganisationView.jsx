@@ -14,7 +14,7 @@ class AdminOrganisationView extends Component {
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
-		return this.props.isworking;
+		return this.props.loadingOrgs;
 	}
 
 	componentDidMount() {
@@ -56,12 +56,12 @@ class AdminOrganisationView extends Component {
 		});
 
 		this.orgTable.on( 'select', ( event, table, type, indexes ) => {
-			if (!this.props.isworking) { // We need this to ensure a redraw does recall while we load!
+			if (!this.props.loadingOrgs) { // We need this to ensure a redraw does recall while we load!
 				let selected = table.data();
 				debug('select, ' + JSON.stringify(selected));
 				this.props.getSelectedOrg(selected._id);
 				debug('select callback, show modal.');
-				$('#member-modal').modal('show');
+				$('#org-modal').modal('show');
 			}
 		});
 	}
@@ -77,8 +77,9 @@ class AdminOrganisationView extends Component {
 };
 
 AdminOrganisationView.propTypes = {
-	isworking:		PropTypes.bool,
-	orgs:			PropType.array,
+	loadingOrgs:	PropTypes.bool,
+	orgs:			PropTypes.array,
+	err: 			PropTypes.string,
 
 	getOrgs:		PropTypes.func,
 	getSelectedOrg:	PropTypes.func

@@ -16,6 +16,6 @@ export const closeMemberAccountAdmin = (id) => ({ type: actions.CLOSE_MEMBER_ACC
 export const updateMemberSuper = (id, firstName, lastName, email, org_id, role) => ({ type: actions.UPDATE_MEMBER, promise: services.updateMember(id, firstName, lastName, email, org_id, role), meta: {onSuccess: () => index.store.dispatch(getAllMembers())}});
 export const closeMemberAccountSuper = (id) => ({ type: actions.CLOSE_MEMBER_ACCOUNT, promise: services.closeMemberAccount(id), meta: {onSuccess: () => index.store.dispatch(getAllMembers())}});
 export const getOrgs = () => ({type: actions.GET_ORGS, promise: services.getOrgs()});
-export const getSelectedOrg = (id) => ({type: actions.GET_SELECTED_ORG, promise: servcies.getSelectedOrg(id)});
+export const getSelectedOrg = (id) => ({type: actions.GET_SELECTED_ORG, promise: services.getSelectedOrg(id)});
 export const updateOrgAdmin = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name)});
 export const updateOrgSuper = (id, name) => ({ type: actions.UPDATE_ORG, promise: services.updateOrg(id, name), meta: {onSuccess: () => index.store.dispatch(getOrgs())}});

@@ -131,6 +131,7 @@ export const getSelectedOrg = (id) => {
 
 };
 
+
 export const updateOrg = (id, name) => {
 	debug('updateOrg, called.');
 
