@@ -199,7 +199,7 @@ export function putOrg(req, res) {
 	debug('PUT, called');
 	debug('PUT, params ' + JSON.stringify(req.params));
 	// Check the user belongs to this org
-	if (req.user.org_id.equals(req.params.id)) {
+	if ((req.user.org_id.equals(req.params.id)) || (req.user.role === SUPER)) {
 		// Ok let's get the org to update
 		Organisation.findById(req.params.id, (err, org) => {
 			if (err) {
@@ -222,12 +222,12 @@ export function putOrg(req, res) {
 				});
 			} else {
 				debug('GET:*, org: no organisations found.');
-				return res.status(404).send({message: 'no organisations found.'});
+				return res.status(404).send({message: 'No organisations found.'});
 			}
 		});
 	} else {
 		debug('PUT, invalid update from user: ' + req.user.id + ', updating org: ' + req.params.id);
-		return res.status(403).send({message: 'organisation not valid for user: ' + req.user.id});
+		return res.status(403).send({message: 'User does not have permission to update this organisation.'});
 	}
 }
 

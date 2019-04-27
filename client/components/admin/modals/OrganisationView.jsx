@@ -27,18 +27,6 @@ export class OrganisationView extends Component {
 				type: 'danger'
 			});
 		}
-
-		debug('componentDidMount, set validator on signup-form.');
-		$('#organisation-form').validator()
-			.on('submit', (event) => {
-				debug('update, submit');
-				if (!event.isDefaultPrevented()) {
-					event.preventDefault();
-					this.props.updateOrgSuper(this.props.org._id, $('#name').val());
-				}
-			})
-			.off('input.bs.validator change.bs.validator focusout.bs.validator');
-
 	}
 
 	getBody() {
@@ -63,6 +51,10 @@ export class OrganisationView extends Component {
 		}
 	}
 
+	handleUpdate () {
+		this.props.updateOrgSuper(this.props.selectedOrg._id, $('#name').val());
+	}
+
 	render () {
 		debug('render, called.');
 		return <div className="modal fade" id="org-modal" tabIndex="-1" role="dialog" aria-labelledby="org-title" aria-hidden="true">
@@ -76,7 +68,7 @@ export class OrganisationView extends Component {
 					</div>
 					{this.getBody()}
 					<div className="modal-footer">
-						<button type="submit" id="org-update" className="btn btn-primary" data-dismiss="modal">Update</button>
+						<button type="submit" id="org-update" className="btn btn-primary" onClick={this.handleUpdate.bind(this)} data-dismiss="modal">Update</button>
 						<button type="button" id="org-cancel" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
