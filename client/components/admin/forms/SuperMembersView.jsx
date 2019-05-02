@@ -9,7 +9,7 @@ import Member from '../modals/Member';
 import Invite from '../modals/Invite';
 import Debug from 'debug';
 
-let debug = Debug('MembersView');
+let debug = Debug('SuperMembersView');
 
 class SuperMembersView extends Component {
 

@@ -8,7 +8,7 @@ import SuperMembersView from './SuperMembersView';
 import * as actions from '../../../actions';
 import Debug from 'debug';
 
-let debug = Debug('Details');
+let debug = Debug('SuperMembers');
 
 const mapStateToProps = (state) => {
 	debug('mapStateToProps: called');

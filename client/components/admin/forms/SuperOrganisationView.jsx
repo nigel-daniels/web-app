@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import Organisation from '../modals/Organisation';
 import Debug from 'debug';
 
-let debug = Debug('OrganisationView');
+let debug = Debug('SuperOrganisationView');
 
 class AdminOrganisationView extends Component {
 

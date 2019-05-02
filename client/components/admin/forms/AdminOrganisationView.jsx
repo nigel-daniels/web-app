@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-let debug = Debug('OrganisationView');
+let debug = Debug('AdminOrganisationView');
 
 class AdminOrganisationView extends Component {
 

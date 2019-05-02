@@ -10,13 +10,13 @@ import Invite from '../modals/Invite';
 import Debug from 'debug';
 import {rfc5322} from '../../constants';
 
-let debug = Debug('MembersView');
+let debug = Debug('AdminMembersView');
 
 class AdminMembersView extends Component {
 
 	shouldComponentUpdate() {
 		debug('shouldComponentUpdate, called.');
-		return this.props.isworking;
+		return this.props.loadingMembers;
 	}
 
 	componentDidMount() {
@@ -114,7 +114,7 @@ class AdminMembersView extends Component {
 };
 
 AdminMembersView.propTypes = {
-	isworking:		PropTypes.bool,
+	loadingMembers:	PropTypes.bool,
 	profile:		PropTypes.object,
 	org:			PropTypes.object,
 	members:		PropTypes.array,
